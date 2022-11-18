@@ -9,12 +9,22 @@
 #include "Globals.h"
 
 #include "Camera.h"
+#include "Mesh.h"
 
 GLuint vboId;
 Shaders myShaders;
 
+float updateTimer = 0.05f;
+float timer = 0.0f;
+
 // Camera
 Camera camera(Vector3(0.0f, 0.0f, -5.0f), Vector3(0.0f, 0.0f, 5.0f));
+
+// Model Loader
+Mesh mesh;
+
+GLuint VAO;
+GLuint EBO;
 
 int Init ( ESContext *esContext )
 {
@@ -36,6 +46,9 @@ int Init ( ESContext *esContext )
 	glBindBuffer(GL_ARRAY_BUFFER, vboId);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(verticesData), verticesData, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	// TODO : load model
+	mesh.Init("../ResourcesPacket/Models/Croco.nfg");
 
 	//creation of shaders and program 
 	return myShaders.Init("../Resources/Shaders/TriangleShaderVS.vs", "../Resources/Shaders/TriangleShaderFS.fs");
@@ -61,24 +74,16 @@ void Draw ( ESContext *esContext )
 		glVertexAttribPointer(myShaders.colorAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(Vector3)));
 	}
 
-	if (myShaders.projectionMatrixUniform != -1)
-	{
-		glUniformMatrix4fv(myShaders.projectionMatrixUniform, 1, GL_FALSE, (GLfloat*)camera.getProjectionMatrix().m);
-	}
-
-	if (myShaders.viewMatrixUniform != -1)
-	{
-		glUniformMatrix4fv(myShaders.viewMatrixUniform, 1, GL_FALSE, (GLfloat*)camera.getViewMatrix().m);
-	}
-
-	if (myShaders.modelMatrixUniform != -1)
+	if (myShaders.mvpMatrixUniform != -1)
 	{
 		Matrix model;
 		model.SetIdentity();
-		glUniformMatrix4fv(myShaders.modelMatrixUniform, 1, GL_FALSE, (GLfloat*)model.m);
-	}
 
-	// TODO : make a single matrix -> MVP = model * view * projection
+		Matrix MVP;
+		MVP = model * camera.getViewMatrix() * camera.getProjectionMatrix();
+
+		glUniformMatrix4fv(myShaders.mvpMatrixUniform, 1, GL_FALSE, (GLfloat*)MVP.m);
+	}
 
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
@@ -89,31 +94,36 @@ void Draw ( ESContext *esContext )
 
 void Update ( ESContext *esContext, float deltaTime )
 {
-	camera.setDeltaTime(deltaTime);
+	timer += deltaTime;
+	if (timer >= updateTimer)
+	{
+		timer = 0.0f;
+		
+		camera.setDeltaTime(deltaTime);
+	}
 }
 
 void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
 {
-	//if (key == 'D')
-	//	std::cout << key;
-	//if (key == 'W')
-	//	std::cout << key;
-	//std::cout << std::endl;
-
 	std::cout << key << std::endl;
+	std::cout << bIsPressed << std::endl << std::endl;
 
+	// TODO : ESC key => exit
 
-	switch (key)
+	if (bIsPressed)
 	{
-		case 'W': camera.moveOz(-1.0f); break;
-		case 'S': camera.moveOz(1.0f);  break;
-		case 'A': camera.moveOx(-1.0f);  break;
-		case 'D': camera.moveOx(1.0f); break;
+		switch (key)
+		{
+			case 'W': camera.moveOz(-1.0f);	break;
+			case 'S': camera.moveOz(1.0f);	break;
+			case 'A': camera.moveOx(-1.0f); break;
+			case 'D': camera.moveOx(1.0f);	break;
 
-		case '&': std::cout << "SUS\n";			break;
-		case '(': std::cout << "JOS\n";			 break;
-		case '%': std::cout << "STANGA\n";		 break;
-		case '\'': std::cout << "DREAPTA\n";	camera.rotateOy(); break;
+			case '&': std::cout << "SUS\n";			 break;
+			case '(': std::cout << "JOS\n";			 break;
+			case '%': std::cout << "STANGA\n";		 break;
+			case '\'': std::cout << "DREAPTA\n";	camera.rotateOy(); break;
+		}
 	}
 }
 

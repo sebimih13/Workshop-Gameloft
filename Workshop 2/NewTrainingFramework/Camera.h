@@ -1,7 +1,5 @@
 #pragma once
 
-// TODO : ? Forward Declarations sau #include ... ?
-
 #include "../Utilities/esUtil.h"
 #include "../Utilities/Math.h"
 

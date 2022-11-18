@@ -1,4 +1,4 @@
-#include <stdafx.h>
+#include "stdafx.h"
 #include "Shaders.h"
 
 int Shaders::Init(char * fileVertexShader, char * fileFragmentShader)
@@ -18,13 +18,10 @@ int Shaders::Init(char * fileVertexShader, char * fileFragmentShader)
 
 	program = esLoadProgram(vertexShader, fragmentShader);
 
-	//finding location of uniforms / attributes
+	// finding location of uniforms / attributes
 	positionAttribute = glGetAttribLocation(program, "a_posL");
 	colorAttribute = glGetAttribLocation(program, "a_color");
-
-	viewMatrixUniform = glGetUniformLocation(program, "u_viewMatrix");
-	projectionMatrixUniform = glGetUniformLocation(program, "u_projectionMatrix");
-	modelMatrixUniform = glGetUniformLocation(program, "u_modelMatrix");
+	mvpMatrixUniform = glGetUniformLocation(program, "u_mvpMatrix");
 
 	return 0;
 }
