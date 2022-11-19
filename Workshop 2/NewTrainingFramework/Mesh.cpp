@@ -2,9 +2,9 @@
 #include "Mesh.h"
 
 #include <fstream>
-#include "../Utilities/utilities.h"
-
 #include <sstream>
+
+#include "Shaders.h"
 
 Mesh::Mesh()
 {
@@ -47,29 +47,32 @@ void Mesh::Init(char* file)
 			if (('0' <= c && c <= '9') || c == '-' || c == '.' || c == ' ')
 				modifiedLine << c;
 				
-		Vector3 pos;
 		Vector3 norm;
 		Vector3 binorm;
 		Vector3 tgt;
 		Vector2 uv;
 
-		modifiedLine >> pos.x >> pos.x >> pos.y >> pos.z;
+		Vertex v;
+
+		modifiedLine >> v.pos.x >> v.pos.x >> v.pos.y >> v.pos.z;
 		modifiedLine >> norm.x >> norm.y >> norm.z;
 		modifiedLine >> binorm.x >> binorm.y >> binorm.z;
 		modifiedLine >> tgt.x >> tgt.y >> tgt.z;
 		modifiedLine >> uv.x >> uv.y;
 
 		// TODO : DEBUG
-		//std::cout << modifiedLine.str() << "\n";
-		//std::cout << pos.x << ' ' << pos.y << ' ' << pos.z << "\n";
-		//std::cout << norm.x << ' ' << norm.y << ' ' << norm.z << "\n";
-		//std::cout << binorm.x << ' ' << binorm.y << ' ' << binorm.z << "\n";
-		//std::cout << tgt.x << ' ' << tgt.y << ' ' << tgt.z << "\n";
-		//std::cout << uv.x << ' ' << uv.y << ' ' << "\n\n\n";
+		std::cout << modifiedLine.str() << "\n";
+		std::cout << v.pos.x << ' ' << v.pos.y << ' ' << v.pos.z << "\n";
+		std::cout << norm.x << ' ' << norm.y << ' ' << norm.z << "\n";
+		std::cout << binorm.x << ' ' << binorm.y << ' ' << binorm.z << "\n";
+		std::cout << tgt.x << ' ' << tgt.y << ' ' << tgt.z << "\n";
+		std::cout << uv.x << ' ' << uv.y << ' ' << "\n\n\n";
 
-		verticesData.push_back(pos.x);
-		verticesData.push_back(pos.y);
-		verticesData.push_back(pos.z);
+		v.color.x = 1.0f;
+		v.color.y = 1.0f;
+		v.color.z = 1.0f;
+
+		verticesData.push_back(v);
 	}
 
 	int nrIndices;
@@ -89,89 +92,34 @@ void Mesh::Init(char* file)
 			if (('0' <= c && c <= '9') || c == ' ')
 				modifiedLine << c;
 		
-		Vector3 indices3;
-		modifiedLine >> indices3.x >> indices3.x >> indices3.y >> indices3.z;
+		unsigned int ind1, ind2, ind3;
+		modifiedLine >> ind1 >> ind1;
+		modifiedLine >> ind2;
+		modifiedLine >> ind3;
 
 		// TODO : DEBUG
-		//std::cout << modifiedLine.str() << '\n';
-		//std::cout << indices.x << ' ' << indices.y << ' ' << indices.z << "\n\n";
+		std::cout << modifiedLine.str() << '\n';
+		std::cout << ind1 << ' ' << ind2 << ' ' << ind3 << "\n\n";
 
-		indices.push_back(indices3.x);
-		indices.push_back(indices3.y);
-		indices.push_back(indices3.z);
+		indices.push_back(ind1);
+		indices.push_back(ind2);
+		indices.push_back(ind3);
 	}
 
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, verticesData.size() * sizeof(Vertex), &verticesData[0], GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	glGenBuffers(1, &EBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), &indices[0], GL_STATIC_DRAW);
-
-
-	// ---------------------------------------------------------
-
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, verticesData.size() * sizeof(Vertex), &verticesData[0], GL_STATIC_DRAW);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
-
-	// vertex positions
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
-
-	// vertex normals
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Normal));
-
-	// vertex texture coords
-	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
-
-	glBindVertexArray(0);
-
-	// ----------------------------------------------------
-
-	//buffer object
-	glGenBuffers(1, &vboId);
-	glBindBuffer(GL_ARRAY_BUFFER, vboId);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(verticesData), verticesData, GL_STATIC_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	glBindBuffer(GL_ARRAY_BUFFER, vboId);
-
-	if (myShaders.positionAttribute != -1)
-	{
-		glEnableVertexAttribArray(myShaders.positionAttribute);
-		glVertexAttribPointer(myShaders.positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-	}
-
-	if (myShaders.colorAttribute != -1)
-	{
-		glEnableVertexAttribArray(myShaders.colorAttribute);
-		glVertexAttribPointer(myShaders.colorAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(Vector3)));
-	}
-
-	if (myShaders.mvpMatrixUniform != -1)
-	{
-		Matrix model;
-		model.SetIdentity();
-
-		Matrix MVP;
-		MVP = model * camera.getViewMatrix() * camera.getProjectionMatrix();
-
-		glUniformMatrix4fv(myShaders.mvpMatrixUniform, 1, GL_FALSE, (GLfloat*)MVP.m);
-	}
-
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-void Mesh::Draw()
+void Mesh::Draw(Shaders programShader)
 {
-
+	// TODO
+	
 }
 

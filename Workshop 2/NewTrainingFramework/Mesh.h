@@ -1,7 +1,12 @@
 #pragma once
 
+#include "../Utilities/utilities.h"
 #include "Vertex.h"
+
 #include <vector>
+
+/** Forward Declarations */
+class Shaders;
 
 class Mesh
 {
@@ -16,9 +21,9 @@ public:
 	void Init(char* file);
 
 	/** Draw */
-	void Draw();
+	void Draw(Shaders programShader);
 
-private:
+// todo : private:
 	/** Mesh data */
 	std::vector<Vertex> verticesData;
 	std::vector<unsigned int> indices;

@@ -49,6 +49,9 @@ public:
    void (ESCALLBACK *drawFunc) ( ESContext * );
    void (ESCALLBACK *keyFunc) ( ESContext *, unsigned char, bool );
    void (ESCALLBACK *updateFunc) ( ESContext *, float deltaTime );
+  
+   // todo : mouseFunc ( ESContext *, bool pressed, click/dclick, mouseX, mouseY)
+   void (ESCALLBACK* mouseFunc) (ESContext *, bool leftClick, int eventType, int mouseX, int mouseY);
 };
 
 
@@ -102,6 +105,11 @@ void ESUTIL_API esRegisterUpdateFunc ( ESContext *esContext, void (ESCALLBACK *u
 //
 void ESUTIL_API esRegisterKeyFunc ( ESContext *esContext, 
                                     void (ESCALLBACK *drawFunc) ( ESContext*, unsigned char, bool ) );
+
+// TODO
+void ESUTIL_API esRegisterMouseFunc (ESContext* esContext, 
+                                    void (ESCALLBACK *mouseFunc) (ESContext*, bool, int, int, int));
+
 //
 /// \brief Log a message to the debug output for the platform
 /// \param formatStr Format string for error log.  

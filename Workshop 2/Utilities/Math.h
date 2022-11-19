@@ -49,6 +49,9 @@ public:
 	Vector3(GLfloat _x, GLfloat _y, GLfloat _z) : x(_x), y(_y), z(_z) {}
 	Vector3(GLfloat * pArg) : x(pArg[0]), y(pArg[1]), z(pArg[2]) {}
 	Vector3(Vector3 & vector) : x(vector.x), y(vector.y), z(vector.z) {}
+
+	// TODO : Copy constructors
+	Vector3(const Vector3 & vector) : x(vector.x), y(vector.y), z(vector.z) {}
 	
 	//Vector's operations
 	GLfloat Length();
