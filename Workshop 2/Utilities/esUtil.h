@@ -3,6 +3,8 @@
 #include <GLES2/gl2.h>
 #include <EGL/egl.h>
 
+#include "../Utilities/mouseActions.h"
+
 //  Macros
 
 #define ESUTIL_API  __cdecl
@@ -51,7 +53,7 @@ public:
    void (ESCALLBACK *updateFunc) ( ESContext *, float deltaTime );
   
    // todo : mouseFunc ( ESContext *, bool pressed, click/dclick, mouseX, mouseY)
-   void (ESCALLBACK* mouseFunc) (ESContext *, bool leftClick, int eventType, int mouseX, int mouseY);
+   void (ESCALLBACK* mouseFunc) (ESContext *, MouseButtons button, MouseEvents eventType, int mouseX, int mouseY);
 };
 
 
@@ -108,7 +110,7 @@ void ESUTIL_API esRegisterKeyFunc ( ESContext *esContext,
 
 // TODO
 void ESUTIL_API esRegisterMouseFunc (ESContext* esContext, 
-                                    void (ESCALLBACK *mouseFunc) (ESContext*, bool, int, int, int));
+                                    void (ESCALLBACK *mouseFunc) (ESContext*, MouseButtons, MouseEvents, int, int));
 
 //
 /// \brief Log a message to the debug output for the platform

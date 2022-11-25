@@ -10,6 +10,8 @@ public:
 
 	GLint positionAttribute;
 	GLuint colorAttribute;
+	GLuint uvAttribute;
+
 	GLuint mvpMatrixUniform;
 
 	int Init(char * fileVertexShader, char * fileFragmentShader);

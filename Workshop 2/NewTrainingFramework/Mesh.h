@@ -23,12 +23,19 @@ public:
 	/** Draw */
 	void Draw(Shaders programShader);
 
-// todo : private:
+	/** Getters / Setters */
+	inline void SetMVP(Matrix MVPtoSet) { MVP = MVPtoSet; }
+
+private:
 	/** Mesh data */
 	std::vector<Vertex> verticesData;
 	std::vector<unsigned int> indices;
 
+	/** Matrix */
+	Matrix MVP;
+
 	/** Render data */
 	GLuint VBO, EBO;
+	GLuint textureID;
 };
 

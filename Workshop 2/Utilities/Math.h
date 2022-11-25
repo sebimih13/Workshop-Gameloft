@@ -15,6 +15,9 @@ public:
 	Vector2(GLfloat * pArg) : x(pArg[0]), y(pArg[1]) {}
 	Vector2(Vector2 & vector) : x(vector.x), y(vector.y) {}
 
+	// TODO : Copy constructors
+	Vector2(const Vector2 & vector) : x(vector.x), y(vector.y) {}
+
 	//Vector's operations
 	GLfloat Length();
 	Vector2 & Normalize();

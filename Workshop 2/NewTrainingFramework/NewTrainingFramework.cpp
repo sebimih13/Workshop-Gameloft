@@ -10,6 +10,7 @@
 
 #include "Camera.h"
 #include "Mesh.h"
+#include "Line.h"
 
 GLuint vboId;
 Shaders myShaders;
@@ -18,16 +19,19 @@ float updateTimer = 0.05f;
 float timer = 0.0f;
 
 // Camera
-Camera camera(Vector3(0.0f, 0.0f, -5.0f), Vector3(0.0f, 0.0f, 5.0f));
+Camera camera(Vector3(0.0f, 0.0f, -500.0f), Vector3(0.0f, 0.0f, 0.0f));
 
-// Model Loader
+// Mesh
 Mesh mesh;
+
+// Line
+Line line;
 
 int Init ( ESContext *esContext )
 {
 	glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
 
-	//triangle data (heap)
+	// triangle data (heap)
 	Vertex verticesData[3];
 
 	verticesData[0].pos.x =  0.0f;  verticesData[0].pos.y =  0.5f;  verticesData[0].pos.z =  0.0f;
@@ -38,34 +42,20 @@ int Init ( ESContext *esContext )
 	verticesData[1].color.x = 0.0f;  verticesData[1].color.y = 1.0f;  verticesData[1].color.z = 0.0f;
 	verticesData[2].color.x = 0.0f;  verticesData[2].color.y = 0.0f;  verticesData[2].color.z = 1.0f;
 
-	//buffer object
+	// buffer object
 	glGenBuffers(1, &vboId);
 	glBindBuffer(GL_ARRAY_BUFFER, vboId);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(verticesData), verticesData, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 
-	// TODO : load model
+	// TODO : init mesh
 	mesh.Init("../ResourcesPacket/Models/Croco.nfg");
 
-	std::cout << "aici\n";
+	// TODO : init line
+	line.Init(Vector3(0.0f, 1.0f, 0.0f), Vector3(0.0f, -1.0f, 0.0f));
 
-	int index = 0;
-	for (auto& v : mesh.verticesData)
-	{
-		std::cout << index++ << " : " << v.pos.x << ' ' << v.pos.y << ' ' << v.pos.z << "\n";
-	}
-
-	std::cout << "\n\n";
-
-	index = 0;
-	for (int i = 0; i < mesh.indices.size(); i += 3)
-	{
-		std::cout << index++ << " : " << mesh.indices[i] << ' ' << mesh.indices[i + 1] << ' ' << mesh.indices[i + 2] << "\n";
-	}
-
-
-	//creation of shaders and program 
+	// creation of shaders and program 
 	return myShaders.Init("../Resources/Shaders/TriangleShaderVS.vs", "../Resources/Shaders/TriangleShaderFS.fs");
 }
 
@@ -75,69 +65,19 @@ void Draw ( ESContext *esContext )
 
 	glUseProgram(myShaders.program);
 
+	// Calculate MVP
+	Matrix model;
+	model.SetIdentity();
 
-	// Mesh start
-	glBindBuffer(GL_ARRAY_BUFFER, mesh.VBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.EBO);
+	Matrix MVP;
+	MVP = model * camera.getViewMatrix() * camera.getProjectionMatrix();
 
-	if (myShaders.positionAttribute != -1)
-	{
-		glEnableVertexAttribArray(myShaders.positionAttribute);
-		glVertexAttribPointer(myShaders.positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-	}
+	// Draw Mesh 
+	mesh.SetMVP(MVP);
+	mesh.Draw(myShaders);
 
-	if (myShaders.colorAttribute != -1)
-	{
-		glEnableVertexAttribArray(myShaders.colorAttribute);
-		glVertexAttribPointer(myShaders.colorAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(Vector3)));
-	}
-
-	if (myShaders.mvpMatrixUniform != -1)
-	{
-		Matrix model;
-		model.SetIdentity();
-
-		Matrix MVP;
-		MVP = model * camera.getViewMatrix() * camera.getProjectionMatrix();
-
-		glUniformMatrix4fv(myShaders.mvpMatrixUniform, 1, GL_FALSE, (GLfloat*)MVP.m);
-	}
-
-	glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	// Mesh end
-
-
-
-	//glBindBuffer(GL_ARRAY_BUFFER, vboId);
-
-	//if (myShaders.positionAttribute != -1)
-	//{
-	//	glEnableVertexAttribArray(myShaders.positionAttribute);
-	//	glVertexAttribPointer(myShaders.positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-	//}
-
-	//if (myShaders.colorAttribute != -1)
-	//{
-	//	glEnableVertexAttribArray(myShaders.colorAttribute);
-	//	glVertexAttribPointer(myShaders.colorAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(Vector3)));
-	//}
-
-	//if (myShaders.mvpMatrixUniform != -1)
-	//{
-	//	Matrix model;
-	//	model.SetIdentity();
-
-	//	Matrix MVP;
-	//	MVP = model * camera.getViewMatrix() * camera.getProjectionMatrix();
-
-	//	glUniformMatrix4fv(myShaders.mvpMatrixUniform, 1, GL_FALSE, (GLfloat*)MVP.m);
-	//}
-
-	//glDrawArrays(GL_TRIANGLES, 0, 3);
-
-	//glBindBuffer(GL_ARRAY_BUFFER, 0);
+	// Draw Line
+	line.Draw();
 
 	eglSwapBuffers ( esContext->eglDisplay, esContext->eglSurface );
 }
@@ -155,8 +95,8 @@ void Update ( ESContext *esContext, float deltaTime )
 
 void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
 {
-	std::cout << key << std::endl;
-	std::cout << bIsPressed << std::endl << std::endl;
+	//std::cout << key << std::endl;
+	//std::cout << bIsPressed << std::endl << std::endl;
 
 	// TODO : ESC key => exit
 
@@ -169,21 +109,39 @@ void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
 			case 'A': camera.moveOx(-1.0f); break;
 			case 'D': camera.moveOx(1.0f);	break;
 
-			case '&': std::cout << "SUS\n";			 break;
-			case '(': std::cout << "JOS\n";			 break;
-			case '%': std::cout << "STANGA\n";		 break;
-			case '\'': std::cout << "DREAPTA\n";	camera.rotateOy(); break;
+			case 'Q': camera.moveOy(1.0f);	break;
+			case 'E': camera.moveOy(-1.0f);	break;
+
+			case '&': std::cout << "SUS\n";			camera.rotateOx(1.0f); break;
+			case '(': std::cout << "JOS\n";			/*camera.rotateOx(-1.0f); */ break;
+			case '%': std::cout << "STANGA\n";		camera.rotateOy(1.0f); break;
+			case '\'': std::cout << "DREAPTA\n";	camera.rotateOy(-1.0f); break;
 		}
 	}
 }
 
-void Mouse(ESContext* esContext, bool leftClick, int eventType, int mouseX, int mouseY)		// ??? coordonate float sau int ???
+void Mouse(ESContext* esContext, MouseButtons button, MouseEvents eventType, int mouseX, int mouseY)
 {
-	std::cout << mouseX << ' ' << mouseY << "\n";
+	switch (button)
+	{
+		case MouseButtons::left:	std::cout << "LEFT ";	break;
+		case MouseButtons::right:	std::cout << "RIGHT ";	break;
+	}
+
+	switch (eventType)
+	{
+		case MouseEvents::click:	std::cout << "CLICK\n";				break;
+		case MouseEvents::unclick:	std::cout << "UNCLICK\n";			break;
+		case MouseEvents::dclick:	std::cout << "DOUBLE CLICK\n";		break;
+	}
+
+	std::cout << "MOUSE : " << mouseX << ' ' << mouseY << "\n\n";
 }
 
 void CleanUp()
 {
+	mesh.~Mesh();
+	line.~Line();
 	glDeleteBuffers(1, &vboId);
 }
 
@@ -208,7 +166,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	esMainLoop ( &esContext );
 
-	//releasing OpenGL resources
+	// releasing OpenGL resources
 	CleanUp();
 
 
@@ -218,4 +176,15 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 	return 0;
 }
+
+/*
+
+	PROBLEME : 
+	1. Camera	: RotateOX + RotateOY
+	2. Texture	: fragmente ciudate    + nu merge daca pun line.draw()
+	3. Mouse	: mouse double click 
+	
+	5. XML File format
+
+*/
 

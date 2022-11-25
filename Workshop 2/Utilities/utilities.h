@@ -6,3 +6,5 @@
 #include "Math.h"
 #include "TGA.h"
 #include "memDbg.h"
+#include "mouseActions.h"
+

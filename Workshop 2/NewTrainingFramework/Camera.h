@@ -18,9 +18,9 @@ public:
 	void moveOz(GLfloat value);
 
 	/** Rotate functions */
-	void rotateOx();
-	void rotateOy();
-	void rotateOz();
+	void rotateOx(GLfloat value);
+	void rotateOy(GLfloat value);
+	void rotateOz(GLfloat value);
 
 	/** Update functions */
 	void updateWorldView();

@@ -11,11 +11,11 @@ Camera::Camera(Vector3 _position, Vector3 _target, Vector3 _up)
 
 	updateAxis();
 
-	moveSpeed = 1.0f;
+	moveSpeed = 100.0f;
 	rotateSpeed = 1.0f;
 
-	nearPlane = 0.1f;
-	farPlane = 10.0f;
+	nearPlane = 0.01f;
+	farPlane = 10000.0f;
 	fov = 45.0f * PI / 180.0f;
 
 	deltaTime = 0.0f;
@@ -32,7 +32,7 @@ Camera::~Camera()
 	
 }
 
-void Camera::moveOx(GLfloat value)		// value = { -1, 1 }	 (inapoi / inainte)
+void Camera::moveOx(GLfloat value)
 {
 	Vector3 left = xAxis * value;
 	Vector3 deplasare = left * moveSpeed * deltaTime;
@@ -62,18 +62,21 @@ void Camera::moveOz(GLfloat value)
 	updateWorldView();
 }
 
-void Camera::rotateOx()
+void Camera::rotateOx(GLfloat value)
 {
 	Matrix mRotateOX;
-	mRotateOX.SetRotationX(rotateSpeed * deltaTime);
+	mRotateOX.SetRotationX(rotateSpeed * deltaTime * value);
 
 	Vector4 localUp = Vector4(up.x, up.y, up.z, 1.0f);
 	Vector4 rotatedLocalUp = localUp * mRotateOX;
 	Vector4 up4 = rotatedLocalUp * worldMatrix;
-	up = Vector3(up4.x, up4.y, up4.z);
-	up.Normalize();
+	up = Vector3(up4.x, up4.y, up4.z).Normalize();
 
-	Vector4 localTarget = Vector4(0.0f, 0.0f, zAxis.Length(), 1.0f);
+	std::cout << "Angle : " << rotateSpeed * deltaTime * value << '\n';
+	std::cout << "up : " << localUp.x << ' ' << localUp.y << ' ' << localUp.z << '\n';
+	std::cout << "new up : " << up.x << ' ' << up.y << ' ' << up.z << '\n';
+
+	Vector4 localTarget = Vector4(0.0f, 0.0f, -(target - position).Length(), 1.0f);
 	Vector4 rotatedTarget = localTarget * mRotateOX;
 	Vector4 target4 = rotatedTarget * worldMatrix;
 	target = Vector3(target4.x, target4.y, target4.z);
@@ -82,12 +85,12 @@ void Camera::rotateOx()
 	updateWorldView();
 }
 
-void Camera::rotateOy()
+void Camera::rotateOy(GLfloat value)
 {
 	Matrix mRotateOY;
-	mRotateOY.SetRotationY(rotateSpeed * deltaTime);
+	mRotateOY.SetRotationY(rotateSpeed * deltaTime * value);
 
-	Vector4 localTarget = Vector4(0.0f, 0.0f, zAxis.Length(), 1.0f);
+	Vector4 localTarget = Vector4(0.0f, 0.0f, -(target - position).Length(), 1.0f);	
 	Vector4 rotatedTarget = localTarget * mRotateOY;
 	Vector4 target4 = rotatedTarget * worldMatrix;
 	target = Vector3(target4.x, target4.y, target4.z);
@@ -96,18 +99,17 @@ void Camera::rotateOy()
 	updateWorldView();
 }
 
-void Camera::rotateOz()
+void Camera::rotateOz(GLfloat value)
 {
 	Matrix mRotateOZ;
-	mRotateOZ.SetRotationZ(rotateSpeed * deltaTime);
+	mRotateOZ.SetRotationZ(rotateSpeed * deltaTime * value);
 
 	Vector4 localUp = Vector4(up.x, up.y, up.z, 1.0f);
 	Vector4 rotatedLocalUp = localUp * mRotateOZ;
 	Vector4 up4 = rotatedLocalUp * worldMatrix;
-	up = Vector3(up4.x, up4.y, up4.z);
-	up.Normalize();
+	up = Vector3(up4.x, up4.y, up4.z).Normalize();
 
-	Vector4 localTarget = Vector4(0.0f, 0.0f, zAxis.Length(), 1.0f);
+	Vector4 localTarget = Vector4(0.0f, 0.0f, -(target - position).Length(), 1.0f);
 	Vector4 rotatedTarget = localTarget * mRotateOZ;
 	Vector4 target4 = rotatedTarget * worldMatrix;
 	target = Vector3(target4.x, target4.y, target4.z);
