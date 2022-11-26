@@ -120,7 +120,7 @@ GLboolean WinCreate ( ESContext *esContext, const char *title )
    HINSTANCE hInstance = GetModuleHandle(NULL);
 
 
-   wndclass.style         = CS_OWNDC;
+   wndclass.style         = CS_OWNDC | CS_DBLCLKS;
    wndclass.lpfnWndProc   = (WNDPROC)ESWindowProc; 
    wndclass.hInstance     = hInstance; 
    wndclass.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH); 
@@ -129,7 +129,7 @@ GLboolean WinCreate ( ESContext *esContext, const char *title )
    if (!RegisterClass (&wndclass) ) 
       return FALSE; 
 
-   wStyle = WS_VISIBLE | WS_POPUP | WS_BORDER | WS_SYSMENU | WS_CAPTION | CS_DBLCLKS;       // TODO : CS_DBLCLKS
+   wStyle = WS_VISIBLE | WS_POPUP | WS_BORDER | WS_SYSMENU | WS_CAPTION;       // TODO : CS_DBLCLKS
    
    // Adjust the window rectangle so that the client area has
    // the correct number of pixels

@@ -21,7 +21,7 @@ public:
 	void Init(char* file);
 
 	/** Draw */
-	void Draw(Shaders programShader);
+	void Draw(Shaders* programShader);
 
 	/** Getters / Setters */
 	inline void SetMVP(Matrix MVPtoSet) { MVP = MVPtoSet; }

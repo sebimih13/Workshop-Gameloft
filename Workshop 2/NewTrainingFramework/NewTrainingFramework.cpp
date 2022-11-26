@@ -29,6 +29,7 @@ Line line;
 
 int Init ( ESContext *esContext )
 {
+	glEnable(GL_DEPTH_TEST);
 	glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
 
 	// triangle data (heap)
@@ -61,7 +62,7 @@ int Init ( ESContext *esContext )
 
 void Draw ( ESContext *esContext )
 {
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glUseProgram(myShaders.program);
 
@@ -74,7 +75,7 @@ void Draw ( ESContext *esContext )
 
 	// Draw Mesh 
 	mesh.SetMVP(MVP);
-	mesh.Draw(myShaders);
+	mesh.Draw(&myShaders);
 
 	// Draw Line
 	line.Draw();
@@ -104,18 +105,22 @@ void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
 	{
 		switch (key)
 		{
-			case 'W': camera.moveOz(-1.0f);	break;
-			case 'S': camera.moveOz(1.0f);	break;
-			case 'A': camera.moveOx(-1.0f); break;
-			case 'D': camera.moveOx(1.0f);	break;
+			case 'W':	camera.moveOz(-1.0f);	break;
+			case 'S':	camera.moveOz(1.0f);	break;
+			case 'A':	camera.moveOx(-1.0f);	break;
+			case 'D':	camera.moveOx(1.0f);	break;
 
-			case 'Q': camera.moveOy(1.0f);	break;
-			case 'E': camera.moveOy(-1.0f);	break;
+			case 'Q':	camera.moveOy(1.0f);	break;
+			case 'E':	camera.moveOy(-1.0f);	break;
 
-			case '&': std::cout << "SUS\n";			camera.rotateOx(1.0f); break;
-			case '(': std::cout << "JOS\n";			/*camera.rotateOx(-1.0f); */ break;
-			case '%': std::cout << "STANGA\n";		camera.rotateOy(1.0f); break;
-			case '\'': std::cout << "DREAPTA\n";	camera.rotateOy(-1.0f); break;
+
+			case 'O':	camera.rotateOz(1.0f);  break;
+			case 'P':	camera.rotateOz(-1.0f); break;
+
+			case '&':	camera.rotateOx(1.0f);	break;
+			case '(':	camera.rotateOx(-1.0f); break;
+			case '%':	camera.rotateOy(1.0f);	break;
+			case '\'':	camera.rotateOy(-1.0f); break;
 		}
 	}
 }
@@ -179,12 +184,8 @@ int _tmain(int argc, _TCHAR* argv[])
 
 /*
 
-	PROBLEME : 
-	1. Camera	: RotateOX + RotateOY
-	2. Texture	: fragmente ciudate    + nu merge daca pun line.draw()
-	3. Mouse	: mouse double click 
-	
-	5. XML File format
+	PROBLEME :
+
 
 */
 

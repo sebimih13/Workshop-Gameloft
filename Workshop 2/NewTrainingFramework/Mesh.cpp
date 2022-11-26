@@ -134,33 +134,33 @@ void Mesh::Init(char* file)
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void Mesh::Draw(Shaders programShader)
+void Mesh::Draw(Shaders* programShader)
 {
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 
-	if (programShader.positionAttribute != -1)
+	if (programShader->positionAttribute != -1)
 	{
-		glEnableVertexAttribArray(programShader.positionAttribute);
-		glVertexAttribPointer(programShader.positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+		glEnableVertexAttribArray(programShader->positionAttribute);
+		glVertexAttribPointer(programShader->positionAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
 	}
 
-	if (programShader.colorAttribute != -1)
+	if (programShader->colorAttribute != -1)
 	{
-		glEnableVertexAttribArray(programShader.colorAttribute);
-		glVertexAttribPointer(programShader.colorAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(Vector3)));
+		glEnableVertexAttribArray(programShader->colorAttribute);
+		glVertexAttribPointer(programShader->colorAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(Vector3)));
 	}
 
-	if (programShader.uvAttribute != -1)
+	if (programShader->uvAttribute != -1)
 	{
-		glEnableVertexAttribArray(programShader.uvAttribute);
-		glVertexAttribPointer(programShader.uvAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(2 * sizeof(Vector3)));
+		glEnableVertexAttribArray(programShader->uvAttribute);
+		glVertexAttribPointer(programShader->uvAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(2 * sizeof(Vector3)));
 	}
 
-	if (programShader.mvpMatrixUniform != -1)
+	if (programShader->mvpMatrixUniform != -1)
 	{
-		glUniformMatrix4fv(programShader.mvpMatrixUniform, 1, GL_FALSE, (GLfloat*)MVP.m);
+		glUniformMatrix4fv(programShader->mvpMatrixUniform, 1, GL_FALSE, (GLfloat*)MVP.m);
 	}
 
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
