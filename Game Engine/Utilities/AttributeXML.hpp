@@ -16,8 +16,6 @@ public:
 	{
 		if (attribute)
 			return true;
-
-		std::cout << "ERROR : ATTRIBUTE INVALID\n";
 		return false;
 	}
 
@@ -25,7 +23,18 @@ public:
 	{
 		if (isValid())
 			return atoi(attribute->value());
+
+		std::cout << "ERROR : getInt() - " << attribute->name() << " ATTRIBUTE INVALID\n";
 		return -1;
+	}
+
+	std::string getString()
+	{
+		if (isValid())
+			return attribute->value();
+
+		std::cout << "ERROR : getString() - " << attribute->name() << " ATTRIBUTE INVALID\n";
+		return "";
 	}
 
 private:

@@ -1,30 +1,26 @@
 #include "stdafx.h"	
 #include "Camera.h"
 
-#include "Globals.h"
+#include "SceneManager.h"
 
-Camera::Camera(Vector3 _position, Vector3 _target, Vector3 _up)
+Camera::Camera()
 {
-	position = _position;
-	target = _target;
-	up = _up;
+	type = CameraType::firstPerson;
 
-	updateAxis();
+	position = Vector3(0.0f, 0.0f, -100.0f);
+	target = Vector3(0.0f, 0.0f, 0.0f);
+	up = Vector3(0.0f, 1.0f, 0.0f);
 
-	moveSpeed = 100.0f;
-	rotateSpeed = 1.0f;
+	translationSpeed = 100.0f;
+	rotationSpeed = 1.0f;
 
 	nearPlane = 0.01f;
 	farPlane = 10000.0f;
-	fov = 45.0f * PI / 180.0f;
+	fov = 45.0f;
 
 	deltaTime = 0.0f;
 
-	projectionMatrix = Matrix().SetPerspective(fov, (float)Globals::screenWidth / (float)Globals::screenHeight, nearPlane, farPlane);
-	viewMatrix = Matrix();
-	worldMatrix = Matrix();
-
-	updateWorldView();
+	Init();
 }
 
 Camera::~Camera()
@@ -32,10 +28,20 @@ Camera::~Camera()
 	
 }
 
+void Camera::Init()
+{
+	float radiansFOV = fov * PI / 180.0f;
+	float aspect = float(SceneManager::getInstance()->getDefaultScreenSize().width) / float(SceneManager::getInstance()->getDefaultScreenSize().height);
+
+	projectionMatrix = Matrix().SetPerspective(radiansFOV, aspect, nearPlane, farPlane);
+	updateAxis();
+	updateWorldView();
+}
+
 void Camera::moveOx(GLfloat value)
 {
 	Vector3 left = xAxis * value;
-	Vector3 deplasare = left * moveSpeed * deltaTime;
+	Vector3 deplasare = left * translationSpeed * deltaTime;
 	position += deplasare;
 	target += deplasare;
 
@@ -45,7 +51,7 @@ void Camera::moveOx(GLfloat value)
 void Camera::moveOy(GLfloat value)
 {
 	Vector3 upward = yAxis * value;
-	Vector3 deplasare = upward * moveSpeed * deltaTime;
+	Vector3 deplasare = upward * translationSpeed * deltaTime;
 	position += deplasare;
 	target += deplasare;
 
@@ -55,7 +61,7 @@ void Camera::moveOy(GLfloat value)
 void Camera::moveOz(GLfloat value)
 {
 	Vector3 forward = zAxis * value;
-	Vector3 deplasare = forward * moveSpeed * deltaTime;
+	Vector3 deplasare = forward * translationSpeed * deltaTime;
 	position += deplasare;
 	target += deplasare;
 
@@ -65,7 +71,7 @@ void Camera::moveOz(GLfloat value)
 void Camera::rotateOx(GLfloat value)
 {
 	Matrix mRotateOX;
-	mRotateOX.SetRotationX(rotateSpeed * deltaTime * value);
+	mRotateOX.SetRotationX(rotationSpeed * deltaTime * value);
 
 	Vector4 localUp = Vector4(0.0f, 1.0f, 0.0f, 0.0f);
 	Vector4 rotatedLocalUp = localUp * mRotateOX;
@@ -84,7 +90,7 @@ void Camera::rotateOx(GLfloat value)
 void Camera::rotateOy(GLfloat value)
 {
 	Matrix mRotateOY;
-	mRotateOY.SetRotationY(rotateSpeed * deltaTime * value);
+	mRotateOY.SetRotationY(rotationSpeed * deltaTime * value);
 
 	Vector4 localTarget = Vector4(0.0f, 0.0f, -(target - position).Length(), 1.0f);	
 	Vector4 rotatedTarget = localTarget * mRotateOY;
@@ -98,7 +104,7 @@ void Camera::rotateOy(GLfloat value)
 void Camera::rotateOz(GLfloat value)
 {
 	Matrix mRotateOZ;
-	mRotateOZ.SetRotationZ(rotateSpeed * deltaTime * value);
+	mRotateOZ.SetRotationZ(rotationSpeed * deltaTime * value);
 
 	Vector4 localUp = Vector4(0.0f, 1.0f, 0.0f, 0.0f);
 	Vector4 rotatedLocalUp = localUp * mRotateOZ;

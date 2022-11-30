@@ -145,8 +145,6 @@ void Mouse(ESContext* esContext, MouseButtons button, MouseEvents eventType, int
 
 void CleanUp()
 {
-	mesh.~Mesh();
-	line.~Line();
 	glDeleteBuffers(1, &vboId);
 }
 

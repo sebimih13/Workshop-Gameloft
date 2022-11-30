@@ -142,6 +142,7 @@
     <ClCompile Include="esUtil.cpp" />
     <ClCompile Include="esUtil_win.cpp" />
     <ClCompile Include="Math.cpp" />
+    <ClCompile Include="NFG.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-ATI|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-Nvidia|Win32'">Create</PrecompiledHeader>
@@ -156,6 +157,8 @@
     <ClInclude Include="esUtil_win.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="memDbg.h" />
+    <ClInclude Include="mouseActions.h" />
+    <ClInclude Include="NFG.h" />
     <ClInclude Include="NodeXML.hpp" />
     <ClInclude Include="rapidxml-1.13\rapidxml.hpp" />
     <ClInclude Include="rapidxml-1.13\rapidxml_iterators.hpp" />

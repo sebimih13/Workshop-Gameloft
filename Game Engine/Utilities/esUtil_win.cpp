@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include <windows.h>
 #include "esUtil.h"
+#include <windowsx.h>
 
+#include "mouseActions.h"
 
 
 // Main window procedure
@@ -29,6 +31,7 @@ LRESULT WINAPI ESWindowProc ( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
          PostQuitMessage(0);             
          break; 
       
+        // KEYBOARD
 	  case WM_KEYDOWN:
 		  {
 			  ESContext *esContext = (ESContext*)(LONG_PTR) GetWindowLongPtr ( hWnd, GWL_USERDATA );
@@ -46,6 +49,61 @@ LRESULT WINAPI ESWindowProc ( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 				  esContext->keyFunc ( esContext, (unsigned char) wParam, false );
 		  }
 		  break;
+
+          // MOUSE
+      case WM_LBUTTONDBLCLK:
+      {
+          ESContext* esContext = (ESContext*)(LONG_PTR)GetWindowLongPtr(hWnd, GWL_USERDATA);
+
+          if (esContext && esContext->mouseFunc)
+              esContext->mouseFunc(esContext, MouseButtons::left, MouseEvents::dclick, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+      }
+      break;
+
+      case WM_LBUTTONDOWN:
+      {
+          ESContext* esContext = (ESContext*)(LONG_PTR)GetWindowLongPtr(hWnd, GWL_USERDATA);
+
+          if (esContext && esContext->mouseFunc)
+              esContext->mouseFunc(esContext, MouseButtons::left, MouseEvents::click, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+      }
+      break;
+
+      case WM_LBUTTONUP:
+      {
+          ESContext* esContext = (ESContext*)(LONG_PTR)GetWindowLongPtr(hWnd, GWL_USERDATA);
+
+          if (esContext && esContext->mouseFunc)
+              esContext->mouseFunc(esContext, MouseButtons::left, MouseEvents::unclick, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+      }
+      break;
+
+      case WM_RBUTTONDBLCLK:
+      {
+          ESContext* esContext = (ESContext*)(LONG_PTR)GetWindowLongPtr(hWnd, GWL_USERDATA);
+
+          if (esContext && esContext->mouseFunc)
+              esContext->mouseFunc(esContext, MouseButtons::right, MouseEvents::dclick, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+      }
+      break;
+
+      case WM_RBUTTONDOWN:
+      {
+          ESContext* esContext = (ESContext*)(LONG_PTR)GetWindowLongPtr(hWnd, GWL_USERDATA);
+
+          if (esContext && esContext->mouseFunc)
+              esContext->mouseFunc(esContext, MouseButtons::right, MouseEvents::click, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+      }
+      break;
+
+      case WM_RBUTTONUP:
+      {
+          ESContext* esContext = (ESContext*)(LONG_PTR)GetWindowLongPtr(hWnd, GWL_USERDATA);
+
+          if (esContext && esContext->mouseFunc)
+              esContext->mouseFunc(esContext, MouseButtons::right, MouseEvents::unclick, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+      }
+      break;
          
       default: 
          lRet = DefWindowProc (hWnd, uMsg, wParam, lParam); 
@@ -64,7 +122,7 @@ GLboolean WinCreate ( ESContext *esContext, const char *title )
    HINSTANCE hInstance = GetModuleHandle(NULL);
 
 
-   wndclass.style         = CS_OWNDC;
+   wndclass.style         = CS_OWNDC | CS_DBLCLKS;
    wndclass.lpfnWndProc   = (WNDPROC)ESWindowProc; 
    wndclass.hInstance     = hInstance; 
    wndclass.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH); 

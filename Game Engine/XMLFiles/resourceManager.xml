@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceManager>
 	<models>
-		<folder path="Res/Models/">
+		<folder path="../ResourcesPacket/Models/">
 			<model id="1">
 				<file>croco.nfg</file>
 			</model>
@@ -11,7 +11,7 @@
 		</folder>
 
 		<!-- un tag folder doar specifica folderul comun pentru un grup de modele (pot sa le am in mai multe foldere)
-		<folder path="Res/Models2/">
+		<folder path="../ResourcesPacket/Models2/">
 			<model id="1001">
 				<file>altceva.nfg</file>
 			</model>
@@ -20,7 +20,7 @@
 		<!-- si aici se adauga toate modelele necesare -->
 	</models>
 	<shaders>
-		<folder path="Res/Shaders/">
+		<folder path="../Resources/Shaders/">
 			<shader id="10">
 				<vs>modelShader.vs</vs>
 				<fs>modelShader.fs</fs>
@@ -34,7 +34,7 @@
 		
 	</shaders>
 	<textures>
-		<folder path="Res/Textures/">
+		<folder path="../ResourcesPacket/Textures/">
 			<texture id="4" type="2d">
 				<file>croco.tga</file>			
 				<min_filter>LINEAR</min_filter>
@@ -67,3 +67,4 @@
 		</folder>
 	</textures>	
 </resourceManager>
+

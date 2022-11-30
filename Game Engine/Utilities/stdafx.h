@@ -8,6 +8,14 @@
 #include "targetver.h"
 #include "esUtil.h"
 
+#include <iostream>
+#include <fstream>
+
+#include <string>
+#include <sstream>
+
+#include <vector>
+
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 #endif

@@ -18,8 +18,6 @@ public:
 	{
 		if (node)
 			return true;
-
-		std::cout << "ERROR : NODE INVALID\n";
 		return false;
 	}
 
@@ -28,6 +26,8 @@ public:
 	{
 		if (isValid())
 			return atoi(node->value()); 
+
+		std::cout << "ERROR : getInt() - " << node->name() << " NODE INVALID\n";
 		return -1;
 	}
 
@@ -35,6 +35,8 @@ public:
 	{
 		if (isValid())
 			return node->value(); 
+
+		std::cout << "ERROR : getString() - " << node->name() << " NODE INVALID\n";
 		return "";
 	}
 
@@ -42,6 +44,8 @@ public:
 	{ 
 		if (isValid())
 			return float(atof(node->value())); 
+
+		std::cout << "ERROR : getFloat() - " << node->name() << "NODE INVALID\n";
 		return -1.0f;
 	}
 
@@ -53,7 +57,6 @@ public:
 		xml_node<>* pChildNode = node->first_node(name.c_str());
 		if (!pChildNode)
 		{
-			std::cout << "ERROR : " << name << " - node not found\n";
 			return NodeXML(nullptr);
 		}
 		return NodeXML(pChildNode);
@@ -67,7 +70,6 @@ public:
 		xml_node<>* pSiblingNode = node->next_sibling();
 		if (!pSiblingNode)
 		{
-			std::cout << "ERROR : sibling not found\n";
 			return NodeXML(nullptr);
 		}
 		return NodeXML(pSiblingNode);
