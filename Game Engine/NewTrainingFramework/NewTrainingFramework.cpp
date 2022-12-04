@@ -252,7 +252,7 @@ int _tmain(int argc, _TCHAR* argv[])
       }
       break;
 
-	  * 16.
+	  * 16. mouseActions.h - contine enums: MouseButtons + MouseEvents -> in .h separat sau le pun in esUtil.h
 
 	  * 17.
 
@@ -265,6 +265,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	* 1. modelul in format wired
 
 	* 2. pentru SceneObject - color (sau textures)
+
+	* 3. rotate camera - mouse input
+
+	* 4. 
 
 */
 
