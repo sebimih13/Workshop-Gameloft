@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SceneObject.h"
 #include "ResourceManager.h"
+#include "Camera.h"
 
 SceneObject::SceneObject()
 {
@@ -37,13 +38,33 @@ void SceneObject::Draw()
 	glBindBuffer(GL_ARRAY_BUFFER, model->getVBO());
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, model->getEBO());
 
-	// TODO : put in a loop
+	// TODO : loop for multiple textures
 	glBindTexture(GL_TEXTURE_2D, textures[0]->getTextureID());
+
+	// TODO : matrix model -> sa NU fie calculat la fiecare draw ddaca este obiect static
+	// TODO : matrix model = scale * rotation * position
+	Matrix translationMatrix;
+	translationMatrix.SetTranslation(position);
+
+	Matrix rotationMatrix;
+	Matrix rotMatrix;
+	rotationMatrix.SetIdentity();	
+	rotationMatrix = rotationMatrix * rotMatrix.SetRotationX(rotation.x);
+	rotationMatrix = rotationMatrix * rotMatrix.SetRotationY(rotation.y);
+	rotationMatrix = rotationMatrix * rotMatrix.SetRotationZ(rotation.z);
+
+	Matrix scaleMatrix;
+	scaleMatrix.SetScale(scale);
+
+	// TODO : check camera pointer
+
+	Matrix modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;
+	Matrix mvp = modelMatrix * camera->getViewMatrix() * camera->getProjectionMatrix();
 
 	// TODO : check
 	shader->setPosition();
 	shader->setUV();
-	shader->setMVP(mvp);
+	shader->setMVP(&mvp);
 
 	// Draw
 	glDrawElements(GL_TRIANGLES, model->getNrIndices(), GL_UNSIGNED_INT, 0);
@@ -76,6 +97,7 @@ void SceneObject::debug()
 	}
 
 	std::cout << "\t name : " << name << '\n';
+	std::cout << "\t type : " << type << '\n';
 	std::cout << "\t wiredFormat : " << wiredFormat << '\n';
 
 	std::cout << '\n';

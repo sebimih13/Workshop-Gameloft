@@ -202,23 +202,16 @@ int _tmain(int argc, _TCHAR* argv[])
 	     * SceneManager -> avem acces usor la camera.view + camera.projection
 		 * SceneObject  -> avem acces la postion / rotation / scale (de care avem nevoie pentru matrix model)
 
-	* 2. Functiile pt translate/rotate/scale trb sa le implementam noi in Math.h ?
-
-	* 3. ModelResource / ShaderResource / TextureResource - trb scrise in acelasi fisier cu clasele Model / Shader / Texture
-
 	* 4. In SceneManager / ResourceManager - variabile / functii static ?
 
 	* 5. Daca stiu ca o variabila va fi populata ulterior, mai trb sa ii atribui o valoare default ? (pt siguranta)
-	
-	* 6. Pentru enums cum este mai eficient sa le parsam?
-		 * cu map<string, enum>
-		 * if ("string" == "enum")
-			  return enum;
 
 	* 7. structurile ModelResource / TextureResource / ShaderResource - ar trb sa mai memoreze id?
 		 * id-ul este folosit doar de ResourceManager cand adauga resursa in map[id] = resursa  
+		 * RASPUNS : nu mai trb
 
 	* 8. Attributes + Uniform trb incluse in clasa Shader ?
+		* DA
 		 
 		 * V2 - in SceneObject->Draw() : de ficare data avem:
 				
@@ -228,8 +221,7 @@ int _tmain(int argc, _TCHAR* argv[])
 				glVertexAttribPointer(attribute, ...);
 
 	* 9. Attributes + Uniform trb incluse in clasa Shader ?
-
-	* 10. Fisierul Globals.h este inutil, din moment ce valorile pt width/height sunt in SceneManager ?
+		* DA
 
 	* 11. Daca avem mai multe variabile de setat inainte de Init()		- vezi exemplu Camera.h
 		  * V1 - avem setters si dupa apelam o functie Init()
@@ -237,9 +229,11 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	* 12. Camera ar trb limitata pe rotatia OX sa nu poata sa faca 360
 
-	* 13. ORICE implementarea -> daca ma rotesc => rotatie pe axa OZ a obiectului
+	* 13. ORICE implementare -> daca ma rotesc => rotatie pe axa OZ a obiectului
+		* De revizuit mai tarziu
 
 	* 14. Special characters in XML -> exemplu daca vreau: & - pt ARROW UP
+		* XML special characters
 
 	* 15. in esUtil_win.cpp : 
 	  
@@ -252,9 +246,9 @@ int _tmain(int argc, _TCHAR* argv[])
       }
       break;
 
-	  * 16. mouseActions.h - contine enums: MouseButtons + MouseEvents -> in .h separat sau le pun in esUtil.h
-
-	  * 17.
+	  * 16. Pentru modelele care nu au texturi fac alt shader?
+		* Mai usor de folosit
+			* DA
 
 */
 
@@ -263,12 +257,17 @@ int _tmain(int argc, _TCHAR* argv[])
 	TODO LIST : 
 
 	* 1. modelul in format wired
+		* de actualizat lista de indici	
 
 	* 2. pentru SceneObject - color (sau textures)
+		 + shader separat pt obiectele care au culoare (nu au texturi)
 
 	* 3. rotate camera - mouse input
 
-	* 4. 
+	* 4. pt teren => extindere clasa SceneObject
+		* drawCommon() - deseneaza toate lucrurile comune pt orice obiect din scena
+
+	* 5. 
 
 */
 

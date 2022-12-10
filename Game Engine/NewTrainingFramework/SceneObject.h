@@ -7,6 +7,16 @@
 #include "Texture.h"
 #include "Shader.h"
 
+class Camera;
+
+enum ObjectType
+{
+	DEFAULT_TYPE,
+
+	Normal,
+	Terrain
+};
+
 class SceneObject
 {
 public:
@@ -38,8 +48,10 @@ public:
 	inline void setShader(int id) { shaderID = id; };
 	inline void setTextures(std::vector<int> ids) { textureIDs = ids; }
 
+	inline void setType(ObjectType t) { type = t; }
+
 	// TODO : check
-	inline void setMVP(Matrix* m) { mvp = m; }
+	inline void setCamera(Camera* cam) { camera = cam; }
 
 private:
 	int ID;
@@ -68,19 +80,13 @@ private:
 	bool wiredFormat;
 
 	// TODO : ObjectType
-	/*
-		enum ObjectType
-		{
-			normal,
-			terrain
-		} type;
-	*/
+	ObjectType type;
 	
 	/** Others */
 	// TODO : bool depthTest;
 
 	// TODO : check + add in constructos ?
-	Matrix* mvp;	
+	Camera* camera;	
 };
 
 // TODO : INITIALIZE STRUCTS + CLASS IN CONSTRUCTOR ? 

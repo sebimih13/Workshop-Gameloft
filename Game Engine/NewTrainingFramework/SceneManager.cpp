@@ -135,9 +135,11 @@ void SceneManager::Init(char* filePath)
 			texturesIDs.push_back(textureID);
 		}
 
-		obj->setModel(objectNode.getChild("model").getInt());
+		obj->setModel(objectNode.getChild("model").getInt());		// TODO : problema pt teren (<model>generated</model>)
 		obj->setShader(objectNode.getChild("shader").getInt());
 		obj->setTextures(texturesIDs);								// TODO : texture / color
+
+		obj->setType(getObjectType(objectNode.getChild("type").getString()));
 
 		obj->setWiredFormat(false);		// TODO : wiredFormat
 
@@ -174,24 +176,18 @@ void SceneManager::LoadObjects()
 
 void SceneManager::Draw()
 {
-	// Calculate MVP
-	Matrix model;			// TODO : add position + rotation + scale
-	model.SetIdentity();
-
-	Matrix MVP;
-	MVP = model * cameras[activeCameraID]->getViewMatrix() * cameras[activeCameraID]->getProjectionMatrix();
-
 	// Draw objects
 	for (SceneObject* object : objects)
 	{
-		object->setMVP(&MVP);
+		// TODO : de transmis scenemanager getActiveCamera
+		object->setCamera(cameras[activeCameraID]);		
 		object->Draw();
 	}
 }
 
 void SceneManager::Update()
 {
-	// TODO : inca nu este concret
+	// TODO : inca nu stiu
 }
 
 ControlsConfig SceneManager::getControlsAction(std::string& action)
@@ -226,7 +222,7 @@ ControlsConfig SceneManager::getControlsAction(std::string& action)
 	else if (action == "ROTATE_CAMERA_NEGATIVE_Z")			// P
 		return ControlsConfig::ROTATE_CAMERA_NEGATIVE_Z;
 
-	return ControlsConfig::DEFAULT;						// ERROR
+	return ControlsConfig::DEFAULT_CONTROLSCONFIG;			// ERROR
 
 	// TODO : ADD MORE
 }
@@ -238,6 +234,17 @@ CameraType SceneManager::getCameraType(std::string& type)
 	else if (type == "thirdPerson")
 		return CameraType::thirdPerson;
 	return CameraType::none;
+
+	// TODO : ADD MORE
+}
+
+ObjectType SceneManager::getObjectType(std::string& type)
+{
+	if (type == "normal")
+		return ObjectType::Normal;
+	else if (type == "terrain")
+		return ObjectType::Terrain;
+	return ObjectType::DEFAULT_TYPE;
 
 	// TODO : ADD MORE
 }

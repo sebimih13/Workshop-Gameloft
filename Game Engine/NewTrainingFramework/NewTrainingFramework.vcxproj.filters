@@ -104,6 +104,12 @@
     <None Include="..\Resources\Shaders\modelShader.vs">
       <Filter>Resources\Shaders</Filter>
     </None>
+    <None Include="..\Resources\Shaders\terrainShader.vs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\terrainShader.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\XMLFiles\resourceManager.xml">

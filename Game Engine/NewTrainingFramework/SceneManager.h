@@ -11,7 +11,7 @@ using namespace rapidxml;
 
 enum ControlsConfig
 {
-	DEFAULT,					// None
+	DEFAULT_CONTROLSCONFIG,					// None
 
 	MOVE_CAMERA_POSITIVE_X,		// A
 	MOVE_CAMERA_NEGATIVE_X,		// D
@@ -92,6 +92,7 @@ private:
 	/** Utilities Functions */
 	ControlsConfig getControlsAction(std::string& action);
 	CameraType getCameraType(std::string& type);
+	ObjectType getObjectType(std::string& type);
 };
 
 

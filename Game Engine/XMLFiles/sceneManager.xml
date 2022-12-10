@@ -86,8 +86,8 @@
 		<comment>in interiorul elementelor model, shader, texture, se gaseste id-ul corespunzator resursei din sceneManager.xml
 		Elementul position se refera practic la translatia obiectului.
 		</comment>
+		
 		<object id="1">
-			
 			<model>1</model>
 			<shader>10</shader>
 			<type>normal</type>
@@ -111,9 +111,60 @@
 				<z>1.0</z>
 			</scale>
 		</object>
-		
-		<!--
+
+		<object id="2">
+			<model>1</model>
+			<shader>10</shader>
+			<type>normal</type>
+			<name>Crocodil_verde_2</name>
+			<textures>
+				<texture id="4"/>
+			</textures>
+			<position>
+				<x>-150.5</x>
+				<y>27</y>
+				<z>21.22</z>
+			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<scale>
+				<x>1.0</x>
+				<y>1.0</y>
+				<z>1.0</z>
+			</scale>
+		</object>
+
 		<object id="3">
+			<model>2</model>
+			<shader>10</shader>
+			<type>normal</type>
+			<name>Bus</name>
+			<textures>
+				<texture id="2"/>
+			</textures>
+			<position>
+				<x>-70.5</x>
+				<y>80</y>
+				<z>90.22</z>
+			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<scale>
+				<x>1.0</x>
+				<y>1.0</y>
+				<z>1.0</z>
+			</scale>
+		</object>
+
+
+		<!-- TODO : Minge
+		<object id="4">
 			
 			<model>5</model>
 			<shader>10</shader>
@@ -141,8 +192,37 @@
 				<z>1.0</z>
 			</scale>
 		</object>	
-		--> 
-		
+		-->
+
+		<!--
+		<object id="8">
+			<model>generated</model>
+			<shader>3</shader>
+			<type>terrain</type>
+			<name>Teren</name>
+			<textures>
+				<texture id="14"/>
+				<texture id="15"/>
+				<texture id="16"/>
+			</textures>
+			<position>
+				<x>1.5</x>
+				<y>2.4</y>
+				<z>7</z>
+			</position>
+			<rotation>
+				<x>0.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</rotation>
+			<scale>
+				<x>1.0</x>
+				<y>1.0</y>
+				<z>1.0</z>
+			</scale>
+		</object>
+		-->
+
 	</objects>
 	
 	<debugSettings>

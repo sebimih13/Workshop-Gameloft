@@ -194,6 +194,8 @@
   <ItemGroup>
     <None Include="..\Resources\Shaders\modelShader.fs" />
     <None Include="..\Resources\Shaders\modelShader.vs" />
+    <None Include="..\Resources\Shaders\terrainShader.fs" />
+    <None Include="..\Resources\Shaders\terrainShader.vs" />
     <None Include="..\Resources\Shaders\TriangleShaderFS.fs" />
     <None Include="..\Resources\Shaders\TriangleShaderVS.vs" />
     <None Include="..\..\Readme.doc" />

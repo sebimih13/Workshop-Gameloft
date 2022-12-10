@@ -6,11 +6,11 @@ NFGData* LoadNFG(const char* filePath)
 	std::ifstream fin(filePath);
 	if (fin.good())
 	{
-		std::cout << filePath << " - VALID\n";
+		std::cout << '\n' << filePath << " - VALID\n";
 	}
 	else
 	{
-		std::cout << filePath << " - INVALID\n";
+		std::cout << '\n' << filePath << " - INVALID\n";
 		return nullptr;
 	}
 
