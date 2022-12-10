@@ -102,34 +102,6 @@ void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
 	// Update input
 	std::map<char, ControlsConfig> inputMap = SceneManager::getInstance()->getControls();
 	input[inputMap[key]] = bIsPressed;
-
-	//TODO : delete?
-	/*
-	if (bIsPressed)
-	{
-		switch (key)
-		{
-			case 'W':	camera->moveOz(-1.0f);		break;
-			case 'S':	camera->moveOz(1.0f);		break;
-			case 'A':	camera->moveOx(-1.0f);		break;
-			case 'D':	camera->moveOx(1.0f);		break;
-
-			case 'Q':	camera->moveOy(1.0f);		break;
-			case 'E':	camera->moveOy(-1.0f);		break;
-
-
-			case 'O':	camera->rotateOz(1.0f);		break;
-			case 'P':	camera->rotateOz(-1.0f);	break;
-
-			case '&':	camera->rotateOx(1.0f);		break;
-			case '(':	camera->rotateOx(-1.0f);	break;
-			case '%':	camera->rotateOy(1.0f);		break;
-			case '\'':	camera->rotateOy(-1.0f);	break;
-			case 'O':	camera->rotateOz(1.0f);		break;
-			case 'P':	camera->rotateOz(-1.0f);	break;
-		}
-	}
-	*/
 }
 
 void Mouse(ESContext* esContext, MouseButtons button, MouseEvents eventType, int mouseX, int mouseY)
@@ -198,9 +170,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 /**	INTREBARI : 
     
-	* 1. Unde trb implementat MVP (SceneManager / SceneObject)
-	     * SceneManager -> avem acces usor la camera.view + camera.projection
-		 * SceneObject  -> avem acces la postion / rotation / scale (de care avem nevoie pentru matrix model)
 
 	* 4. In SceneManager / ResourceManager - variabile / functii static ?
 
@@ -210,30 +179,15 @@ int _tmain(int argc, _TCHAR* argv[])
 		 * id-ul este folosit doar de ResourceManager cand adauga resursa in map[id] = resursa  
 		 * RASPUNS : nu mai trb
 
-	* 8. Attributes + Uniform trb incluse in clasa Shader ?
-		* DA
-		 
-		 * V2 - in SceneObject->Draw() : de ficare data avem:
-				
-				attribute = glGetAttribLocation(programID, "attributeString");
-
-				glEnableVertexAttribArray(attribute);
-				glVertexAttribPointer(attribute, ...);
-
-	* 9. Attributes + Uniform trb incluse in clasa Shader ?
-		* DA
-
 	* 11. Daca avem mai multe variabile de setat inainte de Init()		- vezi exemplu Camera.h
 		  * V1 - avem setters si dupa apelam o functie Init()
 		  * V2 - avem un constructor toti parametrii care contine la sfarsit functia Init()
 
 	* 12. Camera ar trb limitata pe rotatia OX sa nu poata sa faca 360
+		* De revizuit mai tarziu
 
 	* 13. ORICE implementare -> daca ma rotesc => rotatie pe axa OZ a obiectului
 		* De revizuit mai tarziu
-
-	* 14. Special characters in XML -> exemplu daca vreau: & - pt ARROW UP
-		* XML special characters
 
 	* 15. in esUtil_win.cpp : 
 	  
@@ -246,10 +200,6 @@ int _tmain(int argc, _TCHAR* argv[])
       }
       break;
 
-	  * 16. Pentru modelele care nu au texturi fac alt shader?
-		* Mai usor de folosit
-			* DA
-
 */
 
 /*
@@ -258,9 +208,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	* 1. modelul in format wired
 		* de actualizat lista de indici	
-
-	* 2. pentru SceneObject - color (sau textures)
-		 + shader separat pt obiectele care au culoare (nu au texturi)
 
 	* 3. rotate camera - mouse input
 

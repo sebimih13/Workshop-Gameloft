@@ -40,6 +40,7 @@ void Shader::Load()
 	uvAttribute = glGetAttribLocation(programID, "a_uv");
 
 	mvpMatrixUniform = glGetUniformLocation(programID, "u_mvpMatrix");
+	colorUniform = glGetUniformLocation(programID, "u_color");
 }
 
 void Shader::setPosition()
@@ -65,6 +66,14 @@ void Shader::setMVP(Matrix* MVP)
 	if (mvpMatrixUniform != -1)
 	{
 		glUniformMatrix4fv(mvpMatrixUniform, 1, GL_FALSE, (GLfloat*)MVP->m);
+	}
+}
+
+void Shader::setColor(Vector3* color)
+{
+	if (colorUniform != -1)
+	{
+		glUniform3fv(colorUniform, 1, &color->x);		// TODO : check
 	}
 }
 

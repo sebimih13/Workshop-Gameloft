@@ -192,6 +192,8 @@
     <ClInclude Include="SceneManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Resources\Shaders\colorModelShader.fs" />
+    <None Include="..\Resources\Shaders\colorModelShader.vs" />
     <None Include="..\Resources\Shaders\modelShader.fs" />
     <None Include="..\Resources\Shaders\modelShader.vs" />
     <None Include="..\Resources\Shaders\terrainShader.fs" />

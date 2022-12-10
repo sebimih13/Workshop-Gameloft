@@ -48,9 +48,35 @@
 			<key>S</key>
 			<action>MOVE_CAMERA_NEGATIVE_Z</action>
 		</control>
+
+		<control>
+			<key>&#38;</key>
+			<action>ROTATE_CAMERA_POSITIVE_X</action>
+		</control>
+		<control>
+			<key>(</key>
+			<action>ROTATE_CAMERA_NEGATIVE_X</action>
+		</control>
+
+		<control>
+			<key>%</key>
+			<action>ROTATE_CAMERA_POSITIVE_Y</action>
+		</control>
+		<control>
+			<key>&#39;</key>
+			<action>ROTATE_CAMERA_NEGATIVE_Y</action>
+		</control>
+
+		<control>
+			<key>O</key>
+			<action>ROTATE_CAMERA_POSITIVE_Z</action>
+		</control>
+		<control>
+			<key>P</key>
+			<action>ROTATE_CAMERA_NEGATIVE_Z</action>
+		</control>
 		
 		<!-- TODO : adaugati restul -->
-		
 	</controls>
 	
 	<cameras>
@@ -83,9 +109,6 @@
 	<activeCamera>1</activeCamera>
 
 	<objects>
-		<comment>in interiorul elementelor model, shader, texture, se gaseste id-ul corespunzator resursei din sceneManager.xml
-		Elementul position se refera practic la translatia obiectului.
-		</comment>
 		
 		<object id="1">
 			<model>1</model>
@@ -162,14 +185,10 @@
 			</scale>
 		</object>
 
-
-		<!-- TODO : Minge
 		<object id="4">
-			
 			<model>5</model>
-			<shader>10</shader>
+			<shader>11</shader>
 			<type>normal</type>
-			<wired/>
 			<name>Mesh_minge</name>
 			<color>
 				<r>1.0</r>
@@ -178,8 +197,8 @@
 			</color>
 			<position>
 				<x>3.5</x>
-				<y>0</y>
-				<z>20</z>
+				<y>130</y>
+				<z>50</z>
 			</position>
 			<rotation>
 				<x>0</x>
@@ -192,9 +211,8 @@
 				<z>1.0</z>
 			</scale>
 		</object>	
-		-->
 
-		<!--
+		<!-- TODO : TEREN
 		<object id="8">
 			<model>generated</model>
 			<shader>3</shader>

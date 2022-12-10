@@ -38,8 +38,17 @@ void SceneObject::Draw()
 	glBindBuffer(GL_ARRAY_BUFFER, model->getVBO());
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, model->getEBO());
 
-	// TODO : loop for multiple textures
-	glBindTexture(GL_TEXTURE_2D, textures[0]->getTextureID());
+	// TODO : choose color / textures
+	if (textures.size() > 0)
+	{
+		// TODO : loop for multiple textures
+		glBindTexture(GL_TEXTURE_2D, textures[0]->getTextureID());
+	}
+	else
+	{
+		// TODO : set color
+		shader->setColor(&color);
+	}
 
 	// TODO : matrix model -> sa NU fie calculat la fiecare draw ddaca este obiect static
 	// TODO : matrix model = scale * rotation * position
@@ -74,8 +83,12 @@ void SceneObject::Draw()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-	// TODO : put in a loop
-	glBindTexture(GL_TEXTURE_2D, 0);
+	// TODO : choose color / textures
+	if (textures.size() > 0)
+	{
+		// TODO : put in a loop
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
 }
 
 void SceneObject::debug()

@@ -6,12 +6,13 @@
 			<model id="1">
 				<file>croco.nfg</file>
 			</model>
-			<model id="5">
-				<file>Bila.nfg</file>
-			</model>
 
 			<model id="2">
 				<file>bus.nfg</file>
+			</model>
+			
+			<model id="5">
+				<file>Bila.nfg</file>
 			</model>
 		</folder>
 
@@ -31,6 +32,12 @@
 				<vs>modelShader.vs</vs>
 				<fs>modelShader.fs</fs>
 			</shader>
+
+			<shader id="11">
+				<vs>colorModelShader.vs</vs>
+				<fs>colorModelShader.fs</fs>
+			</shader>
+			
 			<shader id="3">
 				<vs>terrainShader.vs</vs>
 				<fs>terrainShader.fs</fs>

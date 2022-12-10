@@ -44,16 +44,6 @@ void SceneManager::Init(char* filePath)
 		controls.insert({ key, getControlsAction(action) });
 	}
 
-	// TODO : add ControlsConfig from XML
-	controls.insert({ '&', ControlsConfig::ROTATE_CAMERA_POSITIVE_X });
-	controls.insert({ '(', ControlsConfig::ROTATE_CAMERA_NEGATIVE_X });
-
-	controls.insert({ '%', ControlsConfig::ROTATE_CAMERA_POSITIVE_Y });
-	controls.insert({ '\'', ControlsConfig::ROTATE_CAMERA_NEGATIVE_Y });
-
-	controls.insert({ 'O', ControlsConfig::ROTATE_CAMERA_POSITIVE_Z });
-	controls.insert({ 'P', ControlsConfig::ROTATE_CAMERA_NEGATIVE_Z });
-
 	// Cameras
 	NodeXML camerasNode = rootNode.getChild("cameras");
 	for (NodeXML cameraNode = camerasNode.getChild("camera"); cameraNode.isValid(); cameraNode = cameraNode.getNextSibling())
@@ -135,9 +125,21 @@ void SceneManager::Init(char* filePath)
 			texturesIDs.push_back(textureID);
 		}
 
-		obj->setModel(objectNode.getChild("model").getInt());		// TODO : problema pt teren (<model>generated</model>)
+		obj->setModel(objectNode.getChild("model").getInt());		// TODO : problema pt teren (<model>generated</model>) => model = 0
 		obj->setShader(objectNode.getChild("shader").getInt());
-		obj->setTextures(texturesIDs);								// TODO : texture / color
+		obj->setTextures(texturesIDs);
+
+		// color
+		NodeXML colorNode = objectNode.getChild("color");
+		if (colorNode.isValid())
+		{
+			Vector3 color;
+			color.x = colorNode.getChild("r").getFloat();
+			color.y = colorNode.getChild("g").getFloat();
+			color.z = colorNode.getChild("b").getFloat();
+
+			obj->setColor(color);
+		}
 
 		obj->setType(getObjectType(objectNode.getChild("type").getString()));
 

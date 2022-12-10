@@ -47,6 +47,7 @@ public:
 	inline void setModel(int id) { modelID = id; }
 	inline void setShader(int id) { shaderID = id; };
 	inline void setTextures(std::vector<int> ids) { textureIDs = ids; }
+	inline void setColor(Vector3 col) { color = col; }
 
 	inline void setType(ObjectType t) { type = t; }
 
@@ -73,7 +74,7 @@ private:
 	std::vector<Texture*> textures;
 
 	/** Color */
-	// TODO 
+	Vector3 color;
 
 	/** XML Attributes */
 	std::string name;

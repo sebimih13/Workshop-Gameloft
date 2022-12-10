@@ -27,10 +27,11 @@ public:
 	/** Getters / Setters */
 	inline GLuint getProgramID() { return programID; }
 
-	void setPosition();			// TODO : aici sau in alta parte
-	void setUV();				// TODO : aici sau in alta parte
+	void setPosition();				// TODO : aici sau in alta parte
+	void setUV();					// TODO : aici sau in alta parte
 
-	void setMVP(Matrix* MVP);	// TODO : aici sau in alta parte
+	void setMVP(Matrix* MVP);		// TODO : aici sau in alta parte
+	void setColor(Vector3* color);	// TODO : aici sau in alta parte
 
 private:
 	ShaderResource* resource;
@@ -42,5 +43,6 @@ private:
 
 	/** Uniforms */				// TODO : aici sau in alta parte
 	GLuint mvpMatrixUniform;
+	GLuint colorUniform;
 };
 
