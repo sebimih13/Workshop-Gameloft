@@ -25,7 +25,10 @@ public:
 	/** Getters / Setters */
 	inline GLuint getVBO() { return VBO; }
 	inline GLuint getEBO() { return EBO; }
+	inline GLuint getWiredEBO() { return wiredEBO; }
+
 	inline GLuint getNrIndices() { return nrIndices; }
+	inline GLuint getNrIndicesWired() { return nrIndicesWired; }
 
 private:
 	ModelResource* resource;

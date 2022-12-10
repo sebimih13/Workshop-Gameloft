@@ -36,7 +36,15 @@ void SceneObject::Draw()
 	// Bind
 	glUseProgram(shader->getProgramID());
 	glBindBuffer(GL_ARRAY_BUFFER, model->getVBO());
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, model->getEBO());
+
+	if (!wiredFormat)
+	{
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, model->getEBO());
+	}
+	else
+	{
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, model->getWiredEBO());
+	}
 
 	// TODO : choose color / textures
 	if (textures.size() > 0)
@@ -76,7 +84,14 @@ void SceneObject::Draw()
 	shader->setMVP(&mvp);
 
 	// Draw
-	glDrawElements(GL_TRIANGLES, model->getNrIndices(), GL_UNSIGNED_INT, 0);
+	if (!wiredFormat)
+	{
+		glDrawElements(GL_TRIANGLES, model->getNrIndices(), GL_UNSIGNED_INT, 0);
+	}
+	else
+	{
+		glDrawElements(GL_LINES, model->getNrIndicesWired(), GL_UNSIGNED_INT, 0);
+	}
 
 	// Unbind
 	glUseProgram(0);

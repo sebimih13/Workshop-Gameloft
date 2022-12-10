@@ -206,9 +206,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	TODO LIST : 
 
-	* 1. modelul in format wired
-		* de actualizat lista de indici	
-
 	* 3. rotate camera - mouse input
 
 	* 4. pt teren => extindere clasa SceneObject
