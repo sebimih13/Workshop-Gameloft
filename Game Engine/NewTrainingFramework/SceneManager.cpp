@@ -143,7 +143,7 @@ void SceneManager::Init(char* filePath)
 
 		obj->setType(getObjectType(objectNode.getChild("type").getString()));
 
-		obj->setWiredFormat(false);		// TODO : wiredFormat
+		obj->setWiredFormat(false);		// TODO : wiredFormat cand apas o tasta
 
 		objects.push_back(obj);
 	}

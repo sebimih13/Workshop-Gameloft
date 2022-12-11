@@ -29,11 +29,6 @@ private:
 	/** Instance */
 	static ResourceManager* instance;
 
-	/** Debug */
-	void debug();
-
-	/** Data */
-
 	/** Models */
 	std::map<int, ModelResource*> modelResources;
 	std::map<int, Model*> models;
@@ -45,6 +40,14 @@ private:
 	/** Shader */
 	std::map<int, ShaderResource*> shaderResources;
 	std::map<int, Shader*> shaders;
+
+	/** Utilities Functions */
+	TextureType getTextureType(std::string type);
+	TextureFilter getTextureFilter(std::string filter);
+	TextureWrapMode getTextureWrapMode(std::string mode);
+
+	/** Debug */
+	void debug();
 };
 
 // TODO : INITIALIZE STRUCTS + CLASS IN CONSTRUCTOR ? 

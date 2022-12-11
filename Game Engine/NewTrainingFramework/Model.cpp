@@ -37,7 +37,7 @@ void Model::Load()
 	}
 
 	nrIndices = data->nrIndices;
-	std::vector<unsigned int> indices = data->indices;
+	std::vector<unsigned int> indicesData = data->indices;
 
 	// TODO : ???
 	delete data;
@@ -47,21 +47,21 @@ void Model::Load()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesData.size() * sizeof(unsigned int), &indicesData[0], GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	// TODO : nrIndiciWired
 	std::vector<unsigned int> wiredIndices;
 	for (unsigned int i = 0; i < nrIndices; i += 3)
 	{
-		wiredIndices.push_back(indices[i]);
-		wiredIndices.push_back(indices[i + 1]);
+		wiredIndices.push_back(indicesData[i]);
+		wiredIndices.push_back(indicesData[i + 1]);
 
-		wiredIndices.push_back(indices[i]);
-		wiredIndices.push_back(indices[i + 2]);
+		wiredIndices.push_back(indicesData[i]);
+		wiredIndices.push_back(indicesData[i + 2]);
 
-		wiredIndices.push_back(indices[i + 1]);
-		wiredIndices.push_back(indices[i + 2]);
+		wiredIndices.push_back(indicesData[i + 1]);
+		wiredIndices.push_back(indicesData[i + 2]);
 	}
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, wiredEBO);

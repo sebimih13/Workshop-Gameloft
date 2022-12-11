@@ -27,9 +27,9 @@ public:
 	SceneObject(const SceneObject& obj);
 
 	/** Load model + shader + textures */
-	void Load();
+	virtual void Load();		// TODO : CHECK
 
-	void Draw();
+	virtual void Draw();		// TODO : CHECK
 
 	/** Debug */
 	void debug();
@@ -54,7 +54,7 @@ public:
 	// TODO : check
 	inline void setCamera(Camera* cam) { camera = cam; }
 
-private:
+protected:
 	int ID;
 
 	Vector3 position;
@@ -73,15 +73,16 @@ private:
 	std::vector<int> textureIDs;
 	std::vector<Texture*> textures;
 
-	/** Color */
-	Vector3 color;
-
 	/** XML Attributes */
 	std::string name;
 	bool wiredFormat;
 
 	// TODO : ObjectType
 	ObjectType type;
+
+private:
+	/** Color */
+	Vector3 color;
 	
 	/** Others */
 	// TODO : bool depthTest;

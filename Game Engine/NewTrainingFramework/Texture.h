@@ -5,18 +5,25 @@
 
 enum TextureType
 {
-	TEXTURE_2D,
-	TEXTURE_3D
+	DEFAULT_TEXTURETYPE,	// None
+
+	TEXTURE_2D				// 2d
+
+	// TODO : ADD MORE
 };
 
 enum TextureFilter
 {
+	DEFAULT_TEXTUREFILTER,	// None
+
 	LINEAR,
 	NEAREST
 };
 
 enum TextureWrapMode
 {
+	DEFAULT_TEXTUREWRAPMODE, // None
+
 	CLAMP_TO_EDGE,
 	REPEAT,
 	MIRRORED_REPEAT

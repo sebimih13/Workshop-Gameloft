@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "ResourceManager.h"
 
-#include "../Utilities/rapidxml-1.13/rapidxml_print.hpp"
 #include "../Utilities/NodeXML.hpp"
 #include "../Utilities/AttributeXML.hpp"
 
@@ -46,16 +45,16 @@ void ResourceManager::Init(char* filePath)
 			TextureResource* resource = new TextureResource();
 			
 			resource->id = textureNode.getAttribute("id").getInt();
-			resource->type = TextureType::TEXTURE_2D;			// TODO
+			resource->type = getTextureType(textureNode.getAttribute("type").getString());
 			
 			resource->filePath = folderNode.getAttribute("path").getString();
 			resource->fileName = textureNode.getChild("file").getString();
 
-			resource->minFilter = TextureFilter::LINEAR;		// TODO
-			resource->magFilter = TextureFilter::LINEAR;		// TODO
+			resource->minFilter = getTextureFilter(textureNode.getChild("min_filter").getString());
+			resource->magFilter = getTextureFilter(textureNode.getChild("mag_filter").getString());
 
-			resource->wrapS = TextureWrapMode::CLAMP_TO_EDGE;	// TODO
-			resource->wrapT = TextureWrapMode::CLAMP_TO_EDGE;	// TODO
+			resource->wrapS = getTextureWrapMode(textureNode.getChild("wrap_s").getString());
+			resource->wrapT = getTextureWrapMode(textureNode.getChild("wrap_t").getString());
 
 			textureResources.insert({ resource->id, resource });
 		}
@@ -124,6 +123,35 @@ Shader* ResourceManager::LoadShader(int id)
 		shaders[id]->Load();
 	}
 	return shaders[id];
+}
+
+TextureType ResourceManager::getTextureType(std::string type)
+{
+	if (type == "2d")
+		return TextureType::TEXTURE_2D;
+	return TextureType::DEFAULT_TEXTURETYPE;
+
+	// TODO : add more
+}
+
+TextureFilter ResourceManager::getTextureFilter(std::string filter)
+{
+	if (filter == "LINEAR")
+		return TextureFilter::LINEAR;
+	else if (filter == "NEAREST")
+		return TextureFilter::NEAREST;
+	return TextureFilter::DEFAULT_TEXTUREFILTER;
+}
+
+TextureWrapMode ResourceManager::getTextureWrapMode(std::string mode)
+{
+	if (mode == "CLAMP_TO_EDGE")
+		return TextureWrapMode::CLAMP_TO_EDGE;
+	else if (mode == "REPEAT")
+		return TextureWrapMode::REPEAT;
+	else if (mode == "MIRRORED_REPEAT")
+		return TextureWrapMode::MIRRORED_REPEAT;
+	return DEFAULT_TEXTUREWRAPMODE;
 }
 
 void ResourceManager::debug()

@@ -21,8 +21,10 @@ SceneObject::SceneObject(const SceneObject& obj) :	ID(obj.ID),
 
 void SceneObject::Load()
 {
-	model = ResourceManager::getInstance()->LoadModel(modelID);
-	shader = ResourceManager::getInstance()->LoadShader(shaderID);
+	if (model != 0)		// TODO : CHECK	
+		model = ResourceManager::getInstance()->LoadModel(modelID);
+	if (shader != 0)	// TODO : CHECK
+		shader = ResourceManager::getInstance()->LoadShader(shaderID);
 
 	for (int& id : textureIDs)
 	{
