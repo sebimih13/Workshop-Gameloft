@@ -29,6 +29,7 @@ public:
 	/** Load model + shader + textures */
 	virtual void Load();		// TODO : CHECK
 
+	/** Draw Object */
 	virtual void Draw();		// TODO : CHECK
 
 	/** Debug */
@@ -55,7 +56,17 @@ public:
 	inline void setCamera(Camera* cam) { camera = cam; }
 
 protected:
-	int ID;
+	// TODO : ObjectType
+	ObjectType type;
+
+	// TODO : check + add in constructos ?
+	Camera* camera;
+
+	/** Attributes */
+	std::string name;
+	bool wiredFormat;
+
+	int ID;		// TODO : make unsigned int
 
 	Vector3 position;
 	Vector3 rotation;
@@ -73,22 +84,12 @@ protected:
 	std::vector<int> textureIDs;
 	std::vector<Texture*> textures;
 
-	/** XML Attributes */
-	std::string name;
-	bool wiredFormat;
-
-	// TODO : ObjectType
-	ObjectType type;
-
 private:
-	/** Color */
+	/** Color */		// TODO : O LAS AICI?
 	Vector3 color;
 	
 	/** Others */
 	// TODO : bool depthTest;
-
-	// TODO : check + add in constructos ?
-	Camera* camera;	
 };
 
 // TODO : INITIALIZE STRUCTS + CLASS IN CONSTRUCTOR ? 

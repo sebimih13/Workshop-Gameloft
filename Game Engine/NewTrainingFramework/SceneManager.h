@@ -7,8 +7,6 @@
 #include "Camera.h"
 #include "SceneObject.h"
 
-using namespace rapidxml;
-
 enum ControlsConfig
 {
 	DEFAULT_CONTROLSCONFIG,		// None
@@ -30,6 +28,8 @@ enum ControlsConfig
 
 	ROTATE_CAMERA_POSITIVE_Z,	// O 
 	ROTATE_CAMERA_NEGATIVE_Z	// P
+
+	// TODO : ADD MORE
 };
 
 struct ScreenConfig

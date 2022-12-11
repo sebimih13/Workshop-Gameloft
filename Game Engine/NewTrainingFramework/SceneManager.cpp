@@ -5,6 +5,8 @@
 #include "../Utilities/NodeXML.hpp"
 #include "../Utilities/AttributeXML.hpp"
 
+#include "TerrainObject.h"
+
 // Instantiate static variables
 SceneManager* SceneManager::instance = nullptr;
 
@@ -95,8 +97,32 @@ void SceneManager::Init(char* filePath)
 	{
 		SceneObject* obj = new SceneObject();
 
+		// TODO : make differents objects based on type
+		ObjectType objType = getObjectType(objectNode.getChild("type").getString());
+
+		if (objType == ObjectType::Terrain)
+		{
+			TerrainObject* terrainObj = new TerrainObject();
+
+			delete obj;
+			obj = terrainObj;
+		}
+
+		obj->setType(objType);
+		obj->setCamera(cameras[activeCameraID]);
+
 		obj->setID(objectNode.getAttribute("id").getInt());
 		obj->setName(objectNode.getChild("name").getString());
+
+		NodeXML wiredNode = objectNode.getChild("wired");
+		if (wiredNode.isValid())
+		{
+			obj->setWiredFormat(true);
+		}
+		else
+		{
+			obj->setWiredFormat(false);
+		}
 
 		Vector3 position;
 		position.x = objectNode.getChild("position").getChild("x").getFloat();
@@ -122,6 +148,8 @@ void SceneManager::Init(char* filePath)
 		for (NodeXML textureNode = texturesNode.getChild("texture"); textureNode.isValid(); textureNode = textureNode.getNextSibling())
 		{
 			int textureID = textureNode.getAttribute("id").getInt();
+			// TODO ADD -> MIN/MAG FILTER
+			// TODO ADD -> WRAP S/T
 			texturesIDs.push_back(textureID);
 		}
 
@@ -140,10 +168,6 @@ void SceneManager::Init(char* filePath)
 
 			obj->setColor(color);
 		}
-
-		obj->setType(getObjectType(objectNode.getChild("type").getString()));
-
-		obj->setWiredFormat(false);		// TODO : wiredFormat cand apas o tasta
 
 		objects.push_back(obj);
 	}
@@ -181,8 +205,6 @@ void SceneManager::Draw()
 	// Draw objects
 	for (SceneObject* object : objects)
 	{
-		// TODO : de transmis scenemanager getActiveCamera
-		object->setCamera(cameras[activeCameraID]);		
 		object->Draw();
 	}
 }
@@ -190,6 +212,9 @@ void SceneManager::Draw()
 void SceneManager::Update()
 {
 	// TODO : inca nu stiu
+
+	// daca am schimbat camera activa => object->setCamera(cameras[activeCameraID]);
+	// altfel o setez o singura data in LoadObjects
 }
 
 ControlsConfig SceneManager::getControlsAction(std::string& action)

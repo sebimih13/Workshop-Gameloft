@@ -18,7 +18,7 @@ void Texture::Load()
 	int textureWidth, textureHeight, texureBpp;
 	char* textureData = LoadTGA(file.c_str(), &textureWidth, &textureHeight, &texureBpp);
 
-	std::cout << "Texture file : " << file << '\n';
+	std::cout << "\nTexture file : " << file << '\n';
 	std::cout << "textureWidth : " << textureWidth << "\n";
 	std::cout << "textureHeight : " << textureHeight << "\n";
 	std::cout << "texureBpp : " << texureBpp << "\n";
@@ -51,9 +51,14 @@ void Texture::Load()
 	case TextureWrapMode::MIRRORED_REPEAT:	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);	break;
 	}
 
-	// TODO : CHOOSE GL_RGB / GL_RGBA	based on texureBpp
+	GLint format;
+	switch (texureBpp)
+	{
+		case 32: format = GL_RGBA; break;
+		case 24: format = GL_RGB;  break;
+	}
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, textureData);
+	glTexImage2D(GL_TEXTURE_2D, 0, format, textureWidth, textureHeight, 0, format, GL_UNSIGNED_BYTE, textureData);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 

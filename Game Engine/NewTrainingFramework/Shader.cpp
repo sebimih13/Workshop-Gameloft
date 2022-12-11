@@ -2,9 +2,9 @@
 #include "Shader.h"
 #include "Vertex.h"
 
-Shader::Shader(ShaderResource* shaderResource) : resource(shaderResource)
+Shader::Shader(ShaderResource* shaderResource) : MAX_TEXTURES(5), resource(shaderResource)
 {
-
+	textureUniforms.resize(MAX_TEXTURES, -1);
 }
 
 Shader::~Shader()
@@ -41,6 +41,13 @@ void Shader::Load()
 
 	mvpMatrixUniform = glGetUniformLocation(programID, "u_mvpMatrix");
 	colorUniform = glGetUniformLocation(programID, "u_color");
+	nrCeluleUniform = glGetUniformLocation(programID, "u_nrCelule");
+
+	for (int i = 0; i < MAX_TEXTURES; i++)
+	{
+		std::string uniformName = "u_texture_" + std::to_string(i);
+		textureUniforms[i] = glGetUniformLocation(programID, uniformName.c_str());
+	}
 }
 
 void Shader::setPosition()
@@ -74,6 +81,22 @@ void Shader::setColor(Vector3* color)
 	if (colorUniform != -1)
 	{
 		glUniform3fv(colorUniform, 1, &color->x);		// TODO : check
+	}
+}
+
+void Shader::setTexture(GLint index)
+{
+	if (textureUniforms[index] != -1)
+	{
+		glUniform1i(textureUniforms[index], index);
+	}
+}
+
+void Shader::setNrCelule(GLint nrCelule)
+{
+	if (nrCeluleUniform != -1)
+	{
+		glUniform1f(nrCeluleUniform, GLfloat(nrCelule));
 	}
 }
 

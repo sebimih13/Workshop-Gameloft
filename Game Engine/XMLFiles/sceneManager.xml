@@ -190,6 +190,7 @@
 			<shader>11</shader>
 			<type>normal</type>
 			<name>Mesh_minge</name>
+			<wired/>
 			<color>
 				<r>1.0</r>
 				<g>0.0</g>
@@ -212,7 +213,6 @@
 			</scale>
 		</object>	
 
-		<!-- TODO : TEREN
 		<object id="8">
 			<model>generated</model>
 			<shader>3</shader>
@@ -222,11 +222,12 @@
 				<texture id="14"/>
 				<texture id="15"/>
 				<texture id="16"/>
+				<texture id="17"/>
 			</textures>
 			<position>
-				<x>1.5</x>
-				<y>2.4</y>
-				<z>7</z>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
 			</position>
 			<rotation>
 				<x>0.0</x>
@@ -239,7 +240,6 @@
 				<z>1.0</z>
 			</scale>
 		</object>
-		-->
 
 	</objects>
 	

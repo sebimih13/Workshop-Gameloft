@@ -124,7 +124,7 @@ void Mouse(ESContext* esContext, MouseButtons button, MouseEvents eventType, int
 
 void CleanUp()
 {
-	
+	// TODO : delete stuffs
 }
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -200,18 +200,34 @@ int _tmain(int argc, _TCHAR* argv[])
       }
       break;
 
+	  -----------------------------------------------------------------------------------------------------------------------------
+
+	  * 16. LINEAR si REPEAT pt: ?
+			- rock.tga
+			- grass.tga
+			- dirt.tga
+			- Terrain_blend_map.tga
+
 */
 
 /*
 
 	TODO LIST : 
 
+	* 2. Forward Declarations in toate fisierele
+
 	* 3. rotate camera - mouse input
 
 	* 4. pt teren => extindere clasa SceneObject
 		* drawCommon() - deseneaza toate lucrurile comune pt orice obiect din scena
 
-	* 5. 
+	* 5. TEREN
+
+	* 6. SKYBOX
+
+	* 7. CONTROLS -> MERGI IN SUS/JOS GLOBAL (NU RELATIV CUM ESTE ACM)
+
+	* 8. pt fiecare resource -> sa fie data in Init()
 
 */
 

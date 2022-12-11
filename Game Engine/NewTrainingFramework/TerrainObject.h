@@ -11,19 +11,20 @@ public:
 	/** Destructor */
 	~TerrainObject();
 
-	void generateModel(Vector3 initialPosition);
-
+	/** Load model + shader + textures */
 	void Load() override;
+
+	/** Draw Object */
 	void Draw() override;
 
 private:
-	/** Proprietati */
-	int nrCelule;			// TODO : nr par
+	// TODO : camera trb sa fie setata
+	/** Generate model for object based on camera->getPosition() */
+	Model* generateModel();
+
+	/** Proprietati speciale */
+	int nrCelule;					// TODO : nr par
 	int dimensiuneCelula;
 	int offsetY;
-
-	/** Render data */
-	GLuint VBO;
-	GLuint EBO;
 };
 

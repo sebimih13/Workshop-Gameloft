@@ -1,14 +1,16 @@
 #include "stdafx.h"
 #include "Model.h"
-#include "Vertex.h"
 
 #include "../Utilities/NFG.h"
 
-Model::Model(ModelResource* modelResource) : resource(modelResource)
+Model::Model()
 {
 	glGenBuffers(1, &VBO);
 	glGenBuffers(1, &EBO);
 	glGenBuffers(1, &wiredEBO);
+
+	nrIndices = 0;
+	nrIndicesWired = 0;
 }
 
 Model::~Model()
@@ -18,7 +20,7 @@ Model::~Model()
 	glDeleteBuffers(1, &wiredEBO);
 }
 
-void Model::Load()
+void Model::Load(ModelResource* resource)
 {
 	std::string file = resource->filePath + resource->fileName;	
 	NFGData* data = LoadNFG(file.c_str());
@@ -36,11 +38,15 @@ void Model::Load()
 		verticesData.push_back(v);
 	}
 
-	nrIndices = data->nrIndices;
-	std::vector<unsigned int> indicesData = data->indices;
+	LoadBuffers(verticesData, data->indices);
 
 	// TODO : ???
 	delete data;
+}
+
+void Model::LoadBuffers(std::vector<Vertex>& verticesData, std::vector<unsigned int>& indicesData)
+{
+	nrIndices = indicesData.size();
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, verticesData.size() * sizeof(Vertex), &verticesData[0], GL_STATIC_DRAW);

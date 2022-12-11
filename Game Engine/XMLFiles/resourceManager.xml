@@ -28,6 +28,7 @@
 	
 	<shaders>
 		<folder path="../Resources/Shaders/">
+			
 			<shader id="10">
 				<vs>modelShader.vs</vs>
 				<fs>modelShader.fs</fs>
@@ -42,6 +43,7 @@
 				<vs>terrainShader.vs</vs>
 				<fs>terrainShader.fs</fs>
 			</shader>
+			
 		<!-- si aici se adauga toate shaderele -->
 		</folder>
 	</shaders>
@@ -69,24 +71,32 @@
 				<file>dirt.tga</file>			
 				<min_filter>LINEAR</min_filter>
 				<mag_filter>LINEAR</mag_filter>
-				<wrap_s>CLAMP_TO_EDGE</wrap_s>
-				<wrap_t>CLAMP_TO_EDGE</wrap_t>
+				<wrap_s>REPEAT</wrap_s>
+				<wrap_t>REPEAT</wrap_t>
 			</texture>
 			
 			<texture id="15" type="2d">
 				<file>rock.tga</file>			
 				<min_filter>LINEAR</min_filter>
 				<mag_filter>LINEAR</mag_filter>
-				<wrap_s>CLAMP_TO_EDGE</wrap_s>
-				<wrap_t>CLAMP_TO_EDGE</wrap_t>
+				<wrap_s>REPEAT</wrap_s>
+				<wrap_t>REPEATREPEAT</wrap_t>
 			</texture>
 
 			<texture id="16" type="2d">
 				<file>grass.tga</file>
 				<min_filter>LINEAR</min_filter>
 				<mag_filter>LINEAR</mag_filter>
-				<wrap_s>CLAMP_TO_EDGE</wrap_s>
-				<wrap_t>CLAMP_TO_EDGE</wrap_t>
+				<wrap_s>REPEAT</wrap_s>
+				<wrap_t>REPEAT</wrap_t>
+			</texture>
+
+			<texture id="17" type="2d">
+				<file>terrain_blend_map.tga</file>
+				<min_filter>LINEAR</min_filter>
+				<mag_filter>LINEAR</mag_filter>
+				<wrap_s>REPEAT</wrap_s>
+				<wrap_t>REPEAT</wrap_t>
 			</texture>
 			
 			<!-- si aici se adauga toate texturile -->

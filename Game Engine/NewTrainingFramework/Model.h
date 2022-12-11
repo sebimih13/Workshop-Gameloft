@@ -3,6 +3,8 @@
 #include "stdafx.h"
 #include "../Utilities/utilities.h"
 
+#include "Vertex.h"
+
 struct ModelResource
 {
 	int id;					// TODO : do i need this?
@@ -14,13 +16,16 @@ class Model
 {
 public:
 	/** Constructor */
-	Model(ModelResource* modelResource);
+	Model();
 
 	/** Destructor */
 	~Model();
 
-	/** Load model from .nfg */
-	void Load();
+	/** Load model from ModelResource */
+	void Load(ModelResource* modelResource);
+
+	/** Load buffers */
+	void LoadBuffers(std::vector<Vertex>& verticesData, std::vector<unsigned int>& indicesData);
 
 	/** Getters / Setters */
 	inline GLuint getVBO() { return VBO; }
@@ -31,8 +36,6 @@ public:
 	inline GLuint getNrIndicesWired() { return nrIndicesWired; }
 
 private:
-	ModelResource* resource;
-
 	GLuint VBO;
 	GLuint EBO;
 	GLuint wiredEBO;

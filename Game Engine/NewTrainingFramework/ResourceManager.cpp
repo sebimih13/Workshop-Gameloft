@@ -99,8 +99,8 @@ Model* ResourceManager::LoadModel(int id)
 {
 	if (models[id] == nullptr)
 	{
-		models[id] = new Model(modelResources[id]);
-		models[id]->Load();
+		models[id] = new Model();
+		models[id]->Load(modelResources[id]);
 	}
 	return models[id];
 }

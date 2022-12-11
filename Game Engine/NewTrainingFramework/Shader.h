@@ -27,13 +27,19 @@ public:
 	/** Getters / Setters */
 	inline GLuint getProgramID() { return programID; }
 
-	void setPosition();				// TODO : aici sau in alta parte
-	void setUV();					// TODO : aici sau in alta parte
+	void setPosition();					// TODO : aici sau in alta parte
+	void setUV();						// TODO : aici sau in alta parte
 
-	void setMVP(Matrix* MVP);		// TODO : aici sau in alta parte
-	void setColor(Vector3* color);	// TODO : aici sau in alta parte
+	void setMVP(Matrix* MVP);			// TODO : aici sau in alta parte
+	void setColor(Vector3* color);		// TODO : aici sau in alta parte
+	void setTexture(GLint index);		// TODO : aici sau in alta parte
+	void setNrCelule(GLint nrCelule);	// TODO : aici sau in alta parte
 
 private:
+	/** CONST variables */
+	const int MAX_TEXTURES;
+
+	/** RENDER DATA */
 	ShaderResource* resource;
 	GLuint programID;
 
@@ -44,5 +50,7 @@ private:
 	/** Uniforms */				// TODO : aici sau in alta parte
 	GLuint mvpMatrixUniform;
 	GLuint colorUniform;
+	std::vector<GLuint> textureUniforms;
+	GLuint nrCeluleUniform;
 };
 

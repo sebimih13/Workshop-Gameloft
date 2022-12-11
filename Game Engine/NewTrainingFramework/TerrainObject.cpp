@@ -1,25 +1,27 @@
 #include "stdafx.h"
 #include "TerrainObject.h"
-#include "Vertex.h"
+
 #include "ResourceManager.h"
+#include "Camera.h"
 
 TerrainObject::TerrainObject()
 {
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
+	// TODO : change 
+	nrCelule = 4;
+	dimensiuneCelula = 100;
+	offsetY = 1;
 }
 
 TerrainObject::~TerrainObject()
 {
-	glDeleteBuffers(1, &VBO);
-	glDeleteBuffers(1, &EBO);
+	
 }
 
-void TerrainObject::generateModel(Vector3 initialPosition)
+Model* TerrainObject::generateModel()
 {
 	Vector3 startPosition;
-	startPosition.x = initialPosition.x - dimensiuneCelula * (nrCelule / 2);
-	startPosition.z = initialPosition.z + dimensiuneCelula * (nrCelule / 2);
+	startPosition.x = camera->getPosition().x - dimensiuneCelula * (nrCelule / 2);
+	startPosition.z = camera->getPosition().z - dimensiuneCelula * (nrCelule / 2);
 
 	std::vector<Vertex> verticesData;
 	std::vector<unsigned int> indicesData;
@@ -30,11 +32,19 @@ void TerrainObject::generateModel(Vector3 initialPosition)
 		{
 			Vertex v;
 			v.pos.x = startPosition.x + dimensiuneCelula * j;
-			v.pos.z = startPosition.z - dimensiuneCelula * i;
+			v.pos.z = startPosition.z + dimensiuneCelula * i;
 			v.pos.y = 0.0f;
+
+			// TODO : ADD UV
+			v.uv.x = float(j);
+			v.uv.y = float(i);
+
+			std::cout << v.pos.x << ' ' << v.pos.y << ' ' << v.pos.z << ' ' << " -> ";
+			std::cout << v.uv.x << ' ' << v.uv.y << '\n';
 
 			verticesData.push_back(v);
 		}
+		std::cout << '\n';
 	}
 
 	for (int i = 0; i < nrCelule; i++)
@@ -58,27 +68,19 @@ void TerrainObject::generateModel(Vector3 initialPosition)
 		}
 	}
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, verticesData.size() * sizeof(Vertex), &verticesData[0], GL_STATIC_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	Model* generatedModel = new Model();
+	generatedModel->LoadBuffers(verticesData, indicesData);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesData.size() * sizeof(unsigned int), &indicesData[0], GL_STATIC_DRAW);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	return generatedModel;
 }
 
 void TerrainObject::Load()
 {
-	// TODO : load model
+	// call parent method to load shader + textures
+	SceneObject::Load();
 
-	if (shader != 0)	// TODO : CHECK
-		shader = ResourceManager::getInstance()->LoadShader(shaderID);
-
-	for (int& id : textureIDs)
-	{
-		Texture* texture = ResourceManager::getInstance()->LoadTexture(id);
-		textures.push_back(texture);
-	}
+	// load model manually
+	model = generateModel();
 }
 
 void TerrainObject::Draw()
@@ -86,6 +88,6 @@ void TerrainObject::Draw()
 	// TODO : call parent method
 	SceneObject::Draw();
 
-	// TODO : add more ?
+	// TODO : mai trb ceva aditional?
 }
 

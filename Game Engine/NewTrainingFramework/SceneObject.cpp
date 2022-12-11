@@ -21,9 +21,9 @@ SceneObject::SceneObject(const SceneObject& obj) :	ID(obj.ID),
 
 void SceneObject::Load()
 {
-	if (model != 0)		// TODO : CHECK	
+	if (modelID != 0)	// TODO : CHECK	
 		model = ResourceManager::getInstance()->LoadModel(modelID);
-	if (shader != 0)	// TODO : CHECK
+	if (shaderID != 0)	// TODO : CHECK
 		shader = ResourceManager::getInstance()->LoadShader(shaderID);
 
 	for (int& id : textureIDs)
@@ -48,17 +48,22 @@ void SceneObject::Draw()
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, model->getWiredEBO());
 	}
 
-	// TODO : choose color / textures
-	if (textures.size() > 0)
+	for (int i = 0; i < textures.size(); i++)
 	{
-		// TODO : loop for multiple textures
-		glBindTexture(GL_TEXTURE_2D, textures[0]->getTextureID());
+		glActiveTexture(GL_TEXTURE0 + i);
+		glBindTexture(GL_TEXTURE_2D, textures[i]->getTextureID());
+		shader->setTexture(i);
 	}
-	else
+	
+	if (textures.size() == 0)
 	{
 		// TODO : set color
+		// TODO : nu mai pune if -> initializeaza color cu o valoare default in constructor
 		shader->setColor(&color);
 	}
+
+	// TODO : move in TerrainObject::Draw()
+	shader->setNrCelule(4);
 
 	// TODO : matrix model -> sa NU fie calculat la fiecare draw ddaca este obiect static
 	// TODO : matrix model = scale * rotation * position
@@ -100,10 +105,10 @@ void SceneObject::Draw()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-	// TODO : choose color / textures
-	if (textures.size() > 0)
+	for (int i = 0; i < textures.size(); i++)
 	{
-		// TODO : put in a loop
+		// TODO : pt unbind e bine?
+		glActiveTexture(GL_TEXTURE0 + i);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }
