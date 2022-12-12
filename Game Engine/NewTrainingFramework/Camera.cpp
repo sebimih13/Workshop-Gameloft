@@ -40,8 +40,8 @@ void Camera::Init()
 
 void Camera::moveOx(GLfloat value)
 {
-	Vector3 left = xAxis * value;
-	Vector3 deplasare = left * translationSpeed * deltaTime;
+	Vector3 right = xAxis * value;
+	Vector3 deplasare = right * translationSpeed * deltaTime;
 	position += deplasare;
 	target += deplasare;
 
@@ -117,6 +117,25 @@ void Camera::rotateOz(GLfloat value)
 
 void Camera::updateAxis()
 {
+	/* TODO : cred ca aici e cv problema
+
+		NU MA RAPORTEZ MEREU CONFORM RIGHT-HANDED COORDINATE SYSTEM
+	
+		xAxis -> este in stanga		(ar trb sa fie in dreapta)
+		yAxis -> este in sus
+		zAxis -> este in fata		(ar trb sa fie in spate)
+
+		Nu respect mereu acelasi sistem de coordonate !!!
+	
+		in NewTrainingFramework pt moveOx :
+		moveOx(-1.0f)	=> dreapta
+		moveOx(1.0f)	=> stanga
+
+		moveOz(-1.0f)	=> merge in spate	(ar trb sa mearga in fata)
+		moveOz(1.0f)	=> merge in fata	(ar trb sa mearga in spate)
+
+	*/
+
 	zAxis = -(target - position).Normalize();
 	yAxis = up.Normalize();
 	xAxis = zAxis.Cross(yAxis).Normalize();

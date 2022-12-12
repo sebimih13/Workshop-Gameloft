@@ -112,6 +112,11 @@ void SceneObject::Draw()
 	}
 }
 
+void SceneObject::Update()
+{
+	// TODO ?
+}
+
 void SceneObject::debug()
 {
 	std::cout << "\t ID : " << ID << '\n';

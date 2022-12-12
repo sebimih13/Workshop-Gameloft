@@ -55,10 +55,11 @@ void Update ( ESContext *esContext, float deltaTime )
 	{
 		timer = 0.0f;
 
+		// Update Objects
+		SceneManager::getInstance()->Update();
+
 		// Update components
 		camera->setDeltaTime(deltaTime);
-
-		// Update Input
 
 		// Move camera
 		if (input[ControlsConfig::MOVE_CAMERA_POSITIVE_X])	// todo : -1.0f -> 1.0f
@@ -200,6 +201,9 @@ int _tmain(int argc, _TCHAR* argv[])
       }
       break;
 
+
+	  -----------------------------------------------------------------------------------------------------------------------------
+	  -----------------------								INTREBARI TEREN									-----------------------
 	  -----------------------------------------------------------------------------------------------------------------------------
 
 	  * 16. LINEAR si REPEAT pt: ?
@@ -211,7 +215,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	  * 17. in terrainShader pun in .vs + .fs ?
 				uniform sampler2D u_texture_3;	// terrain_blend_map.tga
 
-	  * 18. 
+	  * 18. Pt implementarea in care generam terenul in functie de camera
+			* pot sa evit folosirea unui Vector3 aditional pt currentPosition 
+
+	  * 19. pot sa folosesc fs_uv_2 in terrainShader.vs ? 
 
 */
 
@@ -229,6 +236,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	* 6. SKYBOX
 
 	* 7. CONTROLS -> MERGI IN SUS/JOS GLOBAL (NU RELATIV CUM ESTE ACM)
+				  -> MERGI IN INAINTE/INAPO GLOBAL (NU RELATIV CUM ESTE ACM)
 
 	* 8. pt fiecare resource -> sa fie data in Init()
 

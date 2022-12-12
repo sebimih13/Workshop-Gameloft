@@ -35,20 +35,26 @@ void Shader::Load()
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 
-	// finding location of uniforms / attributes
+	// Finding location of uniforms / attributes
+
+	// Any scene object
 	positionAttribute = glGetAttribLocation(programID, "a_pos");
 	uvAttribute = glGetAttribLocation(programID, "a_uv");
 
 	mvpMatrixUniform = glGetUniformLocation(programID, "u_mvpMatrix");
 	colorUniform = glGetUniformLocation(programID, "u_color");
-	nrCeluleUniform = glGetUniformLocation(programID, "u_nrCelule");
-	heightUniform = glGetUniformLocation(programID, "u_height");
 
 	for (int i = 0; i < MAX_TEXTURES; i++)
 	{
 		std::string uniformName = "u_texture_" + std::to_string(i);
 		textureUniforms[i] = glGetUniformLocation(programID, uniformName.c_str());
 	}
+
+	// Terrain Uniforms
+	heightUniform = glGetUniformLocation(programID, "u_height");
+	nrCeluleUniform = glGetUniformLocation(programID, "u_nrCelule");
+	offsetXUniform = glGetUniformLocation(programID, "u_offsetX");
+	offsetZUniform = glGetUniformLocation(programID, "u_offsetZ");
 }
 
 void Shader::setPosition()
@@ -97,7 +103,7 @@ void Shader::setNrCelule(GLint nrCelule)
 {
 	if (nrCeluleUniform != -1)
 	{
-		glUniform1f(nrCeluleUniform, GLfloat(nrCelule));
+		glUniform1i(nrCeluleUniform, nrCelule);
 	}
 }
 
@@ -106,6 +112,22 @@ void Shader::setHeight(Vector3* height)
 	if (heightUniform != -1)
 	{
 		glUniform3fv(heightUniform, 1, &height->x);
+	}
+}
+
+void Shader::setOffsetX(GLint offset)
+{
+	if (offsetXUniform != -1)
+	{
+		glUniform1i(offsetXUniform, offset);
+	}
+}
+
+void Shader::setOffsetZ(GLint offset)
+{
+	if (offsetZUniform != -1)
+	{
+		glUniform1i(offsetZUniform, offset);
 	}
 }
 

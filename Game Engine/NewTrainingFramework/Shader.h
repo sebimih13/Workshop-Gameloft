@@ -27,14 +27,19 @@ public:
 	/** Getters / Setters */
 	inline GLuint getProgramID() { return programID; }
 
+	/** Any scene object */				// TODO : muta in SceneObject.h  ???
 	void setPosition();					// TODO : aici sau in alta parte
 	void setUV();						// TODO : aici sau in alta parte
 
 	void setMVP(Matrix* MVP);			// TODO : aici sau in alta parte
 	void setColor(Vector3* color);		// TODO : aici sau in alta parte
 	void setTexture(GLint index);		// TODO : aici sau in alta parte
-	void setNrCelule(GLint nrCelule);	// TODO : aici sau in alta parte
+
+	/** Terrain */						// TODO : muta in TerrainObject.h ???
 	void setHeight(Vector3* height);	// TODO : aici sau in alta parte
+	void setNrCelule(GLint nrCelule);	// TODO : aici sau in alta parte
+	void setOffsetX(GLint offset);		// TODO : aici sau in alta parte
+	void setOffsetZ(GLint offset);		// TODO : aici sau in alta parte
 
 private:
 	/** CONST variables */
@@ -52,7 +57,11 @@ private:
 	GLuint mvpMatrixUniform;
 	GLuint colorUniform;
 	std::vector<GLuint> textureUniforms;
-	GLuint nrCeluleUniform;
+
+	/** Terrain Uniforms */
 	GLuint heightUniform;
+	GLuint nrCeluleUniform;
+	GLuint offsetXUniform;
+	GLuint offsetZUniform;
 };
 

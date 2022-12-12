@@ -9,7 +9,10 @@ TerrainObject::TerrainObject()
 	// TODO : change 
 	nrCelule = 4;				// TODO : nr par
 	dimensiuneCelula = 100;
-	offsetY = 1;
+
+	offsetX = 0;
+	offsetY = 0;
+	offsetZ = 0;
 }
 
 TerrainObject::~TerrainObject()
@@ -19,6 +22,8 @@ TerrainObject::~TerrainObject()
 
 Model* TerrainObject::generateModel()
 {
+	currentPosition = camera->getPosition();
+
 	Vector3 startPosition;
 	startPosition.x = camera->getPosition().x - dimensiuneCelula * (nrCelule / 2);
 	startPosition.z = camera->getPosition().z - dimensiuneCelula * (nrCelule / 2);
@@ -83,11 +88,54 @@ void TerrainObject::Draw()
 	// TODO : mai trb ceva aditional?
 	glUseProgram(shader->getProgramID());
 
-	shader->setNrCelule(4);
+	shader->setNrCelule(nrCelule);
 	shader->setHeight(&height);
+
+	shader->setOffsetX(offsetX % nrCelule);
+	shader->setOffsetZ(offsetZ % nrCelule);
 
 	// call parent method
 	SceneObject::Draw();
+}
 
+void TerrainObject::Update()
+{
+	// TODO : o functie pt chestia asta cu parametrii : updatePosition(axa)
+
+	// genereaza o noua bucata de teren pe axa X (dreapta/stanga)
+	float deltaX = abs(currentPosition.x - camera->getPosition().x);
+	if (deltaX > dimensiuneCelula)
+	{
+		if (camera->getPosition().x > currentPosition.x)		// deplasare la dreapta
+		{
+			position.x += dimensiuneCelula;
+			currentPosition.x += dimensiuneCelula;
+			offsetX++;
+		}
+		else if (camera->getPosition().x < currentPosition.x)	// deplasare la stanga
+		{
+			position.x -= dimensiuneCelula;
+			currentPosition.x -= dimensiuneCelula;
+			offsetX--;
+		}
+	}
+
+	// genereaza o noua bucata de teren pe axa Z (fata/spate)
+	float deltaZ = abs(currentPosition.z - camera->getPosition().z);
+	if (deltaZ > dimensiuneCelula)
+	{
+		if (camera->getPosition().z > currentPosition.z)		// deplasare inainte
+		{
+			position.z += dimensiuneCelula;
+			currentPosition.z += dimensiuneCelula;
+			offsetZ++;
+		}
+		else if (camera->getPosition().z < currentPosition.z)	// deplasare inapoi
+		{
+			position.z -= dimensiuneCelula;
+			currentPosition.z -= dimensiuneCelula;
+			offsetZ--;
+		}
+	}
 }
 

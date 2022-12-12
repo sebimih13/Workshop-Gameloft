@@ -27,10 +27,13 @@ public:
 	SceneObject(const SceneObject& obj);
 
 	/** Load model + shader + textures */
-	virtual void Load();		// TODO : CHECK
+	virtual void Load();
 
 	/** Draw Object */
-	virtual void Draw();		// TODO : CHECK
+	virtual void Draw();
+
+	/** Update Object */
+	virtual void Update();
 
 	/** Debug */
 	void debug();

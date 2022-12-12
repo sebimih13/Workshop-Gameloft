@@ -232,6 +232,11 @@ void SceneManager::Update()
 
 	// daca am schimbat camera activa => object->setCamera(cameras[activeCameraID]);
 	// altfel o setez o singura data in LoadObjects
+
+	for (SceneObject* object : objects)
+	{
+		object->Update();
+	}
 }
 
 ControlsConfig SceneManager::getControlsAction(std::string& action)
