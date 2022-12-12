@@ -70,10 +70,6 @@ private:
 	/** Instance */
 	static SceneManager* instance;
 
-	/** Debug */
-	void debugClass();
-
-	/** Data */
 	/** Globals */
 	std::string gameName;
 	ScreenConfig defaultScreenSize;
@@ -93,6 +89,9 @@ private:
 	ControlsConfig getControlsAction(std::string& action);
 	CameraType getCameraType(std::string& type);
 	ObjectType getObjectType(std::string& type);
+
+	/** Debug */
+	void debugClass();
 };
 
 

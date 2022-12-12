@@ -8,8 +8,6 @@
 #include "Texture.h"
 #include "Shader.h"
 
-using namespace rapidxml;
-
 class ResourceManager
 {
 public:
@@ -50,6 +48,5 @@ private:
 	void debug();
 };
 
-// TODO : INITIALIZE STRUCTS + CLASS IN CONSTRUCTOR ? 
 // TODO : add const + static
 

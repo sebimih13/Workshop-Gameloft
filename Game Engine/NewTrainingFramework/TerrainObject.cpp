@@ -7,7 +7,7 @@
 TerrainObject::TerrainObject()
 {
 	// TODO : change 
-	nrCelule = 4;
+	nrCelule = 4;				// TODO : nr par
 	dimensiuneCelula = 100;
 	offsetY = 1;
 }
@@ -35,16 +35,11 @@ Model* TerrainObject::generateModel()
 			v.pos.z = startPosition.z + dimensiuneCelula * i;
 			v.pos.y = 0.0f;
 
-			// TODO : ADD UV
 			v.uv.x = float(j);
 			v.uv.y = float(i);
 
-			std::cout << v.pos.x << ' ' << v.pos.y << ' ' << v.pos.z << ' ' << " -> ";
-			std::cout << v.uv.x << ' ' << v.uv.y << '\n';
-
 			verticesData.push_back(v);
 		}
-		std::cout << '\n';
 	}
 
 	for (int i = 0; i < nrCelule; i++)
@@ -85,9 +80,14 @@ void TerrainObject::Load()
 
 void TerrainObject::Draw()
 {
-	// TODO : call parent method
+	// TODO : mai trb ceva aditional?
+	glUseProgram(shader->getProgramID());
+
+	shader->setNrCelule(4);
+	shader->setHeight(&height);
+
+	// call parent method
 	SceneObject::Draw();
 
-	// TODO : mai trb ceva aditional?
 }
 

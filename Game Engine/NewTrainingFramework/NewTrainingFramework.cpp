@@ -208,6 +208,11 @@ int _tmain(int argc, _TCHAR* argv[])
 			- dirt.tga
 			- Terrain_blend_map.tga
 
+	  * 17. in terrainShader pun in .vs + .fs ?
+				uniform sampler2D u_texture_3;	// terrain_blend_map.tga
+
+	  * 18. 
+
 */
 
 /*
@@ -218,10 +223,8 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	* 3. rotate camera - mouse input
 
-	* 4. pt teren => extindere clasa SceneObject
-		* drawCommon() - deseneaza toate lucrurile comune pt orice obiect din scena
-
 	* 5. TEREN
+		* generarea la infinit
 
 	* 6. SKYBOX
 

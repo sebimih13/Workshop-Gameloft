@@ -17,14 +17,18 @@ public:
 	/** Draw Object */
 	void Draw() override;
 
+	/** Getters / Setters */
+	inline void setHeight(Vector3 _height) { height = _height; }
+
 private:
-	// TODO : camera trb sa fie setata
 	/** Generate model for object based on camera->getPosition() */
 	Model* generateModel();
 
 	/** Proprietati speciale */
-	int nrCelule;					// TODO : nr par
+	int nrCelule;
 	int dimensiuneCelula;
 	int offsetY;
+
+	Vector3 height;
 };
 

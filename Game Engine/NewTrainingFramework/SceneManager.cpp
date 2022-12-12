@@ -95,24 +95,44 @@ void SceneManager::Init(char* filePath)
 	NodeXML objectsNode = rootNode.getChild("objects");
 	for (NodeXML objectNode = objectsNode.getChild("object"); objectNode.isValid(); objectNode = objectNode.getNextSibling())
 	{
-		SceneObject* obj = new SceneObject();
+		SceneObject* obj = nullptr;
 
-		// TODO : make differents objects based on type
+		// make different objects based on type
 		ObjectType objType = getObjectType(objectNode.getChild("type").getString());
 
-		if (objType == ObjectType::Terrain)
+		switch (objType)
 		{
-			TerrainObject* terrainObj = new TerrainObject();
+			case ObjectType::Normal:
+				{
+					obj = new SceneObject();
 
-			delete obj;
-			obj = terrainObj;
+					// seteaza atributile speciale (care se regasesc doar in clasa asta)
+					obj->setModel(objectNode.getChild("model").getInt());
+				}
+				break;
+
+			case ObjectType::Terrain:
+				{
+					TerrainObject* terrainObj = new TerrainObject();
+					obj = terrainObj;
+				
+					// seteaza atributile speciale (care se regasesc doar in clasa asta)
+					terrainObj->setModel(-1);
+
+					Vector3 height;
+					height.x = objectNode.getChild("height").getChild("r").getFloat();
+					height.y = objectNode.getChild("height").getChild("g").getFloat();
+					height.z = objectNode.getChild("height").getChild("b").getFloat();
+					terrainObj->setHeight(height);
+				}
+				break;
 		}
 
 		obj->setType(objType);
 		obj->setCamera(cameras[activeCameraID]);
 
-		obj->setID(objectNode.getAttribute("id").getInt());
 		obj->setName(objectNode.getChild("name").getString());
+		obj->setID(objectNode.getAttribute("id").getInt());
 
 		NodeXML wiredNode = objectNode.getChild("wired");
 		if (wiredNode.isValid())
@@ -148,12 +168,9 @@ void SceneManager::Init(char* filePath)
 		for (NodeXML textureNode = texturesNode.getChild("texture"); textureNode.isValid(); textureNode = textureNode.getNextSibling())
 		{
 			int textureID = textureNode.getAttribute("id").getInt();
-			// TODO ADD -> MIN/MAG FILTER
-			// TODO ADD -> WRAP S/T
 			texturesIDs.push_back(textureID);
 		}
 
-		obj->setModel(objectNode.getChild("model").getInt());		// TODO : problema pt teren (<model>generated</model>) => model = 0
 		obj->setShader(objectNode.getChild("shader").getInt());
 		obj->setTextures(texturesIDs);
 

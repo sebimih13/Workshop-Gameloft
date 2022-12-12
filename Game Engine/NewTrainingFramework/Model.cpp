@@ -56,7 +56,7 @@ void Model::LoadBuffers(std::vector<Vertex>& verticesData, std::vector<unsigned 
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesData.size() * sizeof(unsigned int), &indicesData[0], GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-	// TODO : nrIndiciWired
+	// wired format
 	std::vector<unsigned int> wiredIndices;
 	for (unsigned int i = 0; i < nrIndices; i += 3)
 	{

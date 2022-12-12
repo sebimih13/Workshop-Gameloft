@@ -42,6 +42,7 @@ void Shader::Load()
 	mvpMatrixUniform = glGetUniformLocation(programID, "u_mvpMatrix");
 	colorUniform = glGetUniformLocation(programID, "u_color");
 	nrCeluleUniform = glGetUniformLocation(programID, "u_nrCelule");
+	heightUniform = glGetUniformLocation(programID, "u_height");
 
 	for (int i = 0; i < MAX_TEXTURES; i++)
 	{
@@ -80,7 +81,7 @@ void Shader::setColor(Vector3* color)
 {
 	if (colorUniform != -1)
 	{
-		glUniform3fv(colorUniform, 1, &color->x);		// TODO : check
+		glUniform3fv(colorUniform, 1, &color->x);
 	}
 }
 
@@ -97,6 +98,14 @@ void Shader::setNrCelule(GLint nrCelule)
 	if (nrCeluleUniform != -1)
 	{
 		glUniform1f(nrCeluleUniform, GLfloat(nrCelule));
+	}
+}
+
+void Shader::setHeight(Vector3* height)
+{
+	if (heightUniform != -1)
+	{
+		glUniform3fv(heightUniform, 1, &height->x);
 	}
 }
 

@@ -36,30 +36,24 @@ public:
 	void debug();
 
 	/** Getters / Setters */
+	inline void setType(ObjectType t) { type = t; }
+	inline void setCamera(Camera* cam) { camera = cam; }
+
 	inline void setID(int id) { ID = id; }
+	inline void setName(std::string _name) { name = _name; }
+	inline void setWiredFormat(bool wired) { wiredFormat = wired; }
 
 	inline void setPosition(Vector3 _position) { position = _position; }
 	inline void setRotation(Vector3 _rotation) { rotation = _rotation; }
 	inline void setScale(Vector3 _scale) { scale = _scale; }
-
-	inline void setName(std::string _name) { name = _name; }
-	inline void setWiredFormat(bool wired) { wiredFormat = wired; }
 
 	inline void setModel(int id) { modelID = id; }
 	inline void setShader(int id) { shaderID = id; };
 	inline void setTextures(std::vector<int> ids) { textureIDs = ids; }
 	inline void setColor(Vector3 col) { color = col; }
 
-	inline void setType(ObjectType t) { type = t; }
-
-	// TODO : check
-	inline void setCamera(Camera* cam) { camera = cam; }
-
 protected:
-	// TODO : ObjectType
 	ObjectType type;
-
-	// TODO : check + add in constructos ?
 	Camera* camera;
 
 	/** Attributes */

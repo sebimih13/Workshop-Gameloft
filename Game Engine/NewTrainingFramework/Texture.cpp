@@ -51,7 +51,7 @@ void Texture::Load()
 	case TextureWrapMode::MIRRORED_REPEAT:	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);	break;
 	}
 
-	GLint format;
+	GLint format = GL_RGBA;		// Default value
 	switch (texureBpp)
 	{
 		case 32: format = GL_RGBA; break;

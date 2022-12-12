@@ -239,6 +239,11 @@
 				<y>1.0</y>
 				<z>1.0</z>
 			</scale>
+			<height>
+				<r>15</r>
+				<g>5</g>
+				<b>-5</b>
+			</height>
 		</object>
 
 	</objects>
