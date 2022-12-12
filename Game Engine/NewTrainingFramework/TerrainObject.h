@@ -27,9 +27,6 @@ private:
 	/** Generate model for object based on camera->getPosition() */
 	Model* generateModel();
 
-	/** Update currentPosition */
-	void updateCurrentPosition();
-
 	/** Proprietati speciale */
 	int nrCelule;
 	int dimensiuneCelula;

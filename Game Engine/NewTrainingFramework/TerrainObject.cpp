@@ -6,12 +6,12 @@
 
 TerrainObject::TerrainObject()
 {
-	// TODO : change 
+	// TODO : find a good value
 	nrCelule = 4;				// TODO : nr par
-	dimensiuneCelula = 100;
+	dimensiuneCelula = 100;	
 
 	offsetX = 0;
-	offsetY = 0;
+	offsetY = 50;			// TODO : find a good value
 	offsetZ = 0;
 }
 
@@ -26,6 +26,7 @@ Model* TerrainObject::generateModel()
 
 	Vector3 startPosition;
 	startPosition.x = camera->getPosition().x - dimensiuneCelula * (nrCelule / 2);
+	startPosition.y = camera->getPosition().y - offsetY;
 	startPosition.z = camera->getPosition().z - dimensiuneCelula * (nrCelule / 2);
 
 	std::vector<Vertex> verticesData;
@@ -37,8 +38,8 @@ Model* TerrainObject::generateModel()
 		{
 			Vertex v;
 			v.pos.x = startPosition.x + dimensiuneCelula * j;
+			v.pos.y = startPosition.y;
 			v.pos.z = startPosition.z + dimensiuneCelula * i;
-			v.pos.y = 0.0f;
 
 			v.uv.x = float(j);
 			v.uv.y = float(i);

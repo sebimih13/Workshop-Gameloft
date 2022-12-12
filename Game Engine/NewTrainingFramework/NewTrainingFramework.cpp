@@ -220,6 +220,14 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	  * 19. pot sa folosesc fs_uv_2 in terrainShader.vs ? 
 
+	  * 20. uniforms speciale pt un anumit tip de obiect:	* le pun in clasa obiectului ?
+															* sau le pun pe toate la gramada in shader.h 
+			ex. cele pt teren
+
+	  * 21. 
+
+	  * 22. 
+
 */
 
 /*
