@@ -215,9 +215,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	  * 17. in terrainShader pun in .vs + .fs ?
 				uniform sampler2D u_texture_3;	// terrain_blend_map.tga
 
-	  * 18. Pt implementarea in care generam terenul in functie de camera
-			* pot sa evit folosirea unui Vector3 aditional pt currentPosition 
-
 	  * 19. pot sa folosesc fs_uv_2 in terrainShader.vs ? 
 
 	  * 20. uniforms speciale pt un anumit tip de obiect:	* le pun in clasa obiectului ?

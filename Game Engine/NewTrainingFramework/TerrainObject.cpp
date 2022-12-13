@@ -21,12 +21,12 @@ TerrainObject::~TerrainObject()
 
 Model* TerrainObject::generateModel()
 {
-	currentPosition = camera->getPosition();
+	position = camera->getPosition();
 
-	Vector3 startPosition;
-	startPosition.x = camera->getPosition().x - dimensiuneCelula * (nrCelule / 2);
-	startPosition.y = camera->getPosition().y - offsetY;
-	startPosition.z = camera->getPosition().z - dimensiuneCelula * (nrCelule / 2);
+	Vector3 startPosition = Vector3(0.0f, 0.0f, 0.0f);
+	startPosition.x = -dimensiuneCelula * (nrCelule / 2);
+	startPosition.y = -offsetY;
+	startPosition.z = -dimensiuneCelula * (nrCelule / 2);
 
 	std::vector<Vertex> verticesData;
 	std::vector<unsigned int> indicesData;
@@ -100,40 +100,34 @@ void TerrainObject::Draw()
 
 void TerrainObject::Update()
 {
-	// TODO : o functie pt chestia asta cu parametrii : updatePosition(axa)
-
 	// genereaza o noua bucata de teren pe axa X (dreapta/stanga)
-	float deltaX = abs(currentPosition.x - camera->getPosition().x);
+	float deltaX = abs(position.x - camera->getPosition().x);
 	if (deltaX > dimensiuneCelula)
 	{
-		if (camera->getPosition().x > currentPosition.x)		// deplasare la dreapta
+		if (camera->getPosition().x > position.x)		// deplasare la dreapta
 		{
 			position.x += dimensiuneCelula;
-			currentPosition.x += dimensiuneCelula;
 			offsetX++;
 		}
-		else if (camera->getPosition().x < currentPosition.x)	// deplasare la stanga
+		else if (camera->getPosition().x < position.x)	// deplasare la stanga
 		{
 			position.x -= dimensiuneCelula;
-			currentPosition.x -= dimensiuneCelula;
 			offsetX--;
 		}
 	}
 
 	// genereaza o noua bucata de teren pe axa Z (fata/spate)
-	float deltaZ = abs(currentPosition.z - camera->getPosition().z);
+	float deltaZ = abs(position.z - camera->getPosition().z);
 	if (deltaZ > dimensiuneCelula)
 	{
-		if (camera->getPosition().z > currentPosition.z)		// deplasare inainte
+		if (camera->getPosition().z > position.z)		// deplasare inainte
 		{
 			position.z += dimensiuneCelula;
-			currentPosition.z += dimensiuneCelula;
 			offsetZ++;
 		}
-		else if (camera->getPosition().z < currentPosition.z)	// deplasare inapoi
+		else if (camera->getPosition().z < position.z)	// deplasare inapoi
 		{
 			position.z -= dimensiuneCelula;
-			currentPosition.z -= dimensiuneCelula;
 			offsetZ--;
 		}
 	}
