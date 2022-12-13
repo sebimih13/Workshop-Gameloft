@@ -6,6 +6,7 @@
 #include "../Utilities/AttributeXML.hpp"
 
 #include "TerrainObject.h"
+#include "SkyboxObject.h"
 
 // Instantiate static variables
 SceneManager* SceneManager::instance = nullptr;
@@ -124,6 +125,16 @@ void SceneManager::Init(char* filePath)
 					height.y = objectNode.getChild("height").getChild("g").getFloat();
 					height.z = objectNode.getChild("height").getChild("b").getFloat();
 					terrainObj->setHeight(height);
+				}
+				break;
+
+			case ObjectType::Skybox:
+				{
+					SkyboxObject* skyboxObj = new SkyboxObject();
+					obj = skyboxObj;
+
+					// seteaza atributile speciale (care se regasesc doar in clasa asta)
+					obj->setModel(objectNode.getChild("model").getInt());
 				}
 				break;
 		}
@@ -293,6 +304,8 @@ ObjectType SceneManager::getObjectType(std::string& type)
 		return ObjectType::Normal;
 	else if (type == "terrain")
 		return ObjectType::Terrain;
+	else if (type == "skybox")
+		return ObjectType::Skybox;
 	return ObjectType::DEFAULT_TYPE;
 
 	// TODO : ADD MORE

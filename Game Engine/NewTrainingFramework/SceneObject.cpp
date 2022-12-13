@@ -14,19 +14,6 @@ SceneObject::SceneObject()
 	// TODO : adaug restul?
 }
 
-SceneObject::SceneObject(const SceneObject& obj) 
-	:	type(obj.type), camera(obj.camera),
-		name(obj.name), wiredFormat(obj.wiredFormat),
-		ID(obj.ID),
-		position(obj.position), rotation(obj.rotation), scale(obj.scale),
-		modelID(obj.modelID), model(obj.model),
-		shaderID(obj.shaderID), shader(obj.shader),
-		textureIDs(obj.textureIDs), textures(obj.textures),
-		color(obj.color)
-{
-
-}
-
 void SceneObject::Load()
 {
 	if (modelID != -1)
@@ -57,11 +44,12 @@ void SceneObject::Draw()
 	}
 
 	// Set textures
-	for (int i = 0; i < textures.size(); i++)
+	for (unsigned int i = 0; i < textures.size(); i++)
 	{
 		glActiveTexture(GL_TEXTURE0 + i);
-		glBindTexture(GL_TEXTURE_2D, textures[i]->getTextureID());
+		glBindTexture(textures[i]->getTextureType(), textures[i]->getTextureID());
 		shader->setTexture(i);
+
 	}
 
 	// TODO : matrix model -> sa NU fie calculat la fiecare Draw() ddaca este obiect static
@@ -104,11 +92,11 @@ void SceneObject::Draw()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-	for (int i = 0; i < textures.size(); i++)
+	for (unsigned int i = 0; i < textures.size(); i++)
 	{
 		// TODO : pt unbind e bine?
-		glActiveTexture(GL_TEXTURE0 + i);
-		glBindTexture(GL_TEXTURE_2D, 0);
+		glActiveTexture(GL_TEXTURE0 + i);	// TODO : asta mai trb pusa
+		glBindTexture(textures[i]->getTextureType(), 0);
 	}
 }
 

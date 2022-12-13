@@ -7,7 +7,8 @@ enum TextureType
 {
 	DEFAULT_TEXTURETYPE,	// None
 
-	TEXTURE_2D				// 2d
+	TEXTURE_2D,				// 2d
+	TEXTURE_CUBE
 
 	// TODO : ADD MORE
 };
@@ -54,9 +55,13 @@ public:
 
 	/** Getters / Setters */
 	inline GLuint getTextureID() { return textureID; }
+	inline GLuint getTextureType() { return textureType; }
 
 private:
 	TextureResource* resource;
 	GLuint textureID;
+
+	GLuint textureType;
+	GLint format;
 };
 

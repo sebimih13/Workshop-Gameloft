@@ -224,7 +224,7 @@ int _tmain(int argc, _TCHAR* argv[])
 															* sau le pun pe toate la gramada in shader.h 
 			ex. cele pt teren
 
-	  * 21. 
+	  * 21. nu stiu sa aplic textura pt cubemap
 
 	  * 22. 
 
@@ -234,12 +234,11 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	TODO LIST : 
 
+	* 1. ObjectType type -> conteaza doar la parsare => sterge din proprietatile unui SceneObject
+
 	* 2. Forward Declarations in toate fisierele
 
 	* 3. rotate camera - mouse input
-
-	* 5. TEREN
-		* generarea la infinit
 
 	* 6. SKYBOX
 

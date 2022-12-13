@@ -14,7 +14,8 @@ enum ObjectType
 	DEFAULT_TYPE,
 
 	Normal,
-	Terrain
+	Terrain,
+	Skybox
 };
 
 class SceneObject
@@ -22,9 +23,6 @@ class SceneObject
 public:
 	/** Constructor */
 	SceneObject();
-
-	/** Copy Constructor */
-	SceneObject(const SceneObject& obj);
 
 	/** Load model + shader + textures */
 	virtual void Load();
@@ -56,7 +54,7 @@ public:
 	inline void setColor(Vector3 col) { color = col; }
 
 protected:
-	ObjectType type;
+	ObjectType type;		// TODO : teoretic nu mai e nevoie de type aici (este nevoie de el doar cand parsam XML-ul)
 	Camera* camera;
 
 	/** Attributes */

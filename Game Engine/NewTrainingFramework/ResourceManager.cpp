@@ -129,6 +129,8 @@ TextureType ResourceManager::getTextureType(std::string type)
 {
 	if (type == "2d")
 		return TextureType::TEXTURE_2D;
+	else if (type == "cube")
+		return TextureType::TEXTURE_CUBE;
 	return TextureType::DEFAULT_TEXTURETYPE;
 
 	// TODO : add more

@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "TerrainObject.h"
 
-#include "ResourceManager.h"
 #include "Camera.h"
 
 TerrainObject::TerrainObject()

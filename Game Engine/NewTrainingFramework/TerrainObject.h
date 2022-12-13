@@ -35,6 +35,6 @@ private:
 	int offsetZ;
 
 	Vector3 height;
-	Vector3 currentPosition;
+	Vector3 currentPosition;	// TODO : pt a evita asta generateModel() va genera cu punctul de coordonata(0, 0, 0) (acum e fata de unde e camera)
 };
 
