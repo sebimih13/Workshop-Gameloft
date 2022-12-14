@@ -18,9 +18,6 @@ public:
 	void Draw() override;
 
 	/** Update Terrain */
-	void Update() override;
-
-private:
-
+	void Update() override;	
 };
 

@@ -183,6 +183,11 @@
 				<y>1.0</y>
 				<z>1.0</z>
 			</scale>
+			<followingCamera>
+				<ox/>
+				<oy/>
+				<oz/>
+			</followingCamera>
 		</object>
 
 		<object id="4">
@@ -269,6 +274,10 @@
 				<y>1000</y>
 				<z>1000</z>
 			</scale>
+			<followingCamera>
+				<ox/>
+				<oz/>
+			</followingCamera>
 		</object>
 
 	</objects>

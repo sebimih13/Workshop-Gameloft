@@ -102,7 +102,23 @@ void SceneObject::Draw()
 
 void SceneObject::Update()
 {
-	// TODO ?
+	if (followingCamera.x != 0.0f)
+	{
+		static const float offsetX = position.x - camera->getPosition().x;
+		position.x = camera->getPosition().x + offsetX;
+	}
+
+	if (followingCamera.y != 0.0f)
+	{
+		static const float offsetY = position.y - camera->getPosition().y;
+		position.y = camera->getPosition().y + offsetY;
+	}
+
+	if (followingCamera.z != 0.0f)
+	{
+		static const float offsetZ = position.z - camera->getPosition().z;
+		position.z = camera->getPosition().z + offsetZ;
+	}
 }
 
 void SceneObject::debug()

@@ -53,6 +53,8 @@ public:
 	inline void setTextures(std::vector<int> ids) { textureIDs = ids; }
 	inline void setColor(Vector3 col) { color = col; }
 
+	inline void setFollowingCamera(Vector3 axis) { followingCamera = axis; }
+
 protected:
 	ObjectType type;		// TODO : teoretic nu mai e nevoie de type aici (este nevoie de el doar cand parsam XML-ul)
 	Camera* camera;
@@ -82,6 +84,9 @@ protected:
 private:
 	/** Color */		// TODO : O LAS AICI?
 	Vector3 color;
+
+	/** Following camera */
+	Vector3 followingCamera;
 	
 	/** Others */
 	// TODO : bool depthTest;

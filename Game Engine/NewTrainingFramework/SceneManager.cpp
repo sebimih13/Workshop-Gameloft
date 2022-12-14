@@ -197,6 +197,22 @@ void SceneManager::Init(char* filePath)
 			obj->setColor(color);
 		}
 
+		// following camera
+		NodeXML followingCameraNode = objectNode.getChild("followingCamera");
+		if (followingCameraNode.isValid())
+		{
+			Vector3 axis;
+
+			if (followingCameraNode.getChild("ox").isValid())
+				axis.x = 1.0f;
+			if (followingCameraNode.getChild("oy").isValid())
+				axis.y = 1.0f;
+			if (followingCameraNode.getChild("oz").isValid())
+				axis.z = 1.0f;
+
+			obj->setFollowingCamera(axis);
+		}
+
 		objects.push_back(obj);
 	}
 
