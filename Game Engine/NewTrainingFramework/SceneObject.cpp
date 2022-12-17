@@ -49,7 +49,6 @@ void SceneObject::Draw()
 		glActiveTexture(GL_TEXTURE0 + i);
 		glBindTexture(textures[i]->getTextureType(), textures[i]->getTextureID());
 		shader->setTexture(i);
-
 	}
 
 	// TODO : matrix model -> sa NU fie calculat la fiecare Draw() ddaca este obiect static

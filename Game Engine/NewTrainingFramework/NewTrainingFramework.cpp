@@ -231,6 +231,8 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	TODO LIST : 
 
+	PT CAMERA => ROTIRE GLOBALA (NU LOCALA CUM ESTE ACM)
+
 	* 1. ObjectType type -> conteaza doar la parsare => sterge din proprietatile unui SceneObject
 
 	* 2. Forward Declarations in toate fisierele
