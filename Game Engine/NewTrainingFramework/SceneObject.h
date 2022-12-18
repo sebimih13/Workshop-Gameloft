@@ -87,6 +87,7 @@ private:
 
 	/** Following camera */
 	Vector3 followingCamera;
+	Vector3 followingCameraOffset;
 	
 	/** Others */
 	// TODO : bool depthTest;

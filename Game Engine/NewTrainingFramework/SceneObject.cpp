@@ -26,6 +26,11 @@ void SceneObject::Load()
 		Texture* texture = ResourceManager::getInstance()->LoadTexture(id);
 		textures.push_back(texture);
 	}
+
+	// set camera offsets
+	followingCameraOffset.x = position.x - camera->getPosition().x;
+	followingCameraOffset.y = position.y - camera->getPosition().y;
+	followingCameraOffset.z = position.z - camera->getPosition().z;
 }
 
 void SceneObject::Draw()
@@ -101,22 +106,21 @@ void SceneObject::Draw()
 
 void SceneObject::Update()
 {
+	// Update position
+
 	if (followingCamera.x != 0.0f)
 	{
-		static const float offsetX = position.x - camera->getPosition().x;
-		position.x = camera->getPosition().x + offsetX;
+	position.x = camera->getPosition().x + followingCameraOffset.x;
 	}
 
 	if (followingCamera.y != 0.0f)
 	{
-		static const float offsetY = position.y - camera->getPosition().y;
-		position.y = camera->getPosition().y + offsetY;
+	position.y = camera->getPosition().y + followingCameraOffset.y;
 	}
 
 	if (followingCamera.z != 0.0f)
 	{
-		static const float offsetZ = position.z - camera->getPosition().z;
-		position.z = camera->getPosition().z + offsetZ;
+	position.z = camera->getPosition().z + followingCameraOffset.z;
 	}
 }
 

@@ -63,5 +63,8 @@ private:
 
 	GLuint textureType;
 	GLint format;
+
+	/** Utilities Functions */
+	void LoadCubeTexture(char* pDest, char* pSource, int textureWidth, int textureHeight, int textureBpp, int squareX, int squareY);
 };
 

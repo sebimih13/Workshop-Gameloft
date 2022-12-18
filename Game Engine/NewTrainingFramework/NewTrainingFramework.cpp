@@ -221,9 +221,7 @@ int _tmain(int argc, _TCHAR* argv[])
 															* sau le pun pe toate la gramada in shader.h 
 			ex. cele pt teren
 
-	  * 21. nu stiu sa aplic textura pt cubemap
-
-	  * 22. 
+	  * 21. 
 
 */
 
@@ -233,18 +231,23 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	PT CAMERA => ROTIRE GLOBALA (NU LOCALA CUM ESTE ACM)
 
+
 	* 1. ObjectType type -> conteaza doar la parsare => sterge din proprietatile unui SceneObject
 
-	* 2. Forward Declarations in toate fisierele
+	* 2. rezolva rotate camera
 
-	* 3. rotate camera - mouse input
+	  -----------------------------------------------------------------------------------------------------------------------------
 
-	* 6. SKYBOX
+	* 3. Forward Declarations in toate fisierele
 
-	* 7. CONTROLS -> MERGI IN SUS/JOS GLOBAL (NU RELATIV CUM ESTE ACM)
+	* 4. rotate camera - mouse input
+
+	* 5. ObjectType type -> conteaza doar la parsare => sterge din proprietatile unui SceneObject
+
+	* 6. CONTROLS -> MERGI IN SUS/JOS GLOBAL (NU RELATIV CUM ESTE ACM)
 				  -> MERGI IN INAINTE/INAPO GLOBAL (NU RELATIV CUM ESTE ACM)
 
-	* 8. pt fiecare resource -> sa fie data in Init()
+	* 7. pt fiecare resource -> sa fie data in Init()
 
 */
 
