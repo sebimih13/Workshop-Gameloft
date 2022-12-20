@@ -2,10 +2,13 @@
 
 #include "stdafx.h"
 #include "../Utilities/Math.h"
-#include "../Utilities/rapidxml-1.13/rapidxml.hpp"
+#include "../Utilities/rapidxml-1.13/rapidxml.hpp"		// TODO : CIUDAT CA NU MERGE IN .CPP
 
 #include "Camera.h"
 #include "SceneObject.h"
+
+/** Forward Declations */
+class FogEffect;
 
 enum ControlsConfig
 {
@@ -36,13 +39,6 @@ struct ScreenConfig
 {
 	unsigned int width;
 	unsigned int height;
-};
-
-struct Fog
-{
-	float r;
-	float R;
-	Vector3 color;
 };
 
 class SceneManager
@@ -93,7 +89,7 @@ private:
 	std::vector<SceneObject*> objects;
 
 	/** Effects */
-	Fog fog;
+	FogEffect* fogEffect;
 
 	/** Utilities Functions */
 	ControlsConfig getControlsAction(std::string& action);

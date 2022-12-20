@@ -29,8 +29,6 @@ void SkyboxObject::Draw()
 
 void SkyboxObject::Update()
 {
-	// TODO
-
 	// call parent method
 	SceneObject::Update();
 }

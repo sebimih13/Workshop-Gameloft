@@ -35,5 +35,17 @@ private:
 	int offsetZ;
 
 	Vector3 height;
+
+	/** Uniforms */
+	GLuint heightUniform;
+	GLuint nrCeluleUniform;
+	GLuint offsetXUniform;
+	GLuint offsetZUniform;
+
+	/** Set uniforms functions */
+	void setHeight();
+	void setNrCelule();
+	void setOffsetX();
+	void setOffsetZ();
 };
 

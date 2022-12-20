@@ -35,19 +35,6 @@ public:
 	void setColor(Vector3* color);		// TODO : aici sau in alta parte
 	void setTexture(GLint index);		// TODO : aici sau in alta parte
 
-	/** Terrain */						// TODO : muta in TerrainObject.h ???
-	void setHeight(Vector3* height);	// TODO : aici sau in alta parte
-	void setNrCelule(GLint nrCelule);	// TODO : aici sau in alta parte
-	void setOffsetX(GLint offset);		// TODO : aici sau in alta parte
-	void setOffsetZ(GLint offset);		// TODO : aici sau in alta parte
-
-	/** Fog */										// TODO : muta in SceneObject.h ???
-	void setFogrUniform(GLfloat value);				// TODO : aici sau in alta parte
-	void setFogRUniform(GLfloat value);				// TODO : aici sau in alta parte
-	void setFogColorUniform(Vector3* color);		// TODO : aici sau in alta parte
-	void setFogCameraPosUniform(Vector3* pos);		// TODO : aici sau in alta parte
-	void setModelMatrixUniform(Matrix* model);		// TODO : aici sau in alta parte
-
 private:
 	/** CONST variables */
 	const int MAX_TEXTURES;				// TODO : change in constructor for more textures
@@ -64,18 +51,5 @@ private:
 	GLuint mvpMatrixUniform;
 	GLuint colorUniform;
 	std::vector<GLuint> textureUniforms;
-
-	/** Terrain Uniforms */
-	GLuint heightUniform;
-	GLuint nrCeluleUniform;
-	GLuint offsetXUniform;
-	GLuint offsetZUniform;
-
-	/** Fog Uniforms */
-	GLuint fogrUniform;
-	GLuint fogRUniform;
-	GLuint fogColorUniform;
-	GLuint fogCameraPosUniform;
-	GLuint modelMatrixUniform;
 };
 

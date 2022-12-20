@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "SceneObject.h"
+
 #include "ResourceManager.h"
 #include "SceneManager.h"
+
 #include "Camera.h"
 
 SceneObject::SceneObject()
@@ -26,6 +28,13 @@ void SceneObject::Load()
 	{
 		Texture* texture = ResourceManager::getInstance()->LoadTexture(id);
 		textures.push_back(texture);
+	}
+
+	// Effects
+	if (fogEffect && shader && camera)
+	{
+		fogEffect->LoadUniforms(shader);
+		fogEffect->setCamera(camera);
 	}
 
 	// set camera offsets
@@ -82,12 +91,9 @@ void SceneObject::Draw()
 	shader->setMVP(&mvp);
 	shader->setColor(&color);
 
-	// fog : check
-	shader->setFogrUniform(fog->r);
-	shader->setFogRUniform(fog->R);
-	shader->setFogColorUniform(&fog->color);
-	shader->setFogCameraPosUniform(&camera->getPosition());
-	shader->setModelMatrixUniform(&modelMatrix);
+	// Set Effects
+	fogEffect->SetUniforms(&modelMatrix);
+	// TODO : modelMatrix + camera -> trb setate intr-un update doar cand se schimba
 
 	// Draw
 	if (!wiredFormat)
@@ -118,17 +124,17 @@ void SceneObject::Update()
 
 	if (followingCamera.x != 0.0f)
 	{
-	position.x = camera->getPosition().x + followingCameraOffset.x;
+		position.x = camera->getPosition().x + followingCameraOffset.x;
 	}
 
 	if (followingCamera.y != 0.0f)
 	{
-	position.y = camera->getPosition().y + followingCameraOffset.y;
+		position.y = camera->getPosition().y + followingCameraOffset.y;
 	}
 
 	if (followingCamera.z != 0.0f)
 	{
-	position.z = camera->getPosition().z + followingCameraOffset.z;
+		position.z = camera->getPosition().z + followingCameraOffset.z;
 	}
 }
 

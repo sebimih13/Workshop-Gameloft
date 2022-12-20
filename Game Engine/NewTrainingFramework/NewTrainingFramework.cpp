@@ -256,6 +256,8 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	* 8. pt ceata - fara if => clamp
 
+	* 9. verifica fiecare pointer inainte de a-l folosi
+
 
 
 */

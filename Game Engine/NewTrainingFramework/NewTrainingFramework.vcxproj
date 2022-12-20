@@ -163,6 +163,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="FireObject.cpp" />
+    <ClCompile Include="FogEffect.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="NewTrainingFramework.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
@@ -182,6 +184,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="FireObject.h" />
+    <ClInclude Include="FogEffect.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SceneObject.h" />

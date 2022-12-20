@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "SceneManager.h"
 
-#include "../Utilities/rapidxml-1.13/rapidxml_print.hpp"
 #include "../Utilities/NodeXML.hpp"
 #include "../Utilities/AttributeXML.hpp"
 
 #include "TerrainObject.h"
 #include "SkyboxObject.h"
+#include "FogEffect.h"
 
 // Instantiate static variables
 SceneManager* SceneManager::instance = nullptr;
@@ -37,15 +37,20 @@ void SceneManager::Init(char* filePath)
 	backgroundColor.y = rootNode.getChild("backgroundColor").getChild("g").getFloat();
 	backgroundColor.z = rootNode.getChild("backgroundColor").getChild("b").getFloat();
 
-	// Fog
+	// Fog Effect
 	NodeXML fogNode = rootNode.getChild("fog");
 	if (fogNode.isValid())
 	{
-		fog.r = fogNode.getChild("r").getFloat();
-		fog.R = fogNode.getChild("R").getFloat();
-		fog.color.x = fogNode.getChild("color").getChild("r").getFloat();
-		fog.color.y = fogNode.getChild("color").getChild("g").getFloat();
-		fog.color.z = fogNode.getChild("color").getChild("b").getFloat();
+		fogEffect = new FogEffect();
+
+		fogEffect->setr(fogNode.getChild("r").getFloat());
+		fogEffect->setR(fogNode.getChild("R").getFloat());
+
+		Vector3 color;
+		color.x = fogNode.getChild("color").getChild("r").getFloat();
+		color.y = fogNode.getChild("color").getChild("g").getFloat();
+		color.z = fogNode.getChild("color").getChild("b").getFloat();
+		fogEffect->setColor(color);
 	}
 
 	// Controls
@@ -153,11 +158,11 @@ void SceneManager::Init(char* filePath)
 		obj->setType(objType);
 		obj->setCamera(cameras[activeCameraID]);
 
-		// TODO : check
-		obj->setFog(&fog);
-
 		obj->setName(objectNode.getChild("name").getString());
 		obj->setID(objectNode.getAttribute("id").getInt());
+
+		// Set Effects
+		obj->setFog(fogEffect);
 
 		NodeXML wiredNode = objectNode.getChild("wired");
 		if (wiredNode.isValid())
@@ -271,12 +276,20 @@ void SceneManager::Update()
 {
 	// TODO : inca nu stiu
 
-	// daca am schimbat camera activa => object->setCamera(cameras[activeCameraID]);
-	// altfel o setez o singura data in LoadObjects
-
 	for (SceneObject* object : objects)
 	{
 		object->Update();
+
+		// TODO : 
+
+		// daca am schimbat camera activa => object->setCamera(cameras[activeCameraID]);
+		// altfel o setez o singura data in Init
+
+		// daca schimbam position, rotation, scale	=> object->setPosition(...)
+		//											=> object->setRotation(...)
+		//											=> object->setScale(...)
+		//											=> updateModelMatrix
+		// altfel calculez o singura data modelMatrix
 	}
 }
 
@@ -351,10 +364,7 @@ void SceneManager::debugClass()
 	std::cout << "backgroundColor : " << backgroundColor.x << ' ' << backgroundColor.y << ' ' << backgroundColor.z << '\n';
 
 	// fog
-	std::cout << "fog :";
-	std::cout << "\t r : " << fog.r << '\n';
-	std::cout << "\t R : " << fog.R << '\n';
-	std::cout << "\t color : " << fog.color.x << ' ' << fog.color.y << ' ' << fog.color.z << "\n";
+	fogEffect->debug();
 	
 	// controls
 	std::cout << "\nCONTROLS : \n";

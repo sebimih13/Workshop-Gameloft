@@ -117,6 +117,30 @@
 				<wrap_s>CLAMP_TO_EDGE</wrap_s>
 				<wrap_t>CLAMP_TO_EDGE</wrap_t>
 			</texture>
+
+			<texture id="30" type="2d">
+				<file>DisplacementMap.tga</file>
+				<min_filter>LINEAR</min_filter>
+				<mag_filter>LINEAR</mag_filter>
+				<wrap_s>REPEAT</wrap_s>
+				<wrap_t>REPEAT</wrap_t>
+			</texture>
+
+			<texture id="31" type="2d">
+				<file>fire3.tga</file>
+				<min_filter>LINEAR</min_filter>
+				<mag_filter>LINEAR</mag_filter>
+				<wrap_s>REPEAT</wrap_s>				<!-- TODO : REPEAT ? -->
+				<wrap_t>REPEAT</wrap_t>				<!-- TODO : REPEAT ? -->
+			</texture>
+
+			<texture id="32" type="2d">
+				<file>fire_mask.tga</file>
+				<min_filter>LINEAR</min_filter>
+				<mag_filter>LINEAR</mag_filter>
+				<wrap_s>REPEAT</wrap_s>				<!-- TODO : REPEAT ? -->
+				<wrap_t>REPEAT</wrap_t>				<!-- TODO : REPEAT ? -->
+			</texture>
 			
 			<!-- si aici se adauga toate texturile -->
 		</folder>

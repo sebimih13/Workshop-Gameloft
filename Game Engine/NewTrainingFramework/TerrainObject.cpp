@@ -79,20 +79,26 @@ void TerrainObject::Load()
 	// call parent method to load shader + textures
 	SceneObject::Load();
 
+	// Load Uniforms
+	heightUniform = glGetUniformLocation(shader->getProgramID(), "u_height");
+	nrCeluleUniform = glGetUniformLocation(shader->getProgramID(), "u_nrCelule");
+	offsetXUniform = glGetUniformLocation(shader->getProgramID(), "u_offsetX");
+	offsetZUniform = glGetUniformLocation(shader->getProgramID(), "u_offsetZ");
+
 	// load model manually
 	model = generateModel();
 }
 
 void TerrainObject::Draw()
 {
-	// TODO : mai trb ceva aditional?
 	glUseProgram(shader->getProgramID());
 
-	shader->setNrCelule(nrCelule);
-	shader->setHeight(&height);
+	// Set uniforms
+	setNrCelule();
+	setHeight();
 
-	shader->setOffsetX(offsetX % nrCelule);
-	shader->setOffsetZ(offsetZ % nrCelule);
+	setOffsetX();
+	setOffsetZ();
 
 	// call parent method
 	SceneObject::Draw();
@@ -130,6 +136,38 @@ void TerrainObject::Update()
 			position.z -= dimensiuneCelula;
 			offsetZ--;
 		}
+	}
+}
+
+void TerrainObject::setNrCelule()
+{
+	if (nrCeluleUniform != -1)
+	{
+		glUniform1i(nrCeluleUniform, nrCelule);
+	}
+}
+
+void TerrainObject::setHeight()
+{
+	if (heightUniform != -1)
+	{
+		glUniform3fv(heightUniform, 1, &height.x);
+	}
+}
+
+void TerrainObject::setOffsetX()
+{
+	if (offsetXUniform != -1)
+	{
+		glUniform1i(offsetXUniform, offsetX % nrCelule);
+	}
+}
+
+void TerrainObject::setOffsetZ()
+{
+	if (offsetZUniform != -1)
+	{
+		glUniform1i(offsetZUniform, offsetZ % nrCelule);
 	}
 }
 

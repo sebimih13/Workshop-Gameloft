@@ -7,9 +7,10 @@
 #include "Texture.h"
 #include "Shader.h"
 
+#include "FogEffect.h"
+
 /** Forward Declarations */
 class Camera;
-struct Fog;
 
 enum ObjectType
 {
@@ -57,8 +58,8 @@ public:
 
 	inline void setFollowingCamera(Vector3 axis) { followingCamera = axis; }
 
-	// TODO : check
-	inline void setFog(Fog* f) { fog = f; }
+	// Set Effects
+	inline void setFog(FogEffect* fog) { fogEffect = new FogEffect(fog); }
 
 protected:
 	ObjectType type;		// TODO : teoretic nu mai e nevoie de type aici (este nevoie de el doar cand parsam XML-ul)
@@ -94,8 +95,8 @@ private:
 	Vector3 followingCamera;
 	Vector3 followingCameraOffset;
 
-	/** fog */
-	Fog* fog;
+	/** Fog Effect */
+	FogEffect* fogEffect;
 	
 	/** Others */
 	// TODO : bool depthTest;
