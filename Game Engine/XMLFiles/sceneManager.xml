@@ -288,6 +288,33 @@
 			</followingCamera>
 		</object>
 
+		<object id="10">
+			<model>7</model>
+			<shader>5</shader>
+			<type>fire</type>
+			<name>Foc</name>
+			<textures>
+				<texture id="30"/>
+				<texture id="31"/>
+				<texture id="32"/>
+			</textures>
+			<position>
+				<x>-100</x>
+				<y>20</y>
+				<z>-100</z>
+			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<scale>
+				<x>10.0</x>
+				<y>10.0</y>
+				<z>10.0</z>
+			</scale>
+		</object>
+
 	</objects>
 	
 	<debugSettings>

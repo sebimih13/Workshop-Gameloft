@@ -23,6 +23,9 @@ int Init ( ESContext *esContext )
 {
 	glEnable(GL_DEPTH_TEST);
 
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	glClearColor (	SceneManager::getInstance()->getBackgroundColor().x, 
 					SceneManager::getInstance()->getBackgroundColor().y, 
 					SceneManager::getInstance()->getBackgroundColor().z, 
@@ -228,6 +231,21 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	  * 21. in modelShader.fs - vec4(fogAlpha * u_fogColor, 1.0) - e 1.0 aici?
 
+
+	  -----------------------------------------------------------------------------------------------------------------------------
+	  -----------------------								INTREBARI FOC									-----------------------
+	  -----------------------------------------------------------------------------------------------------------------------------
+
+	  * 22. Pt toate texturile avem?
+	  		<min_filter>LINEAR</min_filter>
+			<mag_filter>LINEAR</mag_filter>
+			<wrap_s>REPEAT</wrap_s>		
+			<wrap_t>REPEAT</wrap_t>	
+
+	  * 23. 
+
+	  * 
+
 */
 
 /*
@@ -258,7 +276,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	* 9. verifica fiecare pointer inainte de a-l folosi
 
-
+	* 10. 
 
 */
 

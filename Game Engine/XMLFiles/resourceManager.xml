@@ -19,6 +19,10 @@
 			<model id="6">
 				<file>SkyBox.nfg</file>
 			</model>
+
+			<model id="7">
+				<file>fire.nfg</file>
+			</model>
 			
 		</folder>
 
@@ -53,6 +57,11 @@
 			<shader id="4">
 				<vs>skyboxShader.vs</vs>
 				<fs>skyboxShader.fs</fs>
+			</shader>
+
+			<shader id="5">
+				<vs>fireShader.vs</vs>
+				<fs>fireShader.fs</fs>
 			</shader>
 			
 		<!-- si aici se adauga toate shaderele -->

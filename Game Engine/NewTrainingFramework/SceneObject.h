@@ -18,7 +18,8 @@ enum ObjectType
 
 	Normal,
 	Terrain,
-	Skybox
+	Skybox,
+	Fire
 };
 
 class SceneObject

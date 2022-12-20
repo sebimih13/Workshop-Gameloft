@@ -21,6 +21,12 @@ public:
 	void Update() override;
 
 private:
+	/** Proprietati speciale */
 
+	/** Uniforms */
+	GLuint heightUniform;
+
+	/** Set uniforms functions */
+	void setHeight();
 };
 

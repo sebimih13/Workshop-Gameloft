@@ -6,6 +6,8 @@
 
 #include "TerrainObject.h"
 #include "SkyboxObject.h"
+#include "FireObject.h"
+
 #include "FogEffect.h"
 
 // Instantiate static variables
@@ -153,7 +155,23 @@ void SceneManager::Init(char* filePath)
 					obj->setModel(objectNode.getChild("model").getInt());
 				}
 				break;
+
+			case ObjectType::Fire:
+				{
+					FireObject* fireObj = new FireObject();
+					obj = fireObj;
+
+					// seteaza atributile speciale (care se regasesc doar in clasa asta)
+					obj->setModel(objectNode.getChild("model").getInt());
+				}
+				break;
 		}
+
+		/* TODO : modifica structura la XML
+			* pt model generated - sa nu mai punem <model>...</model> 
+			pt fiecare obiect verificam daca are model
+			altfel inseamna ca e generat
+		*/
 
 		obj->setType(objType);
 		obj->setCamera(cameras[activeCameraID]);
@@ -349,6 +367,8 @@ ObjectType SceneManager::getObjectType(std::string& type)
 		return ObjectType::Terrain;
 	else if (type == "skybox")
 		return ObjectType::Skybox;
+	else if (type == "fire")
+		return ObjectType::Fire;
 	return ObjectType::DEFAULT_TYPE;
 
 	// TODO : ADD MORE
