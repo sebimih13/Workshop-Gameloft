@@ -55,6 +55,13 @@ void Shader::Load()
 	nrCeluleUniform = glGetUniformLocation(programID, "u_nrCelule");
 	offsetXUniform = glGetUniformLocation(programID, "u_offsetX");
 	offsetZUniform = glGetUniformLocation(programID, "u_offsetZ");
+
+	// Fog Uniforms
+	fogrUniform = glGetUniformLocation(programID, "u_r");
+	fogRUniform = glGetUniformLocation(programID, "u_R");
+	fogColorUniform = glGetUniformLocation(programID, "u_fogColor");
+	fogCameraPosUniform = glGetUniformLocation(programID, "u_cameraPos");
+	modelMatrixUniform = glGetUniformLocation(programID, "u_modelMatrix");
 }
 
 void Shader::setPosition()
@@ -128,6 +135,46 @@ void Shader::setOffsetZ(GLint offset)
 	if (offsetZUniform != -1)
 	{
 		glUniform1i(offsetZUniform, offset);
+	}
+}
+
+void Shader::setFogrUniform(GLfloat value)
+{
+	if (fogrUniform != -1)
+	{
+		glUniform1f(fogrUniform, value);
+	}
+}
+
+void Shader::setFogRUniform(GLfloat value)
+{
+	if (fogRUniform != -1)
+	{
+		glUniform1f(fogRUniform, value);
+	}
+}
+
+void Shader::setFogColorUniform(Vector3* color)
+{
+	if (fogColorUniform != -1)
+	{
+		glUniform3fv(fogColorUniform, 1, &color->x);
+	}
+}
+
+void Shader::setFogCameraPosUniform(Vector3* pos)
+{
+	if (fogCameraPosUniform != -1)
+	{
+		glUniform3fv(fogCameraPosUniform, 1, &pos->x);
+	}
+}
+
+void Shader::setModelMatrixUniform(Matrix* model)
+{
+	if (modelMatrixUniform != -1)
+	{
+		glUniformMatrix4fv(modelMatrixUniform, 1, GL_FALSE, (GLfloat*)model->m);
 	}
 }
 

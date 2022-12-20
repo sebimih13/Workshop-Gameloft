@@ -37,6 +37,17 @@ void SceneManager::Init(char* filePath)
 	backgroundColor.y = rootNode.getChild("backgroundColor").getChild("g").getFloat();
 	backgroundColor.z = rootNode.getChild("backgroundColor").getChild("b").getFloat();
 
+	// Fog
+	NodeXML fogNode = rootNode.getChild("fog");
+	if (fogNode.isValid())
+	{
+		fog.r = fogNode.getChild("r").getFloat();
+		fog.R = fogNode.getChild("R").getFloat();
+		fog.color.x = fogNode.getChild("color").getChild("r").getFloat();
+		fog.color.y = fogNode.getChild("color").getChild("g").getFloat();
+		fog.color.z = fogNode.getChild("color").getChild("b").getFloat();
+	}
+
 	// Controls
 	NodeXML controlsNode = rootNode.getChild("controls");
 	for (NodeXML controlNode = controlsNode.getChild("control"); controlNode.isValid(); controlNode = controlNode.getNextSibling())
@@ -141,6 +152,9 @@ void SceneManager::Init(char* filePath)
 
 		obj->setType(objType);
 		obj->setCamera(cameras[activeCameraID]);
+
+		// TODO : check
+		obj->setFog(&fog);
 
 		obj->setName(objectNode.getChild("name").getString());
 		obj->setID(objectNode.getAttribute("id").getInt());
@@ -335,6 +349,12 @@ void SceneManager::debugClass()
 	std::cout << "width : " << defaultScreenSize.width << '\n';
 	std::cout << "height : " << defaultScreenSize.height << '\n';
 	std::cout << "backgroundColor : " << backgroundColor.x << ' ' << backgroundColor.y << ' ' << backgroundColor.z << '\n';
+
+	// fog
+	std::cout << "fog :";
+	std::cout << "\t r : " << fog.r << '\n';
+	std::cout << "\t R : " << fog.R << '\n';
+	std::cout << "\t color : " << fog.color.x << ' ' << fog.color.y << ' ' << fog.color.z << "\n";
 	
 	// controls
 	std::cout << "\nCONTROLS : \n";

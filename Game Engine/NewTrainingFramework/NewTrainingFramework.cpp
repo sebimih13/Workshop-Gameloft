@@ -221,7 +221,12 @@ int _tmain(int argc, _TCHAR* argv[])
 															* sau le pun pe toate la gramada in shader.h 
 			ex. cele pt teren
 
-	  * 21. 
+	  
+	  -----------------------------------------------------------------------------------------------------------------------------
+	  -----------------------								INTREBARI CEATA									-----------------------
+	  -----------------------------------------------------------------------------------------------------------------------------
+
+	  * 21. in modelShader.fs - vec4(fogAlpha * u_fogColor, 1.0) - e 1.0 aici?
 
 */
 
@@ -248,6 +253,10 @@ int _tmain(int argc, _TCHAR* argv[])
 				  -> MERGI IN INAINTE/INAPO GLOBAL (NU RELATIV CUM ESTE ACM)
 
 	* 7. pt fiecare resource -> sa fie data in Init()
+
+	* 8. pt ceata - fara if => clamp
+
+
 
 */
 

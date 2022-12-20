@@ -7,7 +7,9 @@
 #include "Texture.h"
 #include "Shader.h"
 
+/** Forward Declarations */
 class Camera;
+struct Fog;
 
 enum ObjectType
 {
@@ -55,6 +57,9 @@ public:
 
 	inline void setFollowingCamera(Vector3 axis) { followingCamera = axis; }
 
+	// TODO : check
+	inline void setFog(Fog* f) { fog = f; }
+
 protected:
 	ObjectType type;		// TODO : teoretic nu mai e nevoie de type aici (este nevoie de el doar cand parsam XML-ul)
 	Camera* camera;
@@ -88,6 +93,9 @@ private:
 	/** Following camera */
 	Vector3 followingCamera;
 	Vector3 followingCameraOffset;
+
+	/** fog */
+	Fog* fog;
 	
 	/** Others */
 	// TODO : bool depthTest;

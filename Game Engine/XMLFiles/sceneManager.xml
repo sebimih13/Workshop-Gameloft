@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sceneManager>
-	<!-- IMPORTANT! toate tagurile si atributele de tip comment trebuie ignorate (nu le parsati)
-	le-am adaugat ca sa evit cazul de comentarii imbricate (imposibile in XML) -->
-	
+
 	<gameName>My game engine</gameName>
 	
 	<defaultScreenSize>
@@ -19,6 +17,16 @@
 		<g>0.1</g>
 		<b>0.1</b>
 	</backgroundColor>
+	
+	<fog>
+		<r>700</r>
+		<R>1000</R>
+		<color>
+			<r>0.41</r>
+			<g>0.44</g>
+			<b>0.49</b>
+		</color>
+	</fog>
 
 	<controls>
 
@@ -102,7 +110,7 @@
 			<rotationSpeed>1</rotationSpeed>
 			<fov>45</fov>
 			<near>0.2</near>
-			<far>10000</far>
+			<far>100000</far>
 		</camera>
 		<!-- eventual si alte cameras -->
 	</cameras>
@@ -270,9 +278,9 @@
 				<z>0</z>
 			</rotation>
 			<scale>
-				<x>1000</x>
-				<y>1000</y>
-				<z>1000</z>
+				<x>10000</x>
+				<y>10000</y>
+				<z>10000</z>
 			</scale>
 			<followingCamera>
 				<ox/>

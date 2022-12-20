@@ -38,6 +38,13 @@ struct ScreenConfig
 	unsigned int height;
 };
 
+struct Fog
+{
+	float r;
+	float R;
+	Vector3 color;
+};
+
 class SceneManager
 {
 public:
@@ -84,6 +91,9 @@ private:
 
 	/** Objects */
 	std::vector<SceneObject*> objects;
+
+	/** Effects */
+	Fog fog;
 
 	/** Utilities Functions */
 	ControlsConfig getControlsAction(std::string& action);

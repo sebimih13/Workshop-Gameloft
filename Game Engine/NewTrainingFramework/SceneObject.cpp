@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SceneObject.h"
 #include "ResourceManager.h"
+#include "SceneManager.h"
 #include "Camera.h"
 
 SceneObject::SceneObject()
@@ -80,6 +81,13 @@ void SceneObject::Draw()
 	shader->setUV();
 	shader->setMVP(&mvp);
 	shader->setColor(&color);
+
+	// fog : check
+	shader->setFogrUniform(fog->r);
+	shader->setFogRUniform(fog->R);
+	shader->setFogColorUniform(&fog->color);
+	shader->setFogCameraPosUniform(&camera->getPosition());
+	shader->setModelMatrixUniform(&modelMatrix);
 
 	// Draw
 	if (!wiredFormat)
