@@ -313,6 +313,7 @@
 				<y>10.0</y>
 				<z>10.0</z>
 			</scale>
+			<dispMax>0.13</dispMax>
 		</object>
 
 	</objects>

@@ -24,9 +24,9 @@ Model* TerrainObject::generateModel()
 	position = camera->getPosition();
 
 	Vector3 startPosition = Vector3(0.0f, 0.0f, 0.0f);
-	startPosition.x = -dimensiuneCelula * (nrCelule / 2);
-	startPosition.y = -offsetY;
-	startPosition.z = -dimensiuneCelula * (nrCelule / 2);
+	startPosition.x = float(-dimensiuneCelula * (nrCelule / 2));
+	startPosition.y = float(-offsetY);
+	startPosition.z = float(-dimensiuneCelula * (nrCelule / 2));
 
 	std::vector<Vertex> verticesData;
 	std::vector<unsigned int> indicesData;
@@ -76,7 +76,7 @@ Model* TerrainObject::generateModel()
 
 void TerrainObject::Load()
 {
-	// call parent method to load shader + textures
+	// call parent method to load : shader + textures
 	SceneObject::Load();
 
 	// Load Uniforms

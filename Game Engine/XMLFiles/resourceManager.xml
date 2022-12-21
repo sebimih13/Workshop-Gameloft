@@ -33,7 +33,6 @@
 			</model>
 		</folder>
 		-->
-		<!-- si aici se adauga toate modelele necesare -->
 	</models>
 	
 	<shaders>
@@ -64,7 +63,6 @@
 				<fs>fireShader.fs</fs>
 			</shader>
 			
-		<!-- si aici se adauga toate shaderele -->
 		</folder>
 	</shaders>
 	
@@ -151,7 +149,6 @@
 				<wrap_t>REPEAT</wrap_t>				<!-- TODO : REPEAT ? -->
 			</texture>
 			
-			<!-- si aici se adauga toate texturile -->
 		</folder>
 	</textures>	
 </resourceManager>

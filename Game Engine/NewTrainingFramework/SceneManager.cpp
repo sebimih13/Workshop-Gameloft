@@ -152,7 +152,7 @@ void SceneManager::Init(char* filePath)
 					obj = skyboxObj;
 
 					// seteaza atributile speciale (care se regasesc doar in clasa asta)
-					obj->setModel(objectNode.getChild("model").getInt());
+					skyboxObj->setModel(objectNode.getChild("model").getInt());
 				}
 				break;
 
@@ -162,7 +162,8 @@ void SceneManager::Init(char* filePath)
 					obj = fireObj;
 
 					// seteaza atributile speciale (care se regasesc doar in clasa asta)
-					obj->setModel(objectNode.getChild("model").getInt());
+					fireObj->setModel(objectNode.getChild("model").getInt());
+					fireObj->setDispMax(objectNode.getChild("dispMax").getFloat());
 				}
 				break;
 		}

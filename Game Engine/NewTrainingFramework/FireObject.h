@@ -20,13 +20,20 @@ public:
 	/** Update Terrain */
 	void Update() override;
 
+	/** Getters / Setters */
+	inline void setDispMax(float value) { dispMax = value; }
+
 private:
 	/** Proprietati speciale */
+	float time;
+	float dispMax;
 
 	/** Uniforms */
-	GLuint heightUniform;
+	GLuint timeUniform;
+	GLuint dispMaxUniform;
 
 	/** Set uniforms functions */
-	void setHeight();
+	void setTime();
+	void setDispMax();
 };
 
