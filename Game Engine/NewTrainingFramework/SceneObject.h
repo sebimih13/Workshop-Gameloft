@@ -14,7 +14,7 @@ class Camera;
 
 enum ObjectType
 {
-	DEFAULT_TYPE,
+	ObjectType_DEFAULT,
 
 	Normal,
 	Terrain,

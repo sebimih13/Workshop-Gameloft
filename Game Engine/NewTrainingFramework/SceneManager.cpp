@@ -370,7 +370,7 @@ ObjectType SceneManager::getObjectType(std::string& type)
 		return ObjectType::Skybox;
 	else if (type == "fire")
 		return ObjectType::Fire;
-	return ObjectType::DEFAULT_TYPE;
+	return ObjectType::ObjectType_DEFAULT;
 
 	// TODO : ADD MORE
 }
