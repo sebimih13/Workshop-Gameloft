@@ -7,8 +7,8 @@
 		<width>960</width>
 		<height>720</height>
 		<!--
-		se mai poate pune si:
-		<fullscreen />
+			se mai poate pune si:
+			<fullscreen />
 		-->
 	</defaultScreenSize>
 	
@@ -225,34 +225,7 @@
 				<z>1.0</z>
 			</scale>
 		</object>
-
-		<object id="40">
-			<model>5</model>
-			<shader>11</shader>
-			<type>normal</type>
-			<name>LightPoint</name>
-			<color>
-				<r>1.0</r>
-				<g>1.0</g>
-				<b>1.0</b>
-			</color>
-			<position>
-				<x>100</x>
-				<y>-20</y>
-				<z>-220</z>
-			</position>
-			<rotation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</rotation>
-			<scale>
-				<x>0.3</x>
-				<y>0.3</y>
-				<z>0.3</z>
-			</scale>
-		</object>
-
+		
 		<object id="41">
 			<model>5</model>
 			<shader>12</shader>
@@ -385,6 +358,7 @@
 	</ambientalLight>
 	
 	<lights>
+		
 		<light id="1">
 			<position>
 				<x>100</x>
@@ -401,9 +375,30 @@
 				<g>1.0</g>
 				<b>1.0</b>
 			</specularColor>
-			<associatedObject>2</associatedObject>		<!-- TODO : ASTA PT CE E? -->
+			<associatedObject>2</associatedObject>			<!-- TODO : ASTA PT CE E? -->
 			<type>point</type>
 		</light>
+
+		<light id="2">
+			<position>
+				<x>280</x>
+				<y>-20</y>
+				<z>-220</z>
+			</position>
+			<diffuseColor>
+				<r>0.55</r>
+				<g>0.16</g>
+				<b>0.56</b>
+			</diffuseColor>
+			<specularColor>
+				<r>0.55</r>
+				<g>0.16</g>
+				<b>0.56</b>
+			</specularColor>
+			<associatedObject>2</associatedObject>			<!-- TODO : ASTA PT CE E? -->
+			<type>point</type>
+		</light>
+		
 	</lights>
 
 	<!--	TODO :	pentru a folosi lumina -> obiectele vor avea proprietatea de mai jos

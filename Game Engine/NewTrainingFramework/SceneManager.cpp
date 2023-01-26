@@ -147,7 +147,37 @@ void SceneManager::Init(char* filePath)
 			TODO : pt fiecare light -> creeaza un obiect care sa reprezinta aceasta lumina 
 				   -> sa nu mai fie un obiect separat in XML
 		*/
+		SceneObject* lightObj = new SceneObject();
 
+		lightObj->setType(ObjectType::Normal);
+		lightObj->setCamera(cameras[activeCameraID]);
+
+		lightObj->setName("LightPoint_" + std::to_string(lights.size()));
+		lightObj->setID(100 + lights.size());
+
+		lightObj->setPosition(position);
+
+		Vector3 rotation;
+		rotation.x = 0.0f;
+		rotation.y = 0.0f;
+		rotation.z = 0.0f;
+		lightObj->setRotation(rotation);
+
+		Vector3 scale;
+		scale.x = 0.3f;
+		scale.y = 0.3f;
+		scale.z = 0.3f;
+		lightObj->setScale(scale);
+
+		lightObj->setModel(5);
+		lightObj->setShader(11);
+
+		lightObj->setColor(diffuseColor);	// TODO : diffuse / specular ?
+
+		// Set Effects		TODO : rewrite this class
+		lightObj->setFog(fogEffect);
+
+		objects.push_back(lightObj);
 		lights.insert({ id, light });
 	}
 
