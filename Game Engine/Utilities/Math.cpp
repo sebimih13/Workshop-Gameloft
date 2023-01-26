@@ -193,6 +193,13 @@ std::ostream& operator << (std::ostream& os, const Vector3& v)
 	return os;
 }
 
+// TODO : debug
+std::ostream& operator << (std::ostream& os, const Vector3* v)
+{
+	os << v->x << ' ' << v->y << ' ' << v->z;
+	return os;
+}
+
 Vector3 Vector3::Modulate(Vector3 & vector)
 {
 	return Vector3(x * vector.x, y * vector.y, z * vector.z);

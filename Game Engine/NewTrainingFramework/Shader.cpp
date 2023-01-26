@@ -39,9 +39,12 @@ void Shader::Load()
 
 	// Any scene object
 	positionAttribute = glGetAttribLocation(programID, "a_pos");
+	normalAttribute = glGetAttribLocation(programID, "a_norm");
 	uvAttribute = glGetAttribLocation(programID, "a_uv");
 
 	mvpMatrixUniform = glGetUniformLocation(programID, "u_mvpMatrix");
+	modelMatrixUniform = glGetUniformLocation(programID, "u_modelMatrix");
+
 	colorUniform = glGetUniformLocation(programID, "u_color");
 
 	for (int i = 0; i < MAX_TEXTURES; i++)
@@ -49,6 +52,14 @@ void Shader::Load()
 		std::string uniformName = "u_texture_" + std::to_string(i);
 		textureUniforms[i] = glGetUniformLocation(programID, uniformName.c_str());
 	}
+
+	// Ambiental Light
+	ambientalLightColorUniform = glGetUniformLocation(programID, "u_lightColor");
+	ambientalLightStrengthUniform = glGetUniformLocation(programID, "u_ambientStrength");
+
+	// Lights
+	lightPositionUniform = glGetUniformLocation(programID, "u_lightPos");
+	viewPositionUniform = glGetUniformLocation(programID, "u_viewPos");
 }
 
 void Shader::setPosition()
@@ -60,12 +71,21 @@ void Shader::setPosition()
 	}
 }
 
+void Shader::setNormal()
+{
+	if (normalAttribute != -1)
+	{
+		glEnableVertexAttribArray(normalAttribute);
+		glVertexAttribPointer(normalAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(1 * sizeof(Vector3)));
+	}
+}
+
 void Shader::setUV()
 {
 	if (uvAttribute != -1)
 	{
 		glEnableVertexAttribArray(uvAttribute);
-		glVertexAttribPointer(uvAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(Vector3)));
+		glVertexAttribPointer(uvAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(4 * sizeof(Vector3)));
 	}
 }
 
@@ -74,6 +94,14 @@ void Shader::setMVP(Matrix* MVP)
 	if (mvpMatrixUniform != -1)
 	{
 		glUniformMatrix4fv(mvpMatrixUniform, 1, GL_FALSE, (GLfloat*)MVP->m);
+	}
+}
+
+void Shader::setModelMatrixUniform(Matrix* model)
+{
+	if (modelMatrixUniform != -1)
+	{
+		glUniformMatrix4fv(modelMatrixUniform, 1, GL_FALSE, (GLfloat*)model->m);
 	}
 }
 
@@ -90,6 +118,38 @@ void Shader::setTexture(GLint index)
 	if (textureUniforms[index] != -1)
 	{
 		glUniform1i(textureUniforms[index], index);
+	}
+}
+
+void Shader::setAmbientalLightColor(Vector3* color)
+{
+	if (ambientalLightColorUniform != -1)
+	{
+		glUniform3fv(ambientalLightColorUniform, 1, &color->x);
+	}
+}
+
+void Shader::setAmbientalLightStrength(GLfloat strength)
+{
+	if (ambientalLightStrengthUniform != -1)
+	{
+		glUniform1f(ambientalLightStrengthUniform, strength);
+	}
+}
+
+void Shader::setLightPosition(Vector3* pos)
+{
+	if (lightPositionUniform != -1)
+	{
+		glUniform3fv(lightPositionUniform, 1, &pos->x);
+	}
+}
+
+void Shader::setCameraViewPosition(Vector3* pos)
+{
+	if (viewPositionUniform != -1)
+	{
+		glUniform3fv(viewPositionUniform, 1, &pos->x);
 	}
 }
 

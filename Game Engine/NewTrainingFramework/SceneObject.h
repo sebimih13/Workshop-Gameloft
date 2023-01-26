@@ -11,6 +11,7 @@
 
 /** Forward Declarations */
 class Camera;
+class Light;
 
 enum ObjectType
 {
@@ -59,8 +60,15 @@ public:
 
 	inline void setFollowingCamera(Vector3 axis) { followingCamera = axis; }
 
-	// Set Effects
+	/* Set Effects */
 	inline void setFog(FogEffect* fog) { fogEffect = new FogEffect(fog); }
+
+	/* Set Ambiental Light */
+	inline void setAmbientalLightColor(Vector3* color) { ambientalLightColor = color; }
+	inline void setAmbientalLightStrength(float strength) { ambientalLightStrength = strength; }
+
+	/** Lights */
+	inline void addLight(Light* light) { lights.push_back(light); }
 
 protected:
 	ObjectType type;		// TODO : teoretic nu mai e nevoie de type aici (este nevoie de el doar cand parsam XML-ul)
@@ -91,6 +99,13 @@ protected:
 private:
 	/** Color */		// TODO : O LAS AICI?
 	Vector3 color;
+
+	/** Ambiental Light */
+	Vector3* ambientalLightColor;
+	float ambientalLightStrength;
+
+	/** Lights */
+	std::vector<Light*> lights;
 
 	/** Following camera */
 	Vector3 followingCamera;

@@ -47,6 +47,11 @@
 				<vs>colorModelShader.vs</vs>
 				<fs>colorModelShader.fs</fs>
 			</shader>
+
+			<shader id="12">
+				<vs>phongModelShader.vs</vs>
+				<fs>phongModelShader.fs</fs>
+			</shader>
 			
 			<shader id="3">
 				<vs>terrainShader.vs</vs>

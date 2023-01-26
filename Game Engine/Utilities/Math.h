@@ -70,7 +70,9 @@ public:
 	GLfloat Dot(Vector3 & vector);
 	Vector3 Cross(Vector3 & vector);
 
+	// TODO : debug
 	friend std::ostream& operator << (std::ostream& os, const Vector3& v);
+	friend std::ostream& operator << (std::ostream& os, const Vector3* v);
 
 	//access to elements
 	GLfloat operator [] (unsigned int idx);

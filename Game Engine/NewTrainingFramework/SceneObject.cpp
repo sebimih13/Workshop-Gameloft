@@ -5,6 +5,7 @@
 #include "SceneManager.h"
 
 #include "Camera.h"
+#include "Light.h"
 
 SceneObject::SceneObject()
 {
@@ -87,13 +88,27 @@ void SceneObject::Draw()
 
 	// TODO : check
 	shader->setPosition();
+	shader->setNormal();
 	shader->setUV();
+
+	// TODO : modelMatrix + camera -> trb setate intr-un update doar cand se schimba
 	shader->setMVP(&mvp);
+	shader->setModelMatrixUniform(&modelMatrix);
 	shader->setColor(&color);
 
 	// Set Effects
-	fogEffect->SetUniforms(&modelMatrix);
-	// TODO : modelMatrix + camera -> trb setate intr-un update doar cand se schimba
+	fogEffect->SetUniforms();
+
+	// Set Ambiental Light
+	shader->setAmbientalLightColor(ambientalLightColor);
+	shader->setAmbientalLightStrength(ambientalLightStrength);
+
+	// Set lights
+	for (Light* light : lights)
+	{
+		shader->setLightPosition(&light->position);
+	}
+	shader->setCameraViewPosition(&camera->getPosition());
 
 	// Draw
 	if (!wiredFormat)

@@ -3,6 +3,9 @@
 #include "stdafx.h"
 #include "../Utilities/Math.h"
 
+/** Forward Declarations */
+class Shader;
+
 enum LightType
 {
 	LightType_DEFAULT,
@@ -18,14 +21,18 @@ public:
 	/** Constructor */
 	Light();
 
+	/** Getters / Setters */
+	inline void setPosition(Vector3 pos) { position = pos; }
 	inline void setDiffuseColor(Vector3 color) { diffuseColor = color; }
 	inline void setSpecularColor(Vector3 color) { specularColor = color; }
 
-private:
+	// TODO : private
 	int ID;
-	Vector3 diffuseColor;
-	Vector3 specularColor;
 
-	LightType type;
+	Vector3 position;
+	Vector3 diffuseColor;		// TODO : use in shader (make uniform)
+	Vector3 specularColor;		// TODO : use in shader (make uniform)
+
+	LightType type;				// TODO : aici ?
 };
 

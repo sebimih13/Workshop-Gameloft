@@ -6,6 +6,7 @@
 
 #include "Camera.h"
 #include "SceneObject.h"
+#include "Light.h"
 
 /** Forward Declations */
 class FogEffect;
@@ -90,6 +91,13 @@ private:
 
 	/** Effects */
 	FogEffect* fogEffect;
+
+	/** Ambiental Light */
+	Vector3 ambientalLightColor;
+	float ambientalLightStrength;
+
+	/** Lights */
+	std::map<int, Light*> lights;
 
 	/** Utilities Functions */
 	ControlsConfig getControlsAction(std::string& action);

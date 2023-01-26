@@ -29,11 +29,21 @@ public:
 
 	/** Any scene object */				// TODO : muta in SceneObject.h  ???
 	void setPosition();					// TODO : aici sau in alta parte
+	void setNormal();					// TODO : aici sau in alta parte
 	void setUV();						// TODO : aici sau in alta parte
 
 	void setMVP(Matrix* MVP);			// TODO : aici sau in alta parte
+	void setModelMatrixUniform(Matrix* model);
+
 	void setColor(Vector3* color);		// TODO : aici sau in alta parte
 	void setTexture(GLint index);		// TODO : aici sau in alta parte
+
+	void setAmbientalLightColor(Vector3* color);		// TODO : aici sau in alta parte
+	void setAmbientalLightStrength(GLfloat strength);	// TODO : aici sau in alta parte
+
+	// TODO : daca avem mai multe lumini
+	void setLightPosition(Vector3* pos);			// TODO : aici sau in alta parte
+	void setCameraViewPosition(Vector3* pos);		// TODO : aici sau in alta parte
 
 private:
 	/** CONST variables */
@@ -45,11 +55,20 @@ private:
 
 	/** Attributes */					// TODO : aici sau in alta parte
 	GLuint positionAttribute;
+	GLuint normalAttribute;
 	GLuint uvAttribute;
 
 	/** Uniforms */						// TODO : aici sau in alta parte
 	GLuint mvpMatrixUniform;
+	GLuint modelMatrixUniform;
+
 	GLuint colorUniform;
 	std::vector<GLuint> textureUniforms;
+
+	GLuint ambientalLightColorUniform;
+	GLuint ambientalLightStrengthUniform;
+
+	GLuint lightPositionUniform;
+	GLuint viewPositionUniform;
 };
 

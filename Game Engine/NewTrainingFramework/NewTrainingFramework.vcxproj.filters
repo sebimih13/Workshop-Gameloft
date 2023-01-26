@@ -158,6 +158,12 @@
     <None Include="..\Resources\Shaders\fireShader.fs">
       <Filter>Resources\Shaders</Filter>
     </None>
+    <None Include="..\Resources\Shaders\phongModelShader.vs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\phongModelShader.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\XMLFiles\resourceManager.xml">

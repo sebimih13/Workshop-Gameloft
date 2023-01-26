@@ -33,6 +33,9 @@ void Model::Load(ModelResource* resource)
 	{
 		Vertex v;
 		v.pos = data->verticesData[i].pos;
+		v.norm = data->verticesData[i].norm;
+		v.binorm = data->verticesData[i].binorm;
+		v.tgt = data->verticesData[i].tgt;
 		v.uv  = data->verticesData[i].uv;
 
 		verticesData.push_back(v);

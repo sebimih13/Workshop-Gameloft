@@ -28,16 +28,14 @@ void FogEffect::LoadUniforms(Shader* shader)
 	fogRUniform = glGetUniformLocation(shader->getProgramID(), "u_R");
 	fogColorUniform = glGetUniformLocation(shader->getProgramID(), "u_fogColor");
 	fogCameraPosUniform = glGetUniformLocation(shader->getProgramID(), "u_cameraPos");
-	modelMatrixUniform = glGetUniformLocation(shader->getProgramID(), "u_modelMatrix");
 }
 
-void FogEffect::SetUniforms(Matrix* model)
+void FogEffect::SetUniforms()
 {
 	setFogrUniform();
 	setFogRUniform();
 	setFogColorUniform();
 	setFogCameraPosUniform();
-	setModelMatrixUniform(model);
 }
 
 void FogEffect::setFogrUniform()
@@ -69,14 +67,6 @@ void FogEffect::setFogCameraPosUniform()
 	if (fogCameraPosUniform != -1 && camera)
 	{
 		glUniform3fv(fogCameraPosUniform, 1, &camera->getPosition().x);
-	}
-}
-
-void FogEffect::setModelMatrixUniform(Matrix* model)
-{
-	if (modelMatrixUniform != -1)
-	{
-		glUniformMatrix4fv(modelMatrixUniform, 1, GL_FALSE, (GLfloat*)model->m);
 	}
 }
 

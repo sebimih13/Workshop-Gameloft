@@ -110,6 +110,47 @@ void SceneManager::Init(char* filePath)
 	// Active Camera
 	activeCameraID = rootNode.getChild("activeCamera").getInt();
 
+	// Lights
+	NodeXML lightsNode = rootNode.getChild("lights");
+	for (NodeXML lightNode = lightsNode.getChild("light"); lightNode.isValid(); lightNode = lightNode.getNextSibling())
+	{
+		Light* light = nullptr;
+
+		// make different objects based on type
+		// TODO : deocamdata avem doar tipul de baza : Light
+		light = new Light();
+
+		Vector3 position;
+		position.x = lightNode.getChild("position").getChild("x").getFloat();
+		position.y = lightNode.getChild("position").getChild("y").getFloat();
+		position.z = lightNode.getChild("position").getChild("z").getFloat();
+		light->setPosition(position);
+		
+		Vector3 diffuseColor;
+		diffuseColor.x = lightNode.getChild("diffuseColor").getChild("r").getFloat();
+		diffuseColor.y = lightNode.getChild("diffuseColor").getChild("g").getFloat();
+		diffuseColor.z = lightNode.getChild("diffuseColor").getChild("b").getFloat();
+		light->setDiffuseColor(diffuseColor);
+
+		Vector3 specularColor;
+		specularColor.x = lightNode.getChild("specularColor").getChild("r").getFloat();
+		specularColor.y = lightNode.getChild("specularColor").getChild("g").getFloat();
+		specularColor.z = lightNode.getChild("specularColor").getChild("b").getFloat();
+		light->setSpecularColor(specularColor);
+
+		int id = lightNode.getAttribute("id").getInt();
+
+		// TODO : type
+		// TODO : associatedObject		-> asta pt ce?
+
+		/*
+			TODO : pt fiecare light -> creeaza un obiect care sa reprezinta aceasta lumina 
+				   -> sa nu mai fie un obiect separat in XML
+		*/
+
+		lights.insert({ id, light });
+	}
+
 	// Objects
 	NodeXML objectsNode = rootNode.getChild("objects");
 	for (NodeXML objectNode = objectsNode.getChild("object"); objectNode.isValid(); objectNode = objectNode.getNextSibling())
@@ -251,17 +292,49 @@ void SceneManager::Init(char* filePath)
 			obj->setFollowingCamera(axis);
 		}
 
+		// lights
+		NodeXML objLightsNode = objectNode.getChild("lights");
+		for (NodeXML lightNode = objLightsNode.getChild("light"); lightNode.isValid(); lightNode = lightNode.getNextSibling())
+		{
+			int lightID = lightNode.getInt();
+			if (lights[lightID])
+			{
+				obj->addLight(lights[lightID]);
+			}
+		}
+
 		objects.push_back(obj);
+	}
+
+	// Ambiental Light
+	NodeXML ambientalLightNode = rootNode.getChild("ambientalLight");
+	if (ambientalLightNode.isValid())
+	{
+		NodeXML colorNode = ambientalLightNode.getChild("color");
+		ambientalLightColor.x = colorNode.getChild("r").getFloat();
+		ambientalLightColor.y = colorNode.getChild("g").getFloat();
+		ambientalLightColor.z = colorNode.getChild("b").getFloat();
+
+		ambientalLightStrength = ambientalLightNode.getChild("ratio").getFloat();
+
+		// Set Ambiental Light for objects
+		for (SceneObject* object : objects)
+		{
+			object->setAmbientalLightColor(&ambientalLightColor);
+			object->setAmbientalLightStrength(ambientalLightStrength);
+		}
 	}
 
 	// TODO : debugSettings
 
+	// TODO : debug class
 	debugClass();
 }
 
 void SceneManager::Clear()
 {
 	// TODO : delete stuffs
+	delete fogEffect;
 }
 
 SceneManager* SceneManager::getInstance()
@@ -424,5 +497,13 @@ void SceneManager::debugClass()
 	{
 		object->debug();
 	}
+
+	// ambiental light
+	std::cout << "\n Ambiental Light : \n";
+	std::cout << "\t Color : " << ambientalLightColor << '\n';
+	std::cout << "\t Strength : " << ambientalLightStrength << "\n\n";
+
+	// lights
+	std::cout << "\n  Lights : " << lights.size() << "\n\n";
 }
 

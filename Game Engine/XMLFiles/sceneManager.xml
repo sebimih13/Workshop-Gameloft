@@ -224,7 +224,64 @@
 				<y>1.0</y>
 				<z>1.0</z>
 			</scale>
-		</object>	
+		</object>
+
+		<object id="40">
+			<model>5</model>
+			<shader>11</shader>
+			<type>normal</type>
+			<name>LightPoint</name>
+			<color>
+				<r>1.0</r>
+				<g>1.0</g>
+				<b>1.0</b>
+			</color>
+			<position>
+				<x>100</x>
+				<y>-20</y>
+				<z>-220</z>
+			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<scale>
+				<x>0.3</x>
+				<y>0.3</y>
+				<z>0.3</z>
+			</scale>
+		</object>
+
+		<object id="41">
+			<model>5</model>
+			<shader>12</shader>
+			<type>normal</type>
+			<name>PhongSphere</name>
+			<color>
+				<r>1.0</r>
+				<g>0.5</g>
+				<b>0.31</b>
+			</color>
+			<position>
+				<x>190</x>
+				<y>-20</y>
+				<z>-220</z>
+			</position>
+			<rotation>
+				<x>0.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</rotation>
+			<scale>
+				<x>0.3</x>
+				<y>0.3</y>
+				<z>0.3</z>
+			</scale>
+			<lights>
+				<light>1</light>
+			</lights>
+		</object>
 
 		<object id="8">
 			<model>generated</model>
@@ -318,7 +375,6 @@
 
 	</objects>
 
-	<!--
 	<ambientalLight>
 		<color>
 			<r>1.0</r>
@@ -327,12 +383,14 @@
 		</color>
 		<ratio>0.2</ratio>
 	</ambientalLight>
-	-->
 	
-	<!--
 	<lights>
 		<light id="1">
-			<associatedObject>2</associatedObject>
+			<position>
+				<x>100</x>
+				<y>-20</y>
+				<z>-220</z>
+			</position>
 			<diffuseColor>
 				<r>1.0</r>
 				<g>1.0</g>
@@ -343,15 +401,20 @@
 				<g>1.0</g>
 				<b>1.0</b>
 			</specularColor>
+			<associatedObject>2</associatedObject>		<!-- TODO : ASTA PT CE E? -->
 			<type>point</type>
 		</light>
 	</lights>
-	-->
 
-	<!--	TODO : pentru a folosi lumina -> obiectele vor avea proprietatea de mai jos
-	<lights>
-		<light>1</light>
-	</lights>
+	<!--	TODO :	pentru a folosi lumina -> obiectele vor avea proprietatea de mai jos
+					sau le punem toate obiectele afectate direct aici in associatedObject
+			
+			ex:
+			<object>
+				<lights>
+					<light>1</light>
+				</lights>
+			</object>
 	-->
 
 	<debugSettings>

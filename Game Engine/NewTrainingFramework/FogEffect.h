@@ -21,7 +21,7 @@ public:
 	void LoadUniforms(Shader* shader);
 
 	/** Set Uniforms */
-	void SetUniforms(Matrix* model);		// TODO : sa pastrez parametrul asta?
+	void SetUniforms();		// TODO : sa pastrez parametrul asta?
 
 	/** Debug */
 	void debug();
@@ -49,7 +49,6 @@ private:
 	GLuint fogColorUniform;
 
 	GLuint fogCameraPosUniform;
-	GLuint modelMatrixUniform;
 
 	/** Set uniforms functions */
 	void setFogrUniform();
@@ -57,6 +56,15 @@ private:
 	void setFogColorUniform();
 
 	void setFogCameraPosUniform();
-	void setModelMatrixUniform(Matrix* model);
 };
+
+/*
+	TODO : REFACTOR THIS CLASS
+	
+	sa fie asemanatoare cu clasa Light
+	sa retina doar proprietatile
+	si restul obiectelor au un pointer catre clasa FogEffect creata in SceneManager.cpp 
+
+	move uniforms to SceneObject.h
+*/
 
