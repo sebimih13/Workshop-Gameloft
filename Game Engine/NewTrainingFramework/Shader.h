@@ -38,8 +38,15 @@ public:
 	void setColor(Vector3* color);		// TODO : aici sau in alta parte
 	void setTexture(GLint index);		// TODO : aici sau in alta parte
 
+	/** Ambiental */
 	void setAmbientalLightColor(Vector3* color);		// TODO : aici sau in alta parte
 	void setAmbientalLightStrength(GLfloat strength);	// TODO : aici sau in alta parte
+
+	/** Diffuse */
+	void setDiffuseLightColor(Vector3* color);
+
+	/** Specular */
+	void setSpecularLightColor(Vector3* color);
 
 	// TODO : daca avem mai multe lumini
 	void setLightPosition(Vector3* pos);			// TODO : aici sau in alta parte
@@ -70,5 +77,9 @@ private:
 
 	GLuint lightPositionUniform;
 	GLuint viewPositionUniform;
+
+	GLuint diffuseLightColorUniform;
+
+	GLuint specularLightColorUniform;
 };
 

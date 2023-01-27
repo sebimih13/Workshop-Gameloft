@@ -253,6 +253,7 @@
 			</scale>
 			<lights>
 				<light>1</light>
+				<!-- <light>2</light> -->
 			</lights>
 		</object>
 
