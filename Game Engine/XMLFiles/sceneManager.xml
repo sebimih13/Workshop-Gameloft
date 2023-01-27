@@ -233,8 +233,8 @@
 			<name>PhongSphere</name>
 			<color>
 				<r>1.0</r>
-				<g>0.5</g>
-				<b>0.31</b>
+				<g>1.0</g>
+				<b>1.0</b>
 			</color>
 			<position>
 				<x>190</x>
@@ -253,7 +253,9 @@
 			</scale>
 			<lights>
 				<light>1</light>
-				<!-- <light>2</light> -->
+				<light>2</light>
+				<light>3</light>
+				<light>4</light>
 			</lights>
 		</object>
 
@@ -407,6 +409,56 @@
 			</specularColor>
 			<specularStrength>0.5</specularStrength>
 			
+			<associatedObject>2</associatedObject>			<!-- TODO : ASTA PT CE E? -->
+			<type>point</type>
+		</light>
+
+		<light id="3">
+			<position>
+				<x>190</x>
+				<y>70</y>
+				<z>-220</z>
+			</position>
+
+			<diffuseColor>
+				<r>1.0</r>
+				<g>0.0</g>
+				<b>0.0</b>
+			</diffuseColor>
+			<diffuseStrength>1.0</diffuseStrength>
+
+			<specularColor>
+				<r>1.0</r>
+				<g>0.0</g>
+				<b>0.0</b>
+			</specularColor>
+			<specularStrength>0.5</specularStrength>
+
+			<associatedObject>2</associatedObject>			<!-- TODO : ASTA PT CE E? -->
+			<type>point</type>
+		</light>
+
+		<light id="4">
+			<position>
+				<x>190</x>
+				<y>-110</y>
+				<z>-220</z>
+			</position>
+
+			<diffuseColor>
+				<r>0.0</r>
+				<g>0.0</g>
+				<b>1.0</b>
+			</diffuseColor>
+			<diffuseStrength>1.0</diffuseStrength>
+
+			<specularColor>
+				<r>0.0</r>
+				<g>0.0</g>
+				<b>1.0</b>
+			</specularColor>
+			<specularStrength>0.5</specularStrength>
+
 			<associatedObject>2</associatedObject>			<!-- TODO : ASTA PT CE E? -->
 			<type>point</type>
 		</light>

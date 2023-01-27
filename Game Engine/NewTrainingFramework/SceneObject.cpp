@@ -103,18 +103,42 @@ void SceneObject::Draw()
 	shader->setAmbientalLightColor(ambientalLightColor);
 	shader->setAmbientalLightStrength(ambientalLightStrength);
 
-	// Set lights
-	for (Light* light : lights)
-	{
-		shader->setLightPosition(&light->position);
-
-		shader->setDiffuseLightColor(&light->diffuseColor);
-		shader->setDiffuseLightStrength(light->diffuseStrength);
-
-		shader->setSpecularLightColor(&light->specularColor);
-		shader->setSpecularLightStrength(light->specularStrength);
-	}
+	// Set camera position for lights
 	shader->setCameraViewPosition(&camera->getPosition());
+
+	// Set lights
+	if (lights.size() > 0)
+	{
+		std::vector<Vector3> positionLights;
+
+		std::vector<Vector3> diffuseColorLights;
+		std::vector<float> diffuseStrengthLights;
+
+		std::vector<Vector3> specularColorLights;
+		std::vector<float> specularStrengthLights;
+
+		for (Light* light : lights)
+		{
+			positionLights.push_back(light->position);
+
+			diffuseColorLights.push_back(light->diffuseColor);
+			diffuseStrengthLights.push_back(light->diffuseStrength);
+
+			specularColorLights.push_back(light->diffuseColor);
+			specularStrengthLights.push_back(light->diffuseStrength);
+		}
+
+		shader->setLightsCount(lights.size());
+
+		shader->setLightPosition(positionLights);
+
+		shader->setDiffuseLightColor(diffuseColorLights);
+		shader->setDiffuseLightStrength(diffuseStrengthLights);
+
+		shader->setSpecularLightColor(specularColorLights);
+		shader->setSpecularLightStrength(specularStrengthLights);
+	}
+
 
 	// Draw
 	if (!wiredFormat)

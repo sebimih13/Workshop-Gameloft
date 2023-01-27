@@ -38,21 +38,23 @@ public:
 	void setColor(Vector3* color);		// TODO : aici sau in alta parte
 	void setTexture(GLint index);		// TODO : aici sau in alta parte
 
-	// TODO : daca avem mai multe lumini
-	void setLightPosition(Vector3* pos);			// TODO : aici sau in alta parte
-	void setCameraViewPosition(Vector3* pos);		// TODO : aici sau in alta parte
+	/** Lights */
+	void setLightsCount(GLint count);
+	void setCameraViewPosition(Vector3* pos);
+
+	void setLightPosition(std::vector<Vector3>& positions);
 
 	/** Ambiental */
-	void setAmbientalLightColor(Vector3* color);		// TODO : aici sau in alta parte
-	void setAmbientalLightStrength(GLfloat strength);	// TODO : aici sau in alta parte
+	void setAmbientalLightColor(Vector3* color);
+	void setAmbientalLightStrength(GLfloat strength);
 
 	/** Diffuse */
-	void setDiffuseLightColor(Vector3* color);
-	void setDiffuseLightStrength(GLfloat strength);
+	void setDiffuseLightColor(std::vector<Vector3>& colors);
+	void setDiffuseLightStrength(std::vector<GLfloat>& strengths);
 
 	/** Specular */
-	void setSpecularLightColor(Vector3* color);
-	void setSpecularLightStrength(GLfloat strength);
+	void setSpecularLightColor(std::vector<Vector3>& colors);
+	void setSpecularLightStrength(std::vector<GLfloat>& strengths);
 
 private:
 	/** CONST variables */
@@ -76,6 +78,8 @@ private:
 
 	GLuint lightPositionUniform;
 	GLuint viewPositionUniform;
+
+	GLuint lightsCountUniform;
 
 	GLuint ambientalLightColorUniform;
 	GLuint ambientalLightStrengthUniform;
