@@ -23,15 +23,23 @@ public:
 
 	/** Getters / Setters */
 	inline void setPosition(Vector3 pos) { position = pos; }
+
 	inline void setDiffuseColor(Vector3 color) { diffuseColor = color; }
+	inline void setDiffuseStrength(float strength) { diffuseStrength = strength; }
+
 	inline void setSpecularColor(Vector3 color) { specularColor = color; }
+	inline void setSpecularStrength(float strength) { specularStrength = strength; }
 
 	// TODO : private
 	int ID;
 
 	Vector3 position;
-	Vector3 diffuseColor;		// TODO : use in shader (make uniform)
-	Vector3 specularColor;		// TODO : use in shader (make uniform)
+
+	Vector3 diffuseColor;
+	float diffuseStrength;
+
+	Vector3 specularColor;
+	float specularStrength;
 
 	LightType type;				// TODO : aici ?
 };

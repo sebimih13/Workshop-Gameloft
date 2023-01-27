@@ -131,12 +131,14 @@ void SceneManager::Init(char* filePath)
 		diffuseColor.y = lightNode.getChild("diffuseColor").getChild("g").getFloat();
 		diffuseColor.z = lightNode.getChild("diffuseColor").getChild("b").getFloat();
 		light->setDiffuseColor(diffuseColor);
+		light->setDiffuseStrength(lightNode.getChild("diffuseStrength").getFloat());
 
 		Vector3 specularColor;
 		specularColor.x = lightNode.getChild("specularColor").getChild("r").getFloat();
 		specularColor.y = lightNode.getChild("specularColor").getChild("g").getFloat();
 		specularColor.z = lightNode.getChild("specularColor").getChild("b").getFloat();
 		light->setSpecularColor(specularColor);
+		light->setSpecularStrength(lightNode.getChild("specularStrength").getFloat());
 
 		int id = lightNode.getAttribute("id").getInt();
 

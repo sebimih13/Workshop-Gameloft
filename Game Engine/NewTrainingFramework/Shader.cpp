@@ -59,9 +59,11 @@ void Shader::Load()
 
 	// Diffuse
 	diffuseLightColorUniform = glGetUniformLocation(programID, "u_diffuseColor");
+	diffuseLightStrengthUniform = glGetUniformLocation(programID, "u_diffuseStrength");
 
 	// Specular
 	specularLightColorUniform = glGetUniformLocation(programID, "u_specularColor");
+	specularLightStrengthUniform = glGetUniformLocation(programID, "u_specularStrength");
 
 	// Light position
 	lightPositionUniform = glGetUniformLocation(programID, "u_lightPos");
@@ -129,6 +131,22 @@ void Shader::setTexture(GLint index)
 	}
 }
 
+void Shader::setLightPosition(Vector3* pos)
+{
+	if (lightPositionUniform != -1)
+	{
+		glUniform3fv(lightPositionUniform, 1, &pos->x);
+	}
+}
+
+void Shader::setCameraViewPosition(Vector3* pos)
+{
+	if (viewPositionUniform != -1)
+	{
+		glUniform3fv(viewPositionUniform, 1, &pos->x);
+	}
+}
+
 void Shader::setAmbientalLightColor(Vector3* color)
 {
 	if (ambientalLightColorUniform != -1)
@@ -153,6 +171,14 @@ void Shader::setDiffuseLightColor(Vector3* color)
 	}
 }
 
+void Shader::setDiffuseLightStrength(GLfloat strength)
+{
+	if (diffuseLightStrengthUniform != -1)
+	{
+		glUniform1f(diffuseLightStrengthUniform, strength);
+	}
+}
+
 void Shader::setSpecularLightColor(Vector3* color)
 {
 	if (specularLightColorUniform != -1)
@@ -161,19 +187,11 @@ void Shader::setSpecularLightColor(Vector3* color)
 	}
 }
 
-void Shader::setLightPosition(Vector3* pos)
+void Shader::setSpecularLightStrength(GLfloat strength)
 {
-	if (lightPositionUniform != -1)
+	if (specularLightStrengthUniform != -1)
 	{
-		glUniform3fv(lightPositionUniform, 1, &pos->x);
-	}
-}
-
-void Shader::setCameraViewPosition(Vector3* pos)
-{
-	if (viewPositionUniform != -1)
-	{
-		glUniform3fv(viewPositionUniform, 1, &pos->x);
+		glUniform1f(specularLightStrengthUniform, strength);
 	}
 }
 

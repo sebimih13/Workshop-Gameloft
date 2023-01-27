@@ -109,7 +109,10 @@ void SceneObject::Draw()
 		shader->setLightPosition(&light->position);
 
 		shader->setDiffuseLightColor(&light->diffuseColor);
+		shader->setDiffuseLightStrength(light->diffuseStrength);
+
 		shader->setSpecularLightColor(&light->specularColor);
+		shader->setSpecularLightStrength(light->specularStrength);
 	}
 	shader->setCameraViewPosition(&camera->getPosition());
 

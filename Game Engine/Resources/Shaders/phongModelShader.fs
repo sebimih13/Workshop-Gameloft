@@ -16,9 +16,11 @@ uniform float u_ambientStrength;
 
 // diffuse
 uniform vec3 u_diffuseColor;
+uniform float u_diffuseStrength;
 
 // specular
 uniform vec3 u_specularColor;
+uniform float u_specularStrength;
 
 // light position
 uniform vec3 u_lightPos;
@@ -33,16 +35,14 @@ void main()
 	vec3 lightDir = normalize(u_lightPos - fs_worldPos);
 
 	float diff = max(dot(fs_norm, lightDir), 0.0);
-	vec3 diffuse = diff * u_diffuseColor;
+	vec3 diffuse = u_diffuseStrength * diff * u_diffuseColor;
 
-	// specular
-	float specularStrength = 0.5;		// TODO : uniform?
-	
+	// specular	
 	vec3 viewDir = normalize(u_viewPos - fs_worldPos);
 	vec3 reflectDir = reflect(-lightDir, norm);
 
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32.0);
-	vec3 specular = specularStrength * spec * u_specularColor;
+	vec3 specular = u_specularStrength * spec * u_specularColor;
 
 	// result
 	vec3 result = (ambient + diffuse + specular) * u_color;
