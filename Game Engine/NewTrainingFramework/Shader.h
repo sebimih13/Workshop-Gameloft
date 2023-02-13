@@ -30,6 +30,8 @@ public:
 	/** Any scene object */				// TODO : muta in SceneObject.h  ???
 	void setPosition();					// TODO : aici sau in alta parte
 	void setNormal();					// TODO : aici sau in alta parte
+	void setBinormal();					// TODO : aici sau in alta parte
+	void setTangent();					// TODO : aici sau in alta parte
 	void setUV();						// TODO : aici sau in alta parte
 
 	void setMVP(Matrix* MVP);			// TODO : aici sau in alta parte
@@ -52,6 +54,8 @@ private:
 	/** Attributes */					// TODO : aici sau in alta parte
 	GLuint positionAttribute;
 	GLuint normalAttribute;
+	GLuint binormalAttribute;
+	GLuint tangentAttribute;
 	GLuint uvAttribute;
 
 	/** Uniforms */						// TODO : aici sau in alta parte

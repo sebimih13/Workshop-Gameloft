@@ -37,11 +37,14 @@ void Shader::Load()
 
 	// Finding location of uniforms / attributes
 
-	// Any scene object
+	// Attributes
 	positionAttribute = glGetAttribLocation(programID, "a_pos");
 	normalAttribute = glGetAttribLocation(programID, "a_norm");
+	binormalAttribute = glGetAttribLocation(programID, "a_binorm");
+	tangentAttribute = glGetAttribLocation(programID, "a_tgt");
 	uvAttribute = glGetAttribLocation(programID, "a_uv");
 
+	// Uniforms
 	mvpMatrixUniform = glGetUniformLocation(programID, "u_mvpMatrix");
 	modelMatrixUniform = glGetUniformLocation(programID, "u_modelMatrix");
 
@@ -75,6 +78,24 @@ void Shader::setNormal()
 	{
 		glEnableVertexAttribArray(normalAttribute);
 		glVertexAttribPointer(normalAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(1 * sizeof(Vector3)));
+	}
+}
+
+void Shader::setBinormal()
+{
+	if (binormalAttribute != -1)
+	{
+		glEnableVertexAttribArray(binormalAttribute);
+		glVertexAttribPointer(binormalAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(2 * sizeof(Vector3)));
+	}
+}
+
+void Shader::setTangent()
+{
+	if (tangentAttribute != -1)
+	{
+		glEnableVertexAttribArray(tangentAttribute);
+		glVertexAttribPointer(tangentAttribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(3 * sizeof(Vector3)));
 	}
 }
 

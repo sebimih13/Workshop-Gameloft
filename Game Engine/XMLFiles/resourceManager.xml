@@ -105,8 +105,8 @@
 			</shader>
 
 			<shader id="13">
-				<vs>phongModelShader.vs</vs>
-				<fs>phongModelShader.fs</fs>
+				<vs>phongNormalModelShader.vs</vs>
+				<fs>phongNormalModelShader.fs</fs>
 			</shader>
 
 		</folder>
@@ -261,6 +261,14 @@
 
 			<texture id="32" type="2d">
 				<file>fire_mask.tga</file>
+				<min_filter>LINEAR</min_filter>
+				<mag_filter>LINEAR</mag_filter>
+				<wrap_s>REPEAT</wrap_s>				<!-- TODO : REPEAT ? -->
+				<wrap_t>REPEAT</wrap_t>				<!-- TODO : REPEAT ? -->
+			</texture>
+
+			<texture id="40" type="2d">
+				<file>NormalMap.tga</file>
 				<min_filter>LINEAR</min_filter>
 				<mag_filter>LINEAR</mag_filter>
 				<wrap_s>REPEAT</wrap_s>				<!-- TODO : REPEAT ? -->

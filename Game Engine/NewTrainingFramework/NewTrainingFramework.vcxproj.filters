@@ -182,10 +182,10 @@
     <None Include="..\Resources\Shaders\phongColorModelShader.fs">
       <Filter>Resources\Shaders</Filter>
     </None>
-    <None Include="..\Resources\Shaders\phongModelShader.vs">
+    <None Include="..\Resources\Shaders\phongNormalModelShader.vs">
       <Filter>Resources\Shaders</Filter>
     </None>
-    <None Include="..\Resources\Shaders\phongModelShader.fs">
+    <None Include="..\Resources\Shaders\phongNormalModelShader.fs">
       <Filter>Resources\Shaders</Filter>
     </None>
   </ItemGroup>

@@ -454,7 +454,7 @@
 		
 		<object id="41">
 			<model>5</model>
-			<shader>12</shader>
+			<shader>13</shader>
 			<type>normal</type>
 			<name>PhongSphere_1</name>
 			<color>
@@ -462,6 +462,9 @@
 				<g>0.3</g>
 				<b>0.0</b>
 			</color>
+			<textures>
+				<texture id="40"/>
+			</textures>
 			<position>
 				<x>190</x>
 				<y>-20</y>

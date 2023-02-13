@@ -216,8 +216,8 @@
     <None Include="..\Resources\Shaders\modelShader.vs" />
     <None Include="..\Resources\Shaders\phongColorModelShader.fs" />
     <None Include="..\Resources\Shaders\phongColorModelShader.vs" />
-    <None Include="..\Resources\Shaders\phongModelShader.fs" />
-    <None Include="..\Resources\Shaders\phongModelShader.vs" />
+    <None Include="..\Resources\Shaders\phongNormalModelShader.fs" />
+    <None Include="..\Resources\Shaders\phongNormalModelShader.vs" />
     <None Include="..\Resources\Shaders\skyboxShader.fs" />
     <None Include="..\Resources\Shaders\skyboxShader.vs" />
     <None Include="..\Resources\Shaders\terrainShader.fs" />
