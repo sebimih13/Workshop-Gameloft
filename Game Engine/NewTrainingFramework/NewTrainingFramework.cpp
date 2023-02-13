@@ -244,8 +244,15 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	  * 23. 
 
-	  * 
+	  -----------------------------------------------------------------------------------------------------------------------------
+	  -----------------------								INTREBARI LUMINI								-----------------------
+	  -----------------------------------------------------------------------------------------------------------------------------
 
+	  24. Exista posibilitatea sa transmit numarul de lumini si sa am acel for ?
+			-> problema : in fragment shader trb sa fie const pentru a putea itera
+
+	  25. In XML : 
+			<associatedObject>2</associatedObject>			<!-- TODO : ASTA PT CE E? -->
 */
 
 /*

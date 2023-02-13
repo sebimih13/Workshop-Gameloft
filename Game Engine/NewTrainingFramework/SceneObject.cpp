@@ -99,44 +99,23 @@ void SceneObject::Draw()
 	// Set Effects
 	fogEffect->SetUniforms();
 
-	// Set Ambiental Light
-	shader->setAmbientalLightColor(ambientalLightColor);
-	shader->setAmbientalLightStrength(ambientalLightStrength);
-
 	// Set camera position for lights
 	shader->setCameraViewPosition(&camera->getPosition());
 
 	// Set lights
-	if (lights.size() > 0)
+	int directionalLightIndex = 0;
+	int pointLightIndex = 0;
+	int spotLightIndex = 0;
+
+	for (Light* light : lights)
 	{
-		std::vector<Vector3> positionLights;
-
-		std::vector<Vector3> diffuseColorLights;
-		std::vector<float> diffuseStrengthLights;
-
-		std::vector<Vector3> specularColorLights;
-		std::vector<float> specularStrengthLights;
-
-		for (Light* light : lights)
+		switch (light->getType())
 		{
-			positionLights.push_back(light->position);
-
-			diffuseColorLights.push_back(light->diffuseColor);
-			diffuseStrengthLights.push_back(light->diffuseStrength);
-
-			specularColorLights.push_back(light->diffuseColor);
-			specularStrengthLights.push_back(light->diffuseStrength);
+			case LightType::Directional:	light->LoadUniforms(shader, directionalLightIndex++);	break;
+			case LightType::Point:			light->LoadUniforms(shader, pointLightIndex++);			break;
+			case LightType::Spotlight:		light->LoadUniforms(shader, spotLightIndex++);			break;
 		}
-
-		shader->setLightsCount(lights.size());
-
-		shader->setLightPosition(positionLights);
-
-		shader->setDiffuseLightColor(diffuseColorLights);
-		shader->setDiffuseLightStrength(diffuseStrengthLights);
-
-		shader->setSpecularLightColor(specularColorLights);
-		shader->setSpecularLightStrength(specularStrengthLights);
+		light->SetUniforms();
 	}
 
 

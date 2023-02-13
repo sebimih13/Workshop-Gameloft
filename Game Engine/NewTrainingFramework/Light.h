@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "../Utilities/Math.h"
 
-/** Forward Declarations */
+/** Forward Declarations */	
 class Shader;
 
 enum LightType
@@ -13,34 +13,37 @@ enum LightType
 	Point,
 	Directional,
 	Spotlight
+
+	// TODO : ADD MORE
 };
 
 class Light
 {
 public:
 	/** Constructor */
-	Light();
+	Light(LightType type, Vector3 ambientColor, Vector3 diffuseColor, Vector3 specularColor);
+
+	/** Load */
+	virtual void LoadUniforms(Shader* shader, int lightIndex) = 0;
+
+	/** Set Uniforms */
+	virtual void SetUniforms();
 
 	/** Getters / Setters */
-	inline void setPosition(Vector3 pos) { position = pos; }
+	inline LightType getType() { return type; }
 
-	inline void setDiffuseColor(Vector3 color) { diffuseColor = color; }
-	inline void setDiffuseStrength(float strength) { diffuseStrength = strength; }
+protected:
+	/** Properties */
+	Vector3 ambient;
+	Vector3 diffuse;
+	Vector3 specular;
 
-	inline void setSpecularColor(Vector3 color) { specularColor = color; }
-	inline void setSpecularStrength(float strength) { specularStrength = strength; }
+	/** Uniforms */
+	GLuint ambientUniform;
+	GLuint diffuseUniform;
+	GLuint specularUniform;
 
-	// TODO : private
-	int ID;
-
-	Vector3 position;
-
-	Vector3 diffuseColor;
-	float diffuseStrength;
-
-	Vector3 specularColor;
-	float specularStrength;
-
-	LightType type;				// TODO : aici ?
+private:
+	LightType type;
 };
 

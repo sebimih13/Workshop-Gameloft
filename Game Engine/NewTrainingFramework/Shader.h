@@ -39,22 +39,7 @@ public:
 	void setTexture(GLint index);		// TODO : aici sau in alta parte
 
 	/** Lights */
-	void setLightsCount(GLint count);
 	void setCameraViewPosition(Vector3* pos);
-
-	void setLightPosition(std::vector<Vector3>& positions);
-
-	/** Ambiental */
-	void setAmbientalLightColor(Vector3* color);
-	void setAmbientalLightStrength(GLfloat strength);
-
-	/** Diffuse */
-	void setDiffuseLightColor(std::vector<Vector3>& colors);
-	void setDiffuseLightStrength(std::vector<GLfloat>& strengths);
-
-	/** Specular */
-	void setSpecularLightColor(std::vector<Vector3>& colors);
-	void setSpecularLightStrength(std::vector<GLfloat>& strengths);
 
 private:
 	/** CONST variables */
@@ -76,18 +61,8 @@ private:
 	GLuint colorUniform;
 	std::vector<GLuint> textureUniforms;
 
-	GLuint lightPositionUniform;
-	GLuint viewPositionUniform;
-
-	GLuint lightsCountUniform;
-
-	GLuint ambientalLightColorUniform;
-	GLuint ambientalLightStrengthUniform;
-
-	GLuint diffuseLightColorUniform;
-	GLuint diffuseLightStrengthUniform;
-
-	GLuint specularLightColorUniform;
-	GLuint specularLightStrengthUniform;
+	/** Lights Uniforms */
+	GLuint lightPositionUniform;		// TODO : de mutat in clasa light?
+	GLuint viewPositionUniform;			// TODO : de mutat in clasa light?
 };
 

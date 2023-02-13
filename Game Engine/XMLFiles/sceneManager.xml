@@ -116,6 +116,7 @@
 	</cameras>
 	<activeCamera>1</activeCamera>
 
+	
 	<objects>
 		
 		<object id="1">
@@ -230,11 +231,11 @@
 			<model>5</model>
 			<shader>12</shader>
 			<type>normal</type>
-			<name>PhongSphere</name>
+			<name>PhongSphere_1</name>
 			<color>
-				<r>1.0</r>
-				<g>1.0</g>
-				<b>1.0</b>
+				<r>0.4</r>
+				<g>0.3</g>
+				<b>0.0</b>
 			</color>
 			<position>
 				<x>190</x>
@@ -253,9 +254,200 @@
 			</scale>
 			<lights>
 				<light>1</light>
-				<light>2</light>
-				<light>3</light>
-				<light>4</light>
+				<light>10</light>
+				<light>100</light>
+			</lights>
+		</object>
+
+		<object id="42">
+			<model>5</model>
+			<shader>12</shader>
+			<type>normal</type>
+			<name>PhongSphere_2</name>
+			<color>
+				<r>0.0</r>
+				<g>0.3</g>
+				<b>0.4</b>
+			</color>
+			<position>
+				<x>190</x>
+				<y>-20</y>
+				<z>-270</z>
+			</position>
+			<rotation>
+				<x>0.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</rotation>
+			<scale>
+				<x>0.3</x>
+				<y>0.3</y>
+				<z>0.3</z>
+			</scale>
+			<lights>
+				<light>1</light>
+				<light>10</light>
+				<light>100</light>
+			</lights>
+		</object>
+
+		<object id="43">
+			<model>5</model>
+			<shader>12</shader>
+			<type>normal</type>
+			<name>PhongSphere_3</name>
+			<color>
+				<r>0.0</r>
+				<g>0.3</g>
+				<b>0.4</b>
+			</color>
+			<position>
+				<x>190</x>
+				<y>-20</y>
+				<z>-320</z>
+			</position>
+			<rotation>
+				<x>0.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</rotation>
+			<scale>
+				<x>0.3</x>
+				<y>0.3</y>
+				<z>0.3</z>
+			</scale>
+			<lights>
+				<light>1</light>
+				<light>10</light>
+				<light>100</light>
+			</lights>
+		</object>
+
+		<object id="44">
+			<model>5</model>
+			<shader>12</shader>
+			<type>normal</type>
+			<name>PhongSphere_4</name>
+			<color>
+				<r>0.0</r>
+				<g>0.3</g>
+				<b>0.4</b>
+			</color>
+			<position>
+				<x>190</x>
+				<y>-20</y>
+				<z>-370</z>
+			</position>
+			<rotation>
+				<x>0.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</rotation>
+			<scale>
+				<x>0.3</x>
+				<y>0.3</y>
+				<z>0.3</z>
+			</scale>
+			<lights>
+				<light>1</light>
+				<light>10</light>
+				<light>100</light>
+			</lights>
+		</object>
+
+		<object id="45">
+			<model>5</model>
+			<shader>12</shader>
+			<type>normal</type>
+			<name>PhongSphere_5</name>
+			<color>
+				<r>0.0</r>
+				<g>0.3</g>
+				<b>0.4</b>
+			</color>
+			<position>
+				<x>190</x>
+				<y>-20</y>
+				<z>-420</z>
+			</position>
+			<rotation>
+				<x>0.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</rotation>
+			<scale>
+				<x>0.3</x>
+				<y>0.3</y>
+				<z>0.3</z>
+			</scale>
+			<lights>
+				<light>1</light>
+				<light>10</light>
+				<light>100</light>
+			</lights>
+		</object>
+
+		<object id="46">
+			<model>5</model>
+			<shader>12</shader>
+			<type>normal</type>
+			<name>PhongSphere_6</name>
+			<color>
+				<r>0.0</r>
+				<g>0.3</g>
+				<b>0.4</b>
+			</color>
+			<position>
+				<x>190</x>
+				<y>-20</y>
+				<z>-470</z>
+			</position>
+			<rotation>
+				<x>0.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</rotation>
+			<scale>
+				<x>0.3</x>
+				<y>0.3</y>
+				<z>0.3</z>
+			</scale>
+			<lights>
+				<light>1</light>
+				<light>10</light>
+				<light>100</light>
+			</lights>
+		</object>
+
+		<object id="47">
+			<model>5</model>
+			<shader>12</shader>
+			<type>normal</type>
+			<name>PhongSphere_7</name>
+			<color>
+				<r>0.0</r>
+				<g>0.1</g>
+				<b>0.1</b>
+			</color>
+			<position>
+				<x>280</x>
+				<y>-20</y>
+				<z>-520</z>
+			</position>
+			<rotation>
+				<x>0.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</rotation>
+			<scale>
+				<x>0.3</x>
+				<y>0.3</y>
+				<z>0.3</z>
+			</scale>
+			<lights>
+				<light>1</light>
+				<light>10</light>
+				<light>100</light>
 			</lights>
 		</object>
 
@@ -350,132 +542,109 @@
 		</object>
 
 	</objects>
-
-	<ambientalLight>
-		<color>
-			<r>1.0</r>
-			<g>1.0</g>
-			<b>1.0</b>
-		</color>
-		<ratio>0.2</ratio>
-	</ambientalLight>
+	
 	
 	<lights>
 		
 		<light id="1">
-			
-			<position>
-				<x>100</x>
-				<y>-20</y>
-				<z>-220</z>
-			</position>
-			
+			<type>directional</type>
+
+			<direction>
+				<x>1.0</x>
+				<y>-1.0</y>
+				<z>0.0</z>
+			</direction>
+
+			<ambientColor>
+				<r>1.0</r>
+				<g>1.0</g>
+				<b>1.0</b>
+			</ambientColor>
 			<diffuseColor>
 				<r>1.0</r>
 				<g>1.0</g>
 				<b>1.0</b>
 			</diffuseColor>
-			<diffuseStrength>1.0</diffuseStrength>
-
 			<specularColor>
 				<r>1.0</r>
 				<g>1.0</g>
 				<b>1.0</b>
 			</specularColor>
-			<specularStrength>0.5</specularStrength>
-			
-			<associatedObject>2</associatedObject>			<!-- TODO : ASTA PT CE E? -->
-			<type>point</type>
 		</light>
 
-		<light id="2">
+		<light id="10">
+			<type>point</type>
+
 			<position>
 				<x>280</x>
 				<y>-20</y>
 				<z>-220</z>
 			</position>
-			
-			<diffuseColor>
-				<r>0.55</r>
-				<g>0.16</g>
-				<b>0.56</b>
-			</diffuseColor>
-			<diffuseStrength>1.0</diffuseStrength>
-			
-			<specularColor>
-				<r>0.55</r>
-				<g>0.16</g>
-				<b>0.56</b>
-			</specularColor>
-			<specularStrength>0.5</specularStrength>
-			
-			<associatedObject>2</associatedObject>			<!-- TODO : ASTA PT CE E? -->
-			<type>point</type>
-		</light>
 
-		<light id="3">
-			<position>
-				<x>190</x>
-				<y>70</y>
-				<z>-220</z>
-			</position>
+			<!-- max distance = 600 -->
+			<constant>1.0</constant>
+			<linear>0.007</linear>
+			<quadratic>0.0002</quadratic>
 
+			<ambientColor>
+				<r>1.0</r>
+				<g>1.0</g>
+				<b>1.0</b>
+			</ambientColor>
 			<diffuseColor>
 				<r>1.0</r>
-				<g>0.0</g>
-				<b>0.0</b>
+				<g>1.0</g>
+				<b>1.0</b>
 			</diffuseColor>
-			<diffuseStrength>1.0</diffuseStrength>
-
 			<specularColor>
 				<r>1.0</r>
-				<g>0.0</g>
-				<b>0.0</b>
+				<g>1.0</g>
+				<b>1.0</b>
 			</specularColor>
-			<specularStrength>0.5</specularStrength>
-
-			<associatedObject>2</associatedObject>			<!-- TODO : ASTA PT CE E? -->
-			<type>point</type>
 		</light>
 
-		<light id="4">
-			<position>
-				<x>190</x>
-				<y>-110</y>
-				<z>-220</z>
-			</position>
+		<light id="100">
+			<type>spotlight</type>
 
+			<position>
+				<x>280</x>
+				<y>-20</y>
+				<z>-470</z>
+			</position>
+			<direction>
+				<x>0.0</x>
+				<y>0.0</y>
+				<z>-1.0</z>
+			</direction>
+
+			<!-- max distance = 600 -->
+			<constant>1.0</constant>
+			<linear>0.007</linear>
+			<quadratic>0.0002</quadratic>
+			
+			<cutOff>12.5</cutOff>
+			<outerCutOff>15.0</outerCutOff>
+
+			<ambientColor>
+				<r>1.0</r>
+				<g>1.0</g>
+				<b>1.0</b>
+			</ambientColor>
 			<diffuseColor>
-				<r>0.0</r>
-				<g>0.0</g>
+				<r>1.0</r>
+				<g>1.0</g>
 				<b>1.0</b>
 			</diffuseColor>
-			<diffuseStrength>1.0</diffuseStrength>
-
 			<specularColor>
-				<r>0.0</r>
-				<g>0.0</g>
+				<r>1.0</r>
+				<g>1.0</g>
 				<b>1.0</b>
 			</specularColor>
-			<specularStrength>0.5</specularStrength>
-
-			<associatedObject>2</associatedObject>			<!-- TODO : ASTA PT CE E? -->
-			<type>point</type>
 		</light>
 		
 	</lights>
 
-	<!--	TODO :	pentru a folosi lumina -> obiectele vor avea proprietatea de mai jos
-					sau le punem toate obiectele afectate direct aici in associatedObject
-			
-			ex:
-			<object>
-				<lights>
-					<light>1</light>
-				</lights>
-			</object>
-	-->
-
+	
 	<debugSettings>
 		<objectAxes>
 			<OXColor>

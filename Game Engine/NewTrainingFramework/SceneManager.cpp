@@ -10,6 +10,10 @@
 
 #include "FogEffect.h"
 
+#include "DirectionalLight.h"
+#include "PointLight.h"
+#include "SpotLight.h"
+
 // Instantiate static variables
 SceneManager* SceneManager::instance = nullptr;
 
@@ -114,73 +118,152 @@ void SceneManager::Init(char* filePath)
 	NodeXML lightsNode = rootNode.getChild("lights");
 	for (NodeXML lightNode = lightsNode.getChild("light"); lightNode.isValid(); lightNode = lightNode.getNextSibling())
 	{
-		Light* light = nullptr;
+		int id = lightNode.getAttribute("id").getInt();
 
-		// make different objects based on type
-		// TODO : deocamdata avem doar tipul de baza : Light
-		light = new Light();
-
-		Vector3 position;
-		position.x = lightNode.getChild("position").getChild("x").getFloat();
-		position.y = lightNode.getChild("position").getChild("y").getFloat();
-		position.z = lightNode.getChild("position").getChild("z").getFloat();
-		light->setPosition(position);
+		Vector3 ambientColor;
+		ambientColor.x = lightNode.getChild("ambientColor").getChild("r").getFloat();
+		ambientColor.y = lightNode.getChild("ambientColor").getChild("g").getFloat();
+		ambientColor.z = lightNode.getChild("ambientColor").getChild("b").getFloat();
 		
 		Vector3 diffuseColor;
 		diffuseColor.x = lightNode.getChild("diffuseColor").getChild("r").getFloat();
 		diffuseColor.y = lightNode.getChild("diffuseColor").getChild("g").getFloat();
 		diffuseColor.z = lightNode.getChild("diffuseColor").getChild("b").getFloat();
-		light->setDiffuseColor(diffuseColor);
-		light->setDiffuseStrength(lightNode.getChild("diffuseStrength").getFloat());
 
 		Vector3 specularColor;
 		specularColor.x = lightNode.getChild("specularColor").getChild("r").getFloat();
 		specularColor.y = lightNode.getChild("specularColor").getChild("g").getFloat();
 		specularColor.z = lightNode.getChild("specularColor").getChild("b").getFloat();
-		light->setSpecularColor(specularColor);
-		light->setSpecularStrength(lightNode.getChild("specularStrength").getFloat());
 
-		int id = lightNode.getAttribute("id").getInt();
+		// Create new light
+		Light* light = nullptr;
+		LightType lightType = getLightType(lightNode.getChild("type").getString());
 
-		// TODO : type
-		// TODO : associatedObject		-> asta pt ce?
+		switch (lightType)
+		{
+			case LightType::Directional:
+			{
+				Vector3 direction;
+				direction.x = lightNode.getChild("direction").getChild("x").getFloat();
+				direction.y = lightNode.getChild("direction").getChild("y").getFloat();
+				direction.z = lightNode.getChild("direction").getChild("z").getFloat();
+
+				light = new DirectionalLight(lightType, ambientColor, diffuseColor, specularColor, direction);
+			}
+			break;
+
+			case LightType::Point:
+			{
+				Vector3 position;
+				position.x = lightNode.getChild("position").getChild("x").getFloat();
+				position.y = lightNode.getChild("position").getChild("y").getFloat();
+				position.z = lightNode.getChild("position").getChild("z").getFloat();
+
+				float constant = lightNode.getChild("constant").getFloat();
+				float linear = lightNode.getChild("linear").getFloat();
+				float quadratic = lightNode.getChild("quadratic").getFloat();
+
+				light = new PointLight(lightType, ambientColor, diffuseColor, specularColor, position, constant, linear, quadratic);
+			}
+			break;
+
+			case LightType::Spotlight:
+			{
+				Vector3 position;
+				position.x = lightNode.getChild("position").getChild("x").getFloat();
+				position.y = lightNode.getChild("position").getChild("y").getFloat();
+				position.z = lightNode.getChild("position").getChild("z").getFloat();
+
+				Vector3 direction;
+				direction.x = lightNode.getChild("direction").getChild("x").getFloat();
+				direction.y = lightNode.getChild("direction").getChild("y").getFloat();
+				direction.z = lightNode.getChild("direction").getChild("z").getFloat();
+
+				float constant = lightNode.getChild("constant").getFloat();
+				float linear = lightNode.getChild("linear").getFloat();
+				float quadratic = lightNode.getChild("quadratic").getFloat();
+
+				float cutOff = lightNode.getChild("cutOff").getFloat();
+				float outerCutOff = lightNode.getChild("outerCutOff").getFloat();
+
+				// input in radians
+				cutOff = cosf(cutOff * PI / 180.0f);
+				outerCutOff = cosf(outerCutOff * PI / 180.0f);
+
+				light = new SpotLight(lightType, ambientColor, diffuseColor, specularColor, position, direction, constant, linear, quadratic, cutOff, outerCutOff);
+			}
+			break;
+		}
+
+		// Adauga lumina
+		lights.insert({ id, light });
+
 
 		/*
 			TODO : pt fiecare light -> creeaza un obiect care sa reprezinta aceasta lumina 
 				   -> sa nu mai fie un obiect separat in XML
 		*/
-		SceneObject* lightObj = new SceneObject();
 
-		lightObj->setType(ObjectType::Normal);
-		lightObj->setCamera(cameras[activeCameraID]);
+		int pointLightIndex = 0;
+		int spotLightIndex = 0;
 
-		lightObj->setName("LightPoint_" + std::to_string(lights.size()));
-		lightObj->setID(100 + lights.size());
+		if (lightType != LightType::Directional)
+		{
+			SceneObject* lightObj = new SceneObject();
 
-		lightObj->setPosition(position);
+			lightObj->setType(ObjectType::Normal);
+			lightObj->setCamera(cameras[activeCameraID]);
 
-		Vector3 rotation;
-		rotation.x = 0.0f;
-		rotation.y = 0.0f;
-		rotation.z = 0.0f;
-		lightObj->setRotation(rotation);
+			lightObj->setID(100 + pointLightIndex + spotLightIndex);
 
-		Vector3 scale;
-		scale.x = 0.3f;
-		scale.y = 0.3f;
-		scale.z = 0.3f;
-		lightObj->setScale(scale);
+			// TODO : function to create light object
+			Vector3 position;
+			position.x = lightNode.getChild("position").getChild("x").getFloat();
+			position.y = lightNode.getChild("position").getChild("y").getFloat();
+			position.z = lightNode.getChild("position").getChild("z").getFloat();
+			lightObj->setPosition(position);
 
-		lightObj->setModel(5);
-		lightObj->setShader(11);
+			Vector3 rotation;
+			rotation.x = 0.0f;
+			rotation.y = 0.0f;
+			rotation.z = 0.0f;
+			lightObj->setRotation(rotation);
 
-		lightObj->setColor(diffuseColor);	// TODO : diffuse / specular ?
+			lightObj->setShader(11);
 
-		// Set Effects		TODO : rewrite this class
-		lightObj->setFog(fogEffect);
+			lightObj->setColor(diffuseColor);	// TODO : ambient / diffuse / specular 
 
-		objects.push_back(lightObj);
-		lights.insert({ id, light });
+			// Set Effects		TODO : rewrite this class
+			lightObj->setFog(fogEffect);
+
+			if (lightType == LightType::Point)
+			{
+				lightObj->setName("LightPoint_" + std::to_string(pointLightIndex++));
+
+				Vector3 scale;
+				scale.x = 0.3f;
+				scale.y = 0.3f;
+				scale.z = 0.3f;
+				lightObj->setScale(scale);
+
+				lightObj->setModel(5);
+			}
+			else if (lightType == LightType::Spotlight)
+			{
+				lightObj->setName("SpotPoint_" + std::to_string(spotLightIndex++));
+
+				Vector3 scale;
+				scale.x = 5.0f;
+				scale.y = 5.0f;
+				scale.z = 5.0f;
+				lightObj->setScale(scale);
+
+				lightObj->setModel(6);
+			}
+
+			// Adauga obiectul
+			objects.push_back(lightObj);
+		}
 	}
 
 	// Objects
@@ -338,25 +421,6 @@ void SceneManager::Init(char* filePath)
 		objects.push_back(obj);
 	}
 
-	// Ambiental Light
-	NodeXML ambientalLightNode = rootNode.getChild("ambientalLight");
-	if (ambientalLightNode.isValid())
-	{
-		NodeXML colorNode = ambientalLightNode.getChild("color");
-		ambientalLightColor.x = colorNode.getChild("r").getFloat();
-		ambientalLightColor.y = colorNode.getChild("g").getFloat();
-		ambientalLightColor.z = colorNode.getChild("b").getFloat();
-
-		ambientalLightStrength = ambientalLightNode.getChild("ratio").getFloat();
-
-		// Set Ambiental Light for objects
-		for (SceneObject* object : objects)
-		{
-			object->setAmbientalLightColor(&ambientalLightColor);
-			object->setAmbientalLightStrength(ambientalLightStrength);
-		}
-	}
-
 	// TODO : debugSettings
 
 	// TODO : debug class
@@ -480,6 +544,19 @@ ObjectType SceneManager::getObjectType(std::string& type)
 	// TODO : ADD MORE
 }
 
+LightType SceneManager::getLightType(std::string& type)
+{
+	if (type == "directional")
+		return LightType::Directional;
+	else if (type == "point")
+		return LightType::Point;
+	else if (type == "spotlight")
+		return LightType::Spotlight;
+	return LightType::LightType_DEFAULT;
+
+	// TODO : ADD MORE
+}
+
 void SceneManager::debugClass()
 {
 	std::cout << "\n\n\n\n\tSCENE MANAGER\n";
@@ -529,11 +606,6 @@ void SceneManager::debugClass()
 	{
 		object->debug();
 	}
-
-	// ambiental light
-	std::cout << "\n Ambiental Light : \n";
-	std::cout << "\t Color : " << ambientalLightColor << '\n';
-	std::cout << "\t Strength : " << ambientalLightStrength << "\n\n";
 
 	// lights
 	std::cout << "\n  Lights : " << lights.size() << "\n\n";
