@@ -109,6 +109,16 @@
 				<fs>phongNormalModelShader.fs</fs>
 			</shader>
 
+			<shader id="14">
+				<vs>skyboxReflectionShader.vs</vs>
+				<fs>skyboxReflectionShader.fs</fs>
+			</shader>
+
+			<shader id="15">
+				<vs>totalSkyboxReflectionShader.vs</vs>
+				<fs>totalSkyboxReflectionShader.fs</fs>
+			</shader>
+
 		</folder>
 	</shaders>
 	

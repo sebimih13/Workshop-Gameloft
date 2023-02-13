@@ -679,6 +679,61 @@
 			</lights>
 		</object>
 
+		<object id="48">
+			<model>5</model>
+			<shader>14</shader>
+			<type>normal</type>
+			<name>ReflectionSphere_Partial</name>
+			<textures>
+				<texture id="20"/>
+			</textures>
+			<color>
+				<r>0.1</r>
+				<g>0.3</g>
+				<b>0.1</b>
+			</color>
+			<position>
+				<x>120</x>
+				<y>-20</y>
+				<z>-220</z>
+			</position>
+			<rotation>
+				<x>0.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</rotation>
+			<scale>
+				<x>0.3</x>
+				<y>0.3</y>
+				<z>0.3</z>
+			</scale>
+		</object>
+
+		<object id="49">
+			<model>5</model>
+			<shader>15</shader>
+			<type>normal</type>
+			<name>ReflectionSphere_Total</name>
+			<textures>
+				<texture id="20"/>
+			</textures>
+			<position>
+				<x>70</x>
+				<y>-20</y>
+				<z>-220</z>
+			</position>
+			<rotation>
+				<x>0.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</rotation>
+			<scale>
+				<x>0.3</x>
+				<y>0.3</y>
+				<z>0.3</z>
+			</scale>
+		</object>
+
 		<object id="100">
 			<model>generated</model>
 			<shader>3</shader>

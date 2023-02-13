@@ -218,10 +218,14 @@
     <None Include="..\Resources\Shaders\phongColorModelShader.vs" />
     <None Include="..\Resources\Shaders\phongNormalModelShader.fs" />
     <None Include="..\Resources\Shaders\phongNormalModelShader.vs" />
+    <None Include="..\Resources\Shaders\skyboxReflectionShader.fs" />
+    <None Include="..\Resources\Shaders\skyboxReflectionShader.vs" />
     <None Include="..\Resources\Shaders\skyboxShader.fs" />
     <None Include="..\Resources\Shaders\skyboxShader.vs" />
     <None Include="..\Resources\Shaders\terrainShader.fs" />
     <None Include="..\Resources\Shaders\terrainShader.vs" />
+    <None Include="..\Resources\Shaders\totalSkyboxReflectionShader.fs" />
+    <None Include="..\Resources\Shaders\totalSkyboxReflectionShader.vs" />
     <None Include="..\Resources\Shaders\TriangleShaderFS.fs" />
     <None Include="..\Resources\Shaders\TriangleShaderVS.vs" />
     <None Include="..\..\Readme.doc" />
