@@ -200,6 +200,231 @@
 		</object>
 
 		<object id="4">
+			<model>10</model>
+			<shader>10</shader>
+			<type>normal</type>
+			<name>Goliath</name>
+			<textures>
+				<texture id="1"/>
+			</textures>
+			<position>
+				<x>-350.5</x>
+				<y>27.0</y>
+				<z>-200.0</z>
+			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<scale>
+				<x>0.1</x>
+				<y>0.1</y>
+				<z>0.1</z>
+			</scale>
+		</object>
+
+		<object id="5">
+			<model>11</model>
+			<shader>10</shader>
+			<type>normal</type>
+			<name>House</name>
+			<textures>
+				<texture id="3"/>
+			</textures>
+			<position>
+				<x>450.5</x>
+				<y>27.0</y>
+				<z>200.0</z>
+			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<scale>
+				<x>0.1</x>
+				<y>0.1</y>
+				<z>0.1</z>
+			</scale>
+		</object>
+
+		<object id="6">
+			<model>12</model>
+			<shader>10</shader>
+			<type>normal</type>
+			<name>Marine</name>
+			<textures>
+				<texture id="5"/>
+			</textures>
+			<position>
+				<x>-200.0</x>
+				<y>-50.0</y>
+				<z>-400.0</z>
+			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<scale>
+				<x>1.0</x>
+				<y>1.0</y>
+				<z>1.0</z>
+			</scale>
+		</object>
+
+		<object id="7">
+			<model>13</model>
+			<shader>10</shader>
+			<type>normal</type>
+			<name>Witch</name>
+			<textures>
+				<texture id="6"/>
+			</textures>
+			<position>
+				<x>-200.0</x>
+				<y>-20.0</y>
+				<z>-500.0</z>
+			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<scale>
+				<x>0.2</x>
+				<y>0.2</y>
+				<z>0.2</z>
+			</scale>
+		</object>
+
+		<object id="8">
+			<model>14</model>
+			<shader>10</shader>
+			<type>normal</type>
+			<name>Woman1</name>
+			<textures>
+				<texture id="7"/>
+			</textures>
+			<position>
+				<x>-200.0</x>
+				<y>-50.0</y>
+				<z>-600.0</z>
+			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<scale>
+				<x>50.0</x>
+				<y>50.0</y>
+				<z>50.0</z>
+			</scale>
+		</object>
+
+		<object id="9">
+			<model>15</model>
+			<shader>10</shader>
+			<type>normal</type>
+			<name>Woman2</name>
+			<textures>
+				<texture id="8"/>
+			</textures>
+			<position>
+				<x>-200.0</x>
+				<y>-50.0</y>
+				<z>-700.0</z>
+			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<scale>
+				<x>50.0</x>
+				<y>50.0</y>
+				<z>50.0</z>
+			</scale>
+		</object>
+
+		<object id="10">
+			<model>16</model>
+			<shader>10</shader>
+			<type>normal</type>
+			<name>SCV</name>
+			<textures>
+				<texture id="9"/>
+			</textures>
+			<position>
+				<x>-400.0</x>
+				<y>-50.0</y>
+				<z>-400.0</z>
+			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<scale>
+				<x>0.3</x>
+				<y>0.3</y>
+				<z>0.3</z>
+			</scale>
+		</object>
+
+		<object id="11">
+			<model>17</model>
+			<shader>10</shader>
+			<type>normal</type>
+			<name>train</name>
+			<textures>
+				<texture id="10"/>
+			</textures>
+			<position>
+				<x>-400.0</x>
+				<y>-30.0</y>
+				<z>-600.0</z>
+			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<scale>
+				<x>0.3</x>
+				<y>0.3</y>
+				<z>0.3</z>
+			</scale>
+		</object>
+
+		<object id="12">
+			<model>18</model>
+			<shader>10</shader>
+			<type>normal</type>
+			<name>Command_Center</name>
+			<textures>
+				<texture id="11"/>
+			</textures>
+			<position>
+				<x>-400.0</x>
+				<y>-30.0</y>
+				<z>-800.0</z>
+			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<scale>
+				<x>0.3</x>
+				<y>0.3</y>
+				<z>0.3</z>
+			</scale>
+		</object>
+
+		<object id="40">
 			<model>5</model>
 			<shader>11</shader>
 			<type>normal</type>
@@ -451,7 +676,7 @@
 			</lights>
 		</object>
 
-		<object id="8">
+		<object id="100">
 			<model>generated</model>
 			<shader>3</shader>
 			<type>terrain</type>
@@ -484,7 +709,7 @@
 			</height>
 		</object>
 
-		<object id="9">
+		<object id="101">
 			<model>6</model>
 			<shader>4</shader>
 			<type>skybox</type>
@@ -513,7 +738,7 @@
 			</followingCamera>
 		</object>
 
-		<object id="10">
+		<object id="102">
 			<model>7</model>
 			<shader>5</shader>
 			<type>fire</type>

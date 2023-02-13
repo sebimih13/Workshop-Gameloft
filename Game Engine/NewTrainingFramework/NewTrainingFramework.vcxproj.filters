@@ -176,6 +176,12 @@
     <None Include="..\Resources\Shaders\fireShader.fs">
       <Filter>Resources\Shaders</Filter>
     </None>
+    <None Include="..\Resources\Shaders\phongColorModelShader.vs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
+    <None Include="..\Resources\Shaders\phongColorModelShader.fs">
+      <Filter>Resources\Shaders</Filter>
+    </None>
     <None Include="..\Resources\Shaders\phongModelShader.vs">
       <Filter>Resources\Shaders</Filter>
     </None>

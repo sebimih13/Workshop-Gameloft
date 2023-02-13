@@ -3,7 +3,7 @@ precision mediump float;
 varying vec3 fs_worldPos;
 varying vec2 fs_uv;
 
-uniform sampler2D u_texture;
+uniform sampler2D u_texture_0;
 
 // Fog
 uniform float u_r;
@@ -14,7 +14,7 @@ uniform vec3 u_cameraPos;
 void main()
 {
 	// texture color
-	vec4 color_object = texture2D(u_texture, fs_uv);
+	vec4 color_object = texture2D(u_texture_0, fs_uv);
 
 	if (color_object.a <= 0.2)
 	{

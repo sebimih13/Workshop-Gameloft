@@ -54,8 +54,8 @@ uniform DirectionalLight directionalLights[MAX_DIRECTIONAL_LIGHTS];
 uniform PointLight pointLights[MAX_POINT_LIGHTS];
 uniform Spotlight spotlights[MAX_SPOTLIGHTS];
 
-// Object texture
-uniform sampler2D u_texture_0;
+// Object color
+uniform vec3 u_color;
 
 // Camera position
 uniform vec3 u_viewPos;
@@ -100,16 +100,16 @@ vec3 calculateDirectionalLight(DirectionalLight light, vec3 normal, vec3 viewDir
 	vec3 lightDir = normalize(-light.direction);
 
 	// ambient
-	vec3 ambient = light.ambient * vec3(texture2D(u_texture_0, fs_uv));
+	vec3 ambient = light.ambient * u_color;
 
 	// diffuse
 	float diff = max(dot(normal, lightDir), 0.0);
-	vec3 diffuse = light.diffuse * diff *  vec3(texture2D(u_texture_0, fs_uv));
+	vec3 diffuse = light.diffuse * diff * u_color;
 	
 	// specular
 	vec3 reflectDir = reflect(-lightDir, normal); 
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32.0);
-	vec3 specular = light.specular * spec *  vec3(texture2D(u_texture_0, fs_uv));
+	vec3 specular = light.specular * spec * u_color;
 
 	return ambient + diffuse + specular;
 }
@@ -119,16 +119,16 @@ vec3 calculatePointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewD
 	vec3 lightDir = normalize(light.position - fragPos);
 	
 	// ambient
-	vec3 ambient = light.ambient *  vec3(texture2D(u_texture_0, fs_uv));
+	vec3 ambient = light.ambient * u_color;
 
 	// diffuse
 	float diff = max(dot(normal, lightDir), 0.0);
-	vec3 diffuse = light.diffuse * diff *  vec3(texture2D(u_texture_0, fs_uv));
+	vec3 diffuse = light.diffuse * diff * u_color;
 
 	// specular
 	vec3 reflectDir = reflect(-lightDir, normal); 
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32.0);
-	vec3 specular = light.specular * spec *  vec3(texture2D(u_texture_0, fs_uv));
+	vec3 specular = light.specular * spec * u_color;
 
 	// attenuation
 	float distance = length(light.position - fragPos);
@@ -146,16 +146,16 @@ vec3 calculateSpotlight(Spotlight light, vec3 normal, vec3 fragPos, vec3 viewDir
 	vec3 lightDir = normalize(light.position - fragPos);
 
 	// ambient 
-	vec3 ambient = light.ambient *  vec3(texture2D(u_texture_0, fs_uv));
+	vec3 ambient = light.ambient * u_color;
 
 	// diffuse
 	float diff = max(dot(normal, lightDir), 0.0);
-	vec3 diffuse = light.diffuse * diff *  vec3(texture2D(u_texture_0, fs_uv));
+	vec3 diffuse = light.diffuse * diff * u_color;
 
 	// specular
 	vec3 reflectDir = reflect(-lightDir, normal); 
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32.0);
-	vec3 specular = light.specular * spec * vec3(texture2D(u_texture_0, fs_uv));
+	vec3 specular = light.specular * spec * u_color;
 
 	// attenuation
 	float distance = length(light.position - fragPos);

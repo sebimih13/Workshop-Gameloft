@@ -214,6 +214,8 @@
     <None Include="..\Resources\Shaders\fireShader.vs" />
     <None Include="..\Resources\Shaders\modelShader.fs" />
     <None Include="..\Resources\Shaders\modelShader.vs" />
+    <None Include="..\Resources\Shaders\phongColorModelShader.fs" />
+    <None Include="..\Resources\Shaders\phongColorModelShader.vs" />
     <None Include="..\Resources\Shaders\phongModelShader.fs" />
     <None Include="..\Resources\Shaders\phongModelShader.vs" />
     <None Include="..\Resources\Shaders\skyboxShader.fs" />

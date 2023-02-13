@@ -23,6 +23,42 @@
 			<model id="7">
 				<file>fire.nfg</file>
 			</model>
+
+			<model id="10">
+				<file>Goliath.nfg</file>
+			</model>
+
+			<model id="11">
+				<file>House.nfg</file>
+			</model>
+
+			<model id="12">
+				<file>Marine.nfg</file>
+			</model>
+
+			<model id="13">
+				<file>Witch.nfg</file>
+			</model>
+
+			<model id="14">
+				<file>Woman1.nfg</file>
+			</model>
+
+			<model id="15">
+				<file>Woman2.nfg</file>
+			</model>
+
+			<model id="16">
+				<file>SCV.nfg</file>
+			</model>
+
+			<model id="17">
+				<file>train.nfg</file>
+			</model>
+
+			<model id="18">
+				<file>Teran_Command_Center.nfg</file>
+			</model>
 			
 		</folder>
 
@@ -37,21 +73,6 @@
 	
 	<shaders>
 		<folder path="../Resources/Shaders/">
-			
-			<shader id="10">
-				<vs>modelShader.vs</vs>
-				<fs>modelShader.fs</fs>
-			</shader>
-
-			<shader id="11">
-				<vs>colorModelShader.vs</vs>
-				<fs>colorModelShader.fs</fs>
-			</shader>
-
-			<shader id="12">
-				<vs>phongModelShader.vs</vs>
-				<fs>phongModelShader.fs</fs>
-			</shader>
 			
 			<shader id="3">
 				<vs>terrainShader.vs</vs>
@@ -68,14 +89,34 @@
 				<fs>fireShader.fs</fs>
 			</shader>
 			
+			<shader id="10">
+				<vs>modelShader.vs</vs>
+				<fs>modelShader.fs</fs>
+			</shader>
+
+			<shader id="11">
+				<vs>colorModelShader.vs</vs>
+				<fs>colorModelShader.fs</fs>
+			</shader>
+
+			<shader id="12">
+				<vs>phongColorModelShader.vs</vs>
+				<fs>phongColorModelShader.fs</fs>
+			</shader>
+
+			<shader id="13">
+				<vs>phongModelShader.vs</vs>
+				<fs>phongModelShader.fs</fs>
+			</shader>
+
 		</folder>
 	</shaders>
 	
 	<textures>
 		<folder path="../ResourcesPacket/Textures/">
-			
-			<texture id="4" type="2d">
-				<file>croco.tga</file>			
+
+			<texture id="1" type="2d">
+				<file>Golitah.tga</file>
 				<min_filter>LINEAR</min_filter>
 				<mag_filter>LINEAR</mag_filter>
 				<wrap_s>CLAMP_TO_EDGE</wrap_s>
@@ -84,6 +125,78 @@
 			
 			<texture id="2" type="2d">
 				<file>bus.tga</file>
+				<min_filter>LINEAR</min_filter>
+				<mag_filter>LINEAR</mag_filter>
+				<wrap_s>CLAMP_TO_EDGE</wrap_s>
+				<wrap_t>CLAMP_TO_EDGE</wrap_t>
+			</texture>
+
+			<texture id="3" type="2d">
+				<file>House.tga</file>
+				<min_filter>LINEAR</min_filter>
+				<mag_filter>LINEAR</mag_filter>
+				<wrap_s>CLAMP_TO_EDGE</wrap_s>
+				<wrap_t>CLAMP_TO_EDGE</wrap_t>
+			</texture>
+			
+			<texture id="4" type="2d">
+				<file>croco.tga</file>			
+				<min_filter>LINEAR</min_filter>
+				<mag_filter>LINEAR</mag_filter>
+				<wrap_s>CLAMP_TO_EDGE</wrap_s>
+				<wrap_t>CLAMP_TO_EDGE</wrap_t>
+			</texture>
+
+			<texture id="5" type="2d">
+				<file>Marine.tga</file>
+				<min_filter>LINEAR</min_filter>
+				<mag_filter>LINEAR</mag_filter>
+				<wrap_s>CLAMP_TO_EDGE</wrap_s>
+				<wrap_t>CLAMP_TO_EDGE</wrap_t>
+			</texture>
+
+			<texture id="6" type="2d">
+				<file>Witch.tga</file>
+				<min_filter>LINEAR</min_filter>
+				<mag_filter>LINEAR</mag_filter>
+				<wrap_s>CLAMP_TO_EDGE</wrap_s>
+				<wrap_t>CLAMP_TO_EDGE</wrap_t>
+			</texture>
+
+			<texture id="7" type="2d">
+				<file>Woman1.tga</file>
+				<min_filter>LINEAR</min_filter>
+				<mag_filter>LINEAR</mag_filter>
+				<wrap_s>CLAMP_TO_EDGE</wrap_s>
+				<wrap_t>CLAMP_TO_EDGE</wrap_t>
+			</texture>
+
+			<texture id="8" type="2d">
+				<file>Woman2.tga</file>
+				<min_filter>LINEAR</min_filter>
+				<mag_filter>LINEAR</mag_filter>
+				<wrap_s>CLAMP_TO_EDGE</wrap_s>
+				<wrap_t>CLAMP_TO_EDGE</wrap_t>
+			</texture>
+
+			<texture id="9" type="2d">
+				<file>SCV.tga</file>
+				<min_filter>LINEAR</min_filter>
+				<mag_filter>LINEAR</mag_filter>
+				<wrap_s>CLAMP_TO_EDGE</wrap_s>
+				<wrap_t>CLAMP_TO_EDGE</wrap_t>
+			</texture>
+
+			<texture id="10" type="2d">
+				<file>train.tga</file>
+				<min_filter>LINEAR</min_filter>
+				<mag_filter>LINEAR</mag_filter>
+				<wrap_s>CLAMP_TO_EDGE</wrap_s>
+				<wrap_t>CLAMP_TO_EDGE</wrap_t>
+			</texture>
+
+			<texture id="11" type="2d">
+				<file>Terran_Command_Center.tga</file>
 				<min_filter>LINEAR</min_filter>
 				<mag_filter>LINEAR</mag_filter>
 				<wrap_s>CLAMP_TO_EDGE</wrap_s>
