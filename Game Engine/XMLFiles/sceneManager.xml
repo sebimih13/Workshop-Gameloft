@@ -133,9 +133,9 @@
 				<z>21.22</z>
 			</position>
 			<rotation>
-				<x>0.5</x>
-				<y>1.4</y>
-				<z>1</z>
+				<x>0.0</x>
+				<y>-90.0</y>
+				<z>0.0</z>
 			</rotation>
 			<scale>
 				<x>1.0</x>
@@ -158,9 +158,9 @@
 				<z>21.22</z>
 			</position>
 			<rotation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
+				<x>0.0</x>
+				<y>90.0</y>
+				<z>0.0</z>
 			</rotation>
 			<scale>
 				<x>1.0</x>

@@ -5,6 +5,8 @@
 
 #define PI 3.14159265359
 
+inline float getRadians(float angleInDegrees) { return float(PI * angleInDegrees / 180.0f); }
+
 //Vector2
 
 class Vector2

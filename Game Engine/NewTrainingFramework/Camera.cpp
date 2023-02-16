@@ -30,7 +30,7 @@ Camera::~Camera()
 
 void Camera::Init()
 {
-	float radiansFOV = float(fov * PI / 180.0f);
+	float radiansFOV = getRadians(fov);
 	float aspect = float(SceneManager::getInstance()->getDefaultScreenSize().width) / float(SceneManager::getInstance()->getDefaultScreenSize().height);
 
 	projectionMatrix = Matrix().SetPerspective(radiansFOV, aspect, nearPlane, farPlane);

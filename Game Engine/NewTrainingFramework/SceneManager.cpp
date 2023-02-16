@@ -187,8 +187,8 @@ void SceneManager::Init(char* filePath)
 				float outerCutOff = lightNode.getChild("outerCutOff").getFloat();
 
 				// input in radians
-				cutOff = cosf(cutOff * PI / 180.0f);
-				outerCutOff = cosf(outerCutOff * PI / 180.0f);
+				cutOff = cosf(getRadians(cutOff));
+				outerCutOff = cosf(getRadians(outerCutOff));
 
 				light = new SpotLight(lightType, ambientColor, diffuseColor, specularColor, position, direction, constant, linear, quadratic, cutOff, outerCutOff);
 			}
@@ -356,9 +356,9 @@ void SceneManager::Init(char* filePath)
 		obj->setPosition(position);
 
 		Vector3 rotation;
-		rotation.x = objectNode.getChild("rotation").getChild("x").getFloat();
-		rotation.y = objectNode.getChild("rotation").getChild("y").getFloat();
-		rotation.z = objectNode.getChild("rotation").getChild("z").getFloat();
+		rotation.x = getRadians(objectNode.getChild("rotation").getChild("x").getFloat());
+		rotation.y = getRadians(objectNode.getChild("rotation").getChild("y").getFloat());
+		rotation.z = getRadians(objectNode.getChild("rotation").getChild("z").getFloat());
 		obj->setRotation(rotation);
 
 		Vector3 scale;
