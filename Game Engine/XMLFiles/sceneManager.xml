@@ -129,7 +129,7 @@
 			</textures>
 			<position>
 				<x>20.5</x>
-				<y>27</y>
+				<y>27.0</y>
 				<z>21.22</z>
 			</position>
 			<rotation>
@@ -142,6 +142,21 @@
 				<y>1.0</y>
 				<z>1.0</z>
 			</scale>
+
+			<trajectory type="linear" iteration-count="3" direction="normal" speed="1.0">
+				<points>
+					<point>
+						<x>20.5</x>
+						<y>27.0</y>
+						<z>21.22</z>
+					</point>
+					<point>
+						<x>320.5</x>
+						<y>27.0</y>
+						<z>21.22</z>
+					</point>
+				</points>
+			</trajectory>
 		</object>
 
 		<object id="2">
@@ -167,6 +182,21 @@
 				<y>1.0</y>
 				<z>1.0</z>
 			</scale>
+
+			<trajectory type="linear" iteration-count="3" direction="alternate" speed="1.0">
+				<points>
+					<point>
+						<x>-150.5</x>
+						<y>27</y>
+						<z>21.22</z>
+					</point>
+					<point>
+						<x>-650.5</x>
+						<y>27</y>
+						<z>21.22</z>
+					</point>
+				</points>
+			</trajectory>
 		</object>
 
 		<object id="3">
@@ -466,9 +496,9 @@
 				<texture id="40"/>
 			</textures>
 			<position>
-				<x>190</x>
-				<y>-20</y>
-				<z>-220</z>
+				<x>190.0</x>
+				<y>-20.0</y>
+				<z>-220.0</z>
 			</position>
 			<rotation>
 				<x>0.0</x>
@@ -732,6 +762,237 @@
 				<y>0.3</y>
 				<z>0.3</z>
 			</scale>
+		</object>
+
+		<object id="50">
+			<model>5</model>
+			<shader>13</shader>
+			<type>normal</type>
+			<name>PhongSphere_Anim_0</name>
+			<color>
+				<r>0.4</r>
+				<g>0.3</g>
+				<b>0.0</b>
+			</color>
+			<textures>
+				<texture id="40"/>
+			</textures>
+			<position>
+				<x>240.0</x>
+				<y>-20.0</y>
+				<z>-220.0</z>
+			</position>
+			<rotation>
+				<x>0.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</rotation>
+			<scale>
+				<x>0.3</x>
+				<y>0.3</y>
+				<z>0.3</z>
+			</scale>
+			<lights>
+				<light>1</light>
+				<light>10</light>
+				<light>100</light>
+			</lights>
+
+			<trajectory type="line-strip" iteration-count="3" direction="alternate" speed="5.3">
+				<points>
+					<point>
+						<x>240.0</x>
+						<y>-20.0</y>
+						<z>-220.0</z>
+					</point>
+					<point>
+						<x>240.0</x>
+						<y>50.0</y>
+						<z>-220.0</z>
+					</point>
+					<point>
+						<x>350.0</x>
+						<y>50.0</y>
+						<z>-220.0</z>
+					</point>
+					<point>
+						<x>350.0</x>
+						<y>-20.0</y>
+						<z>-220.0</z>
+					</point>
+				</points>
+			</trajectory>
+		</object>
+
+		<object id="51">
+			<model>5</model>
+			<shader>13</shader>
+			<type>normal</type>
+			<name>PhongSphere_Anim_1</name>
+			<color>
+				<r>0.4</r>
+				<g>0.3</g>
+				<b>0.0</b>
+			</color>
+			<textures>
+				<texture id="40"/>
+			</textures>
+			<position>
+				<x>240.0</x>
+				<y>-60.0</y>
+				<z>-270.0</z>
+			</position>
+			<rotation>
+				<x>0.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</rotation>
+			<scale>
+				<x>0.3</x>
+				<y>0.3</y>
+				<z>0.3</z>
+			</scale>
+			<lights>
+				<light>1</light>
+				<light>10</light>
+				<light>100</light>
+			</lights>
+
+			<trajectory type="line-strip" iteration-count="3" direction="normal" speed="3.3">
+				<points>
+					<point>
+						<x>240.0</x>
+						<y>-20.0</y>
+						<z>-270.0</z>
+					</point>
+					<point>
+						<x>240.0</x>
+						<y>50.0</y>
+						<z>-270.0</z>
+					</point>
+					<point>
+						<x>350.0</x>
+						<y>50.0</y>
+						<z>-270.0</z>
+					</point>
+					<point>
+						<x>350.0</x>
+						<y>-20.0</y>
+						<z>-270.0</z>
+					</point>
+				</points>
+			</trajectory>
+		</object>
+
+		<object id="52">
+			<model>5</model>
+			<shader>13</shader>
+			<type>normal</type>
+			<name>PhongSphere_Anim_2</name>
+			<color>
+				<r>0.4</r>
+				<g>0.3</g>
+				<b>0.0</b>
+			</color>
+			<textures>
+				<texture id="40"/>
+			</textures>
+			<position>
+				<x>240.0</x>
+				<y>-60.0</y>
+				<z>-320.0</z>
+			</position>
+			<rotation>
+				<x>0.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</rotation>
+			<scale>
+				<x>0.3</x>
+				<y>0.3</y>
+				<z>0.3</z>
+			</scale>
+			<lights>
+				<light>1</light>
+				<light>10</light>
+				<light>100</light>
+			</lights>
+
+			<trajectory type="line-loop" iteration-count="3" speed="3.3">
+				<points>
+					<point>
+						<x>240.0</x>
+						<y>-20.0</y>
+						<z>-320.0</z>
+					</point>
+					<point>
+						<x>240.0</x>
+						<y>50.0</y>
+						<z>-320.0</z>
+					</point>
+					<point>
+						<x>350.0</x>
+						<y>50.0</y>
+						<z>-320.0</z>
+					</point>
+					<point>
+						<x>350.0</x>
+						<y>-20.0</y>
+						<z>-320.0</z>
+					</point>
+				</points>
+			</trajectory>
+		</object>
+
+		<object id="53">
+			<model>5</model>
+			<shader>13</shader>
+			<type>normal</type>
+			<name>PhongSphere_Anim_3</name>
+			<color>
+				<r>0.4</r>
+				<g>0.3</g>
+				<b>0.0</b>
+			</color>
+			<textures>
+				<texture id="40"/>
+			</textures>
+			<position>
+				<x>450.0</x>
+				<y>-20.0</y>
+				<z>-270.0</z>
+			</position>
+			<rotation>
+				<x>0.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</rotation>
+			<scale>
+				<x>0.3</x>
+				<y>0.3</y>
+				<z>0.3</z>
+			</scale>
+			<lights>
+				<light>1</light>
+				<light>10</light>
+				<light>100</light>
+			</lights>
+
+			<trajectory type="circle" iteration-count="3" speed="3.3">
+				<center>
+					<x>450.0</x>
+					<y>-20.0</y>
+					<z>-270.0</z>
+				</center>
+				<radius>10.0</radius>
+				<rotationPlane>
+					<x>0.5</x>
+					<y>0.0</y>
+					<z>3.0</z>
+				</rotationPlane>
+
+
+			</trajectory>
 		</object>
 
 		<object id="100">

@@ -12,6 +12,7 @@
 /** Forward Declarations */
 class Camera;
 class Light;
+class Trajectory;
 
 enum ObjectType
 {
@@ -36,7 +37,7 @@ public:
 	virtual void Draw();
 
 	/** Update Object */
-	virtual void Update();
+	virtual void Update(float deltaTime);
 
 	/** Debug */
 	void debug();
@@ -69,6 +70,9 @@ public:
 
 	/** Lights */
 	inline void addLight(Light* light) { lights.push_back(light); }
+
+	/** Trajectory */
+	inline void setTrajectory(Trajectory* traj) { trajectory = traj; }
 
 protected:
 	ObjectType type;		// TODO : teoretic nu mai e nevoie de type aici (este nevoie de el doar cand parsam XML-ul)
@@ -113,6 +117,9 @@ private:
 
 	/** Fog Effect */
 	FogEffect* fogEffect;
+
+	/** Trajectory */
+	Trajectory* trajectory;
 	
 	/** Others */
 	// TODO : bool depthTest;

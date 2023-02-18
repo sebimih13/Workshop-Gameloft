@@ -28,6 +28,15 @@ public:
 		return -1;
 	}
 
+	float getFloat()
+	{
+		if (isValid())
+			return float(atof(attribute->value()));
+
+		std::cout << "ERROR : getFloat() - " << attribute->name() << "ATTRIBUTE INVALID\n";
+		return -1.0f;
+	}
+
 	std::string getString()
 	{
 		if (isValid())

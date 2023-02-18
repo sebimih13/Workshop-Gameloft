@@ -104,7 +104,7 @@ void TerrainObject::Draw()
 	SceneObject::Draw();
 }
 
-void TerrainObject::Update()
+void TerrainObject::Update(float deltaTime)
 {
 	// genereaza o noua bucata de teren pe axa X (dreapta/stanga)
 	float deltaX = abs(position.x - camera->getPosition().x);

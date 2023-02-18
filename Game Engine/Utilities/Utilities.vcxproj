@@ -167,6 +167,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TGA.h" />
+    <ClInclude Include="Trajectories.hpp" />
     <ClInclude Include="utilities.h" />
   </ItemGroup>
   <ItemGroup>

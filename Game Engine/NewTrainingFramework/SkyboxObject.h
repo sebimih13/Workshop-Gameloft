@@ -18,6 +18,6 @@ public:
 	void Draw() override;
 
 	/** Update Terrain */
-	void Update() override;	
+	void Update(float deltaTime) override;
 };
 

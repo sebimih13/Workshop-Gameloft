@@ -418,6 +418,113 @@ void SceneManager::Init(char* filePath)
 			}
 		}
 
+		// TODO : Trajectory
+		NodeXML trajectoryNode = objectNode.getChild("trajectory");
+		if (trajectoryNode.isValid())
+		{
+			TrajectoryType trajectoryType = getTrajectoryType(trajectoryNode.getAttribute("type").getString());
+			float trajectorySpeed = trajectoryNode.getAttribute("speed").getFloat();
+
+			// TODO : iterationCount poate fi si INFINITE
+			int iterationCount = trajectoryNode.getAttribute("iteration-count").getInt();
+
+			Trajectory* trajectory = nullptr;
+
+			switch (trajectoryType)
+			{
+				case TrajectoryType::Linear:
+				{
+					std::vector<Vector3> points;
+
+					NodeXML pointsNode = trajectoryNode.getChild("points");
+					if (pointsNode.isValid())
+					{
+						for (NodeXML pointNode = pointsNode.getChild("point"); pointNode.isValid(); pointNode = pointNode.getNextSibling())
+						{
+							Vector3 point;
+							point.x = pointNode.getChild("x").getFloat();
+							point.y = pointNode.getChild("y").getFloat();
+							point.z = pointNode.getChild("z").getFloat();
+
+							points.push_back(point);
+						}
+					}
+
+					TrajectoryDirectionType direction = getTrajectoryDirectionType(trajectoryNode.getAttribute("direction").getString());
+
+					trajectory = new LinearTrajectory(points[0], points[1], trajectorySpeed, iterationCount, direction);
+				}
+				break;
+
+				case TrajectoryType::LineStrip:
+				{
+					std::vector<Vector3> points;
+
+					NodeXML pointsNode = trajectoryNode.getChild("points");
+					if (pointsNode.isValid())
+					{
+						for (NodeXML pointNode = pointsNode.getChild("point"); pointNode.isValid(); pointNode = pointNode.getNextSibling())
+						{
+							Vector3 point;
+							point.x = pointNode.getChild("x").getFloat();
+							point.y = pointNode.getChild("y").getFloat();
+							point.z = pointNode.getChild("z").getFloat();
+
+							points.push_back(point);
+						}
+					}
+
+					TrajectoryDirectionType direction = getTrajectoryDirectionType(trajectoryNode.getAttribute("direction").getString());
+
+					trajectory = new LineStripTrajectory(points, trajectorySpeed, iterationCount, direction);
+				}
+				break;
+
+				case TrajectoryType::LineLoop:
+				{
+					std::vector<Vector3> points;
+
+					NodeXML pointsNode = trajectoryNode.getChild("points");
+					if (pointsNode.isValid())
+					{
+						for (NodeXML pointNode = pointsNode.getChild("point"); pointNode.isValid(); pointNode = pointNode.getNextSibling())
+						{
+							Vector3 point;
+							point.x = pointNode.getChild("x").getFloat();
+							point.y = pointNode.getChild("y").getFloat();
+							point.z = pointNode.getChild("z").getFloat();
+
+							points.push_back(point);
+						}
+					}
+
+					trajectory = new LineLoopTrajectory(points, trajectorySpeed, iterationCount);
+				}
+				break;
+
+				case TrajectoryType::Circle:
+				{
+					// TODO 
+					Vector3 center;
+					center.x = trajectoryNode.getChild("center").getChild("x").getFloat();
+					center.y = trajectoryNode.getChild("center").getChild("y").getFloat();
+					center.z = trajectoryNode.getChild("center").getChild("z").getFloat();
+
+					Vector3 rotationPlane;
+					rotationPlane.x = trajectoryNode.getChild("rotationPlane").getChild("x").getFloat();
+					rotationPlane.y = trajectoryNode.getChild("rotationPlane").getChild("y").getFloat();
+					rotationPlane.z = trajectoryNode.getChild("rotationPlane").getChild("z").getFloat();
+
+					float radius = trajectoryNode.getChild("radius").getFloat();
+
+					trajectory = new CircleTrajectory(center, rotationPlane, radius, trajectorySpeed, iterationCount);
+				}
+				break;
+			}
+		
+			obj->setTrajectory(trajectory);
+		}
+
 		objects.push_back(obj);
 	}
 
@@ -460,13 +567,13 @@ void SceneManager::Draw()
 	}
 }
 
-void SceneManager::Update()
+void SceneManager::Update(float deltaTime)
 {
 	// TODO : inca nu stiu
 
 	for (SceneObject* object : objects)
 	{
-		object->Update();
+		object->Update(deltaTime);
 
 		// TODO : 
 
@@ -555,6 +662,32 @@ LightType SceneManager::getLightType(std::string& type)
 	return LightType::LightType_DEFAULT;
 
 	// TODO : ADD MORE
+}
+
+TrajectoryType SceneManager::getTrajectoryType(std::string& type)
+{
+	if (type == "linear")
+		return TrajectoryType::Linear;
+	else if (type == "line-strip")
+		return TrajectoryType::LineStrip;
+	else if (type == "line-loop")
+		return TrajectoryType::LineLoop;
+	else if (type == "circle")
+		return TrajectoryType::Circle;
+	return TrajectoryType::TrajectoryType_DEFAULT;
+
+	// TODO : add more
+}
+
+TrajectoryDirectionType SceneManager::getTrajectoryDirectionType(std::string& type)
+{
+	if (type == "normal")
+		return TrajectoryDirectionType::normal;
+	else if (type == "alternate")
+		return TrajectoryDirectionType::alternate;
+	return TrajectoryDirectionType::TrajectoryDirectionType_DEFAULT;
+
+	// TODO : add more
 }
 
 void SceneManager::debugClass()

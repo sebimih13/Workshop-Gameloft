@@ -15,6 +15,8 @@ SceneObject::SceneObject()
 	name = "DEFAULT_NAME";
 	wiredFormat = false;
 
+	trajectory = nullptr;
+
 	// TODO : adaug restul?
 }
 
@@ -142,9 +144,13 @@ void SceneObject::Draw()
 	}
 }
 
-void SceneObject::Update()
+void SceneObject::Update(float deltaTime)
 {
 	// Update position
+	if (trajectory)
+	{
+		trajectory->applyTrajectory(position, rotation, deltaTime);
+	}
 
 	if (followingCamera.x != 0.0f)
 	{

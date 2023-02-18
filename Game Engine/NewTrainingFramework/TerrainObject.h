@@ -18,7 +18,7 @@ public:
 	void Draw() override;
 
 	/** Update Terrain */
-	void Update() override;
+	void Update(float deltaTime) override;
 
 	/** Getters / Setters */
 	inline void setHeight(Vector3 _height) { height = _height; }

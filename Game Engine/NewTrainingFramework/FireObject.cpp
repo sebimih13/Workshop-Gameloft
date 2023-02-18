@@ -33,7 +33,7 @@ void FireObject::Draw()
 	SceneObject::Draw();
 }
 
-void FireObject::Update()
+void FireObject::Update(float deltaTime)
 {
 	// TODO : calculeaza pe baza clock()
 	time += 0.007f; 
@@ -43,7 +43,7 @@ void FireObject::Update()
 	}
 
 	// call parent method
-	SceneObject::Update();
+	SceneObject::Update(deltaTime);
 }
 
 void FireObject::setTime()

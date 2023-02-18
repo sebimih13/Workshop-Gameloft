@@ -6,6 +6,7 @@
 #define PI 3.14159265359
 
 inline float getRadians(float angleInDegrees) { return float(PI * angleInDegrees / 180.0f); }
+inline float clamp(const float X, const float Min, const float Max) { return (X < Min) ? Min : (X < Max) ? X : Max; }	// TODO : ramane?
 
 //Vector2
 

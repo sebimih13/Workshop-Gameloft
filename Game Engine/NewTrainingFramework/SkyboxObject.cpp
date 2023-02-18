@@ -27,9 +27,9 @@ void SkyboxObject::Draw()
 	SceneObject::Draw();
 }
 
-void SkyboxObject::Update()
+void SkyboxObject::Update(float deltaTime)
 {
 	// call parent method
-	SceneObject::Update();
+	SceneObject::Update(deltaTime);
 }
 

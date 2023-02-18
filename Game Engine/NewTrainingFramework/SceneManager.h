@@ -8,6 +8,7 @@
 #include "SceneObject.h"
 
 #include "Light.h"
+#include "../Utilities/Trajectories.hpp"
 
 /** Forward Declations */
 class FogEffect;
@@ -58,7 +59,7 @@ public:
 	void Draw();
 
 	/** Upadate objects */
-	void Update();
+	void Update(float deltaTime);
 
 	/** Getters */
 	inline std::string& getGameName() { return gameName; }
@@ -101,6 +102,9 @@ private:
 	CameraType getCameraType(std::string& type);
 	ObjectType getObjectType(std::string& type);
 	LightType getLightType(std::string& type);
+
+	TrajectoryType getTrajectoryType(std::string& type);
+	TrajectoryDirectionType getTrajectoryDirectionType(std::string& type);
 
 	/** Debug */
 	void debugClass();

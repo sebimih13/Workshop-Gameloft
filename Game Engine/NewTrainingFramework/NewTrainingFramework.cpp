@@ -59,7 +59,7 @@ void Update ( ESContext *esContext, float deltaTime )
 		timer = 0.0f;
 
 		// Update Objects
-		SceneManager::getInstance()->Update();
+		SceneManager::getInstance()->Update(deltaTime);
 
 		// Update components
 		camera->setDeltaTime(deltaTime);
