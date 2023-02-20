@@ -163,6 +163,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="FireObject.cpp" />
     <ClCompile Include="FogEffect.cpp" />
@@ -188,6 +189,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="FireObject.h" />
     <ClInclude Include="FogEffect.h" />
@@ -208,6 +210,8 @@
     <ClInclude Include="SceneManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Resources\Shaders\collisionShader.fs" />
+    <None Include="..\Resources\Shaders\collisionShader.vs" />
     <None Include="..\Resources\Shaders\colorModelShader.fs" />
     <None Include="..\Resources\Shaders\colorModelShader.vs" />
     <None Include="..\Resources\Shaders\fireShader.fs" />

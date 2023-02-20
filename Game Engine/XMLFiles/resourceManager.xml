@@ -119,6 +119,11 @@
 				<fs>totalSkyboxReflectionShader.fs</fs>
 			</shader>
 
+			<shader id="16">
+				<vs>collisionShader.vs</vs>
+				<fs>collisionShader.fs</fs>
+			</shader>
+
 		</folder>
 	</shaders>
 	

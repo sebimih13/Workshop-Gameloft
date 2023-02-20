@@ -6,6 +6,7 @@
 
 #include "Camera.h"
 #include "Light.h"
+#include "CollisionComponent.h"
 
 SceneObject::SceneObject()
 {
@@ -14,6 +15,7 @@ SceneObject::SceneObject()
 
 	name = "DEFAULT_NAME";
 	wiredFormat = false;
+	drawCollision = true;		// TODO : change
 
 	trajectory = nullptr;
 
@@ -88,10 +90,14 @@ void SceneObject::Draw()
 	Matrix modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;
 	Matrix mvp = modelMatrix * camera->getViewMatrix() * camera->getProjectionMatrix();
 
-	// TODO : check
+	// Set Attributes
 	shader->setPosition();
 	shader->setNormal();
+	shader->setBinormal();
+	shader->setTangent();
 	shader->setUV();
+
+	// Set Uniforms
 
 	// TODO : modelMatrix + camera -> trb setate intr-un update doar cand se schimba
 	shader->setMVP(&mvp);
@@ -120,8 +126,7 @@ void SceneObject::Draw()
 		light->SetUniforms();
 	}
 
-
-	// Draw
+	// Draw Object
 	if (!wiredFormat)
 	{
 		glDrawElements(GL_TRIANGLES, model->getNrIndices(), GL_UNSIGNED_INT, 0);
@@ -141,6 +146,32 @@ void SceneObject::Draw()
 		// TODO : pt unbind e bine?
 		glActiveTexture(GL_TEXTURE0 + i);	// TODO : asta mai trb pusa
 		glBindTexture(textures[i]->getTextureType(), 0);
+	}
+
+	// TODO : Draw collision
+	if (drawCollision && model->getCollisionComponent())
+	{
+		CollisionComponent* collision = model->getCollisionComponent();
+
+		// Load Collision Render Data
+		glUseProgram(ResourceManager::getInstance()->LoadShader(16)->getProgramID());
+		glBindBuffer(GL_ARRAY_BUFFER, collision->getVBO());
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, collision->getWiredEBO());
+
+		// Set Attributes
+		shader->setPosition();
+
+		// Set Uniforms
+		shader->setMVP(&mvp);
+		shader->setColor(&Vector3(1.0f, 0.0f, 0.0f));		// TODO : choose color from XML
+
+		// Draw Collision
+		glDrawElements(GL_LINES, collision->getNrIndicesWired(), GL_UNSIGNED_INT, 0);
+
+		// Unbind
+		glUseProgram(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 }
 

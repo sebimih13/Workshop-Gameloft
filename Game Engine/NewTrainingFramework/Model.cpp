@@ -2,6 +2,7 @@
 #include "Model.h"
 
 #include "../Utilities/NFG.h"
+#include "CollisionComponent.h"
 
 Model::Model()
 {
@@ -11,6 +12,8 @@ Model::Model()
 
 	nrIndices = 0;
 	nrIndicesWired = 0;
+
+	collision = nullptr;
 }
 
 Model::~Model()
@@ -18,6 +21,8 @@ Model::~Model()
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
 	glDeleteBuffers(1, &wiredEBO);
+
+	delete collision;
 }
 
 void Model::Load(ModelResource* resource)
@@ -42,6 +47,7 @@ void Model::Load(ModelResource* resource)
 	}
 
 	LoadBuffers(verticesData, data->indices);
+	LoadCollision(verticesData);
 
 	// TODO : ???
 	delete data;
@@ -56,7 +62,7 @@ void Model::LoadBuffers(std::vector<Vertex>& verticesData, std::vector<unsigned 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesData.size() * sizeof(unsigned int), &indicesData[0], GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, nrIndices * sizeof(unsigned int), &indicesData[0], GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	// wired format
@@ -78,5 +84,31 @@ void Model::LoadBuffers(std::vector<Vertex>& verticesData, std::vector<unsigned 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	nrIndicesWired = wiredIndices.size();
+}
+
+void Model::LoadCollision(std::vector<Vertex>& verticesData)
+{
+	float minX = verticesData[0].pos.x;
+	float maxX = verticesData[0].pos.x;
+
+	float minY = verticesData[0].pos.y;
+	float maxY = verticesData[0].pos.y;
+
+	float minZ = verticesData[0].pos.z;
+	float maxZ = verticesData[0].pos.z;
+
+	for (Vertex& v : verticesData)
+	{
+		minX = min(minX, v.pos.x);
+		maxX = max(maxX, v.pos.x);
+
+		minY = min(minY, v.pos.y);
+		maxY = max(maxY, v.pos.y);
+
+		minZ = min(minZ, v.pos.z);
+		maxZ = max(maxZ, v.pos.z);
+	}
+
+	collision = new CollisionComponent(minX, maxX, minY, maxY, minZ, maxZ);
 }
 

@@ -89,7 +89,7 @@
 	
 	<cameras>
 		<camera id="1">
-			<comment>elemntul type este folosit doar in taskul optional cu tipurile de Camera </comment>
+			<comment>elementul type este folosit doar in taskul optional cu tipurile de Camera </comment>
 			<type>firstPerson</type>
 			<position>
 				<x>0</x>
@@ -462,7 +462,7 @@
 			<wired/>
 			<color>
 				<r>1.0</r>
-				<g>0.0</g>
+				<g>1.0</g>
 				<b>0.0</b>
 			</color>
 			<position>
@@ -978,6 +978,7 @@
 				<light>100</light>
 			</lights>
 
+			<!-- TODO : CALCULEAZA TRAIECTORIA PT ASTA -->
 			<trajectory type="circle" iteration-count="3" speed="3.3">
 				<center>
 					<x>450.0</x>
@@ -990,7 +991,6 @@
 					<y>0.0</y>
 					<z>3.0</z>
 				</rotationPlane>
-
 
 			</trajectory>
 		</object>

@@ -569,8 +569,6 @@ void SceneManager::Draw()
 
 void SceneManager::Update(float deltaTime)
 {
-	// TODO : inca nu stiu
-
 	for (SceneObject* object : objects)
 	{
 		object->Update(deltaTime);

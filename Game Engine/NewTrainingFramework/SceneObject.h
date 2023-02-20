@@ -81,6 +81,7 @@ protected:
 	/** Attributes */
 	std::string name;
 	bool wiredFormat;
+	bool drawCollision;
 
 	int ID;		// TODO : make unsigned int
 
