@@ -13,6 +13,7 @@
 class Camera;
 class Light;
 class Trajectory;
+class CollisionComponent;
 
 enum ObjectType
 {
@@ -39,16 +40,25 @@ public:
 	/** Update Object */
 	virtual void Update(float deltaTime);
 
+	/** Collision */
+	void calculateCollision();
+
 	/** Debug */
 	void debug();
 
 	/** Getters / Setters */
+
+	/** Setters */
 	inline void setType(ObjectType t) { type = t; }
 	inline void setCamera(Camera* cam) { camera = cam; }
 
 	inline void setID(int id) { ID = id; }
 	inline void setName(std::string _name) { name = _name; }
 	inline void setWiredFormat(bool wired) { wiredFormat = wired; }
+	inline void setDrawCollision(bool enable) { drawCollision = enable; }
+
+	inline void setActiveCollision(bool enable) { activeCollision = enable; }
+	inline bool getActiveCollision() { return activeCollision; }
 
 	inline void setPosition(Vector3 _position) { position = _position; }
 	inline void setRotation(Vector3 _rotation) { rotation = _rotation; }
@@ -74,6 +84,11 @@ public:
 	/** Trajectory */
 	inline void setTrajectory(Trajectory* traj) { trajectory = traj; }
 
+	/** Getters */
+	inline std::string& getName() { return name; }
+
+	CollisionComponent* getCollisionComponent() { return model->getCollisionComponent(); }
+
 protected:
 	ObjectType type;		// TODO : teoretic nu mai e nevoie de type aici (este nevoie de el doar cand parsam XML-ul)
 	Camera* camera;
@@ -82,6 +97,7 @@ protected:
 	std::string name;
 	bool wiredFormat;
 	bool drawCollision;
+	bool activeCollision;
 
 	int ID;		// TODO : make unsigned int
 

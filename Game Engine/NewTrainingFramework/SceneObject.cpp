@@ -15,7 +15,9 @@ SceneObject::SceneObject()
 
 	name = "DEFAULT_NAME";
 	wiredFormat = false;
-	drawCollision = true;		// TODO : change
+
+	drawCollision = false;
+	activeCollision = false;
 
 	trajectory = nullptr;
 
@@ -149,24 +151,25 @@ void SceneObject::Draw()
 	}
 
 	// TODO : Draw collision
-	if (drawCollision && model->getCollisionComponent())
+	if (drawCollision && getCollisionComponent())
 	{
-		CollisionComponent* collision = model->getCollisionComponent();
+		// Get Collision Shader
+		Shader* collisionShader = ResourceManager::getInstance()->LoadShader(16);
 
 		// Load Collision Render Data
-		glUseProgram(ResourceManager::getInstance()->LoadShader(16)->getProgramID());
-		glBindBuffer(GL_ARRAY_BUFFER, collision->getVBO());
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, collision->getWiredEBO());
+		glUseProgram(collisionShader->getProgramID());
+		glBindBuffer(GL_ARRAY_BUFFER, getCollisionComponent()->getVBO());
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, getCollisionComponent()->getWiredEBO());
 
 		// Set Attributes
-		shader->setPosition();
+		collisionShader->setPosition();
 
 		// Set Uniforms
-		shader->setMVP(&mvp);
-		shader->setColor(&Vector3(1.0f, 0.0f, 0.0f));		// TODO : choose color from XML
+		collisionShader->setMVP(&mvp);
+		collisionShader->setColor(&Vector3(1.0f, 0.0f, 0.0f));		// TODO : choose color from XML
 
 		// Draw Collision
-		glDrawElements(GL_LINES, collision->getNrIndicesWired(), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_LINES, getCollisionComponent()->getNrIndicesWired(), GL_UNSIGNED_INT, 0);
 
 		// Unbind
 		glUseProgram(0);
@@ -177,12 +180,19 @@ void SceneObject::Draw()
 
 void SceneObject::Update(float deltaTime)
 {
+	// Update collision
+	if (activeCollision)	// TODO : mai trb adaugat si drawCollision
+	{
+		calculateCollision();
+	}
+
 	// Update position
 	if (trajectory)
 	{
 		trajectory->applyTrajectory(position, rotation, deltaTime);
 	}
-
+	
+	// Following Objects
 	if (followingCamera.x != 0.0f)
 	{
 		position.x = camera->getPosition().x + followingCameraOffset.x;
@@ -197,6 +207,70 @@ void SceneObject::Update(float deltaTime)
 	{
 		position.z = camera->getPosition().z + followingCameraOffset.z;
 	}
+}
+
+void SceneObject::calculateCollision()
+{
+	// TODO
+	// Get collision box's vertices
+	// multiply by mvp (p * v * m)
+	// get minVertex and maxVertex
+	// check collisions with other objects
+
+	// TODO : matrix model -> sa NU fie calculat la fiecare Draw() ddaca este obiect static
+	Matrix translationMatrix;
+	translationMatrix.SetTranslation(position);
+
+	Matrix rotationMatrix;
+	Matrix rotMatrix;
+	rotationMatrix.SetIdentity();
+	rotationMatrix = rotationMatrix * rotMatrix.SetRotationX(rotation.x);
+	rotationMatrix = rotationMatrix * rotMatrix.SetRotationY(rotation.y);
+	rotationMatrix = rotationMatrix * rotMatrix.SetRotationZ(rotation.z);
+
+	Matrix scaleMatrix;
+	scaleMatrix.SetScale(scale);
+
+	Matrix modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;
+
+	// MIN/MAX values
+	float minX = FLT_MAX, maxX = FLT_MIN;
+	float minY = FLT_MAX, maxY = FLT_MIN;
+	float minZ = FLT_MAX, maxZ = FLT_MIN;
+
+	for (Vertex& v : getCollisionComponent()->getVerticesData())
+	{
+		// TODO : care este ordinea este corecta?
+		
+		// NO V1: Vector4 vertexPosition = camera->getProjectionMatrix() * camera->getViewMatrix() * modelMatrix * Vector4(v.pos, 1.0f);
+		// NO V2: Vector4 vertexPosition = Vector4(v.pos, 1.0f) * camera->getProjectionMatrix() * camera->getViewMatrix() * modelMatrix;
+
+		// NO V3: Vector4 vertexPosition = modelMatrix * camera->getViewMatrix() * camera->getProjectionMatrix() * Vector4(v.pos, 1.0f);
+		// V4: 
+		Vector4 vertexPosition = Vector4(v.pos, 1.0f) * modelMatrix * camera->getViewMatrix() * camera->getProjectionMatrix();
+
+		minX = min(minX, vertexPosition.x);
+		maxX = max(maxX, vertexPosition.x);
+
+		minY = min(minY, vertexPosition.y);
+		maxY = max(maxY, vertexPosition.y);
+
+		minZ = min(minZ, vertexPosition.z);
+		maxZ = max(maxZ, vertexPosition.z);
+	}
+
+	getCollisionComponent()->updateMinX(minX);
+	getCollisionComponent()->updateMaxX(maxX);
+
+	getCollisionComponent()->updateMinY(minY);
+	getCollisionComponent()->updateMaxY(maxY);
+
+	getCollisionComponent()->updateMinZ(minZ);
+	getCollisionComponent()->updateMaxZ(maxZ);
+
+	// TODO : delete DEBUG
+	//std::cout << "MIN X : " << minX << '\n';
+	//std::cout << "MAX X : " << maxX << "\n\n";
 }
 
 void SceneObject::debug()

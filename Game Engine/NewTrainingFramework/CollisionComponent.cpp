@@ -1,24 +1,38 @@
 #include "stdafx.h"
 #include "CollisionComponent.h"
 
-#include "Vertex.h"
+#include <limits>
 
 CollisionComponent::CollisionComponent(float minX, float maxX, float minY, float maxY, float minZ, float maxZ)
+	:	minX(FLT_MAX), maxX(FLT_MIN),
+		minY(FLT_MAX), maxY(FLT_MIN),
+		minZ(FLT_MAX), maxZ(FLT_MIN)
 {
 	glGenBuffers(1, &VBO);
 	glGenBuffers(1, &wiredEBO);
 
-	std::vector<Vertex> verticesData = {
-		Vertex(Vector3(minX, minY, maxZ)),		// 0
-		Vertex(Vector3(maxX, minY, maxZ)),		// 1
-		Vertex(Vector3(minX, minY, minZ)),		// 2
-		Vertex(Vector3(maxX, minY, minZ)),		// 3
+	// TODO : delete
+	//std::vector<Vertex> verticesData = {
+	//	Vertex(Vector3(minX, minY, maxZ)),		// 0
+	//	Vertex(Vector3(maxX, minY, maxZ)),		// 1
+	//	Vertex(Vector3(minX, minY, minZ)),		// 2
+	//	Vertex(Vector3(maxX, minY, minZ)),		// 3
 
-		Vertex(Vector3(minX, maxY, maxZ)),		// 4
-		Vertex(Vector3(maxX, maxY, maxZ)),		// 5
-		Vertex(Vector3(minX, maxY, minZ)),		// 6
-		Vertex(Vector3(maxX, maxY, minZ)),		// 7
-	};
+	//	Vertex(Vector3(minX, maxY, maxZ)),		// 4
+	//	Vertex(Vector3(maxX, maxY, maxZ)),		// 5
+	//	Vertex(Vector3(minX, maxY, minZ)),		// 6
+	//	Vertex(Vector3(maxX, maxY, minZ)),		// 7
+	//};
+
+	verticesData.push_back(Vertex(Vector3(minX, minY, maxZ)));		// 0
+	verticesData.push_back(Vertex(Vector3(maxX, minY, maxZ)));		// 1
+	verticesData.push_back(Vertex(Vector3(minX, minY, minZ)));		// 2
+	verticesData.push_back(Vertex(Vector3(maxX, minY, minZ)));		// 3
+
+	verticesData.push_back(Vertex(Vector3(minX, maxY, maxZ)));		// 4
+	verticesData.push_back(Vertex(Vector3(maxX, maxY, maxZ)));		// 5
+	verticesData.push_back(Vertex(Vector3(minX, maxY, minZ)));		// 6
+	verticesData.push_back(Vertex(Vector3(maxX, maxY, minZ)));		// 7
 
 	std::vector<unsigned int> indicesData = {
 		// patrat jos

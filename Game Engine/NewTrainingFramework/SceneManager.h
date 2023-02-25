@@ -33,15 +33,17 @@ enum ControlsConfig
 	ROTATE_CAMERA_NEGATIVE_Y,	// ARROW RIGHT
 
 	ROTATE_CAMERA_POSITIVE_Z,	// O 
-	ROTATE_CAMERA_NEGATIVE_Z	// P
+	ROTATE_CAMERA_NEGATIVE_Z,	// P
+
+	DEBUG_MODE					// M
 
 	// TODO : ADD MORE
 };
 
 struct ScreenConfig
 {
-	unsigned int width;
-	unsigned int height;
+	unsigned int width = 960;
+	unsigned int height = 720;
 };
 
 class SceneManager
@@ -61,6 +63,12 @@ public:
 	/** Upadate objects */
 	void Update(float deltaTime);
 
+	/** Debug */
+	void debugScene(bool activate);
+
+	/** Check Collision */
+	bool checkCollision(SceneObject* obj1, SceneObject* obj2);
+
 	/** Getters */
 	inline std::string& getGameName() { return gameName; }
 	inline ScreenConfig& getDefaultScreenSize() { return defaultScreenSize; }
@@ -71,7 +79,7 @@ public:
 
 private:
 	/** Constructor */
-	SceneManager() {  };
+	SceneManager() {  }
 	 
 	/** Instance */
 	static SceneManager* instance;

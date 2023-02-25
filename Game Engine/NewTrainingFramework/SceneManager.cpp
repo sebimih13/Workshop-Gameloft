@@ -4,6 +4,8 @@
 #include "../Utilities/NodeXML.hpp"
 #include "../Utilities/AttributeXML.hpp"
 
+#include "CollisionComponent.h"
+
 #include "TerrainObject.h"
 #include "SkyboxObject.h"
 #include "FireObject.h"
@@ -340,14 +342,13 @@ void SceneManager::Init(char* filePath)
 		obj->setFog(fogEffect);
 
 		NodeXML wiredNode = objectNode.getChild("wired");
-		if (wiredNode.isValid())
-		{
-			obj->setWiredFormat(true);
-		}
-		else
-		{
-			obj->setWiredFormat(false);
-		}
+		wiredNode.isValid() ? obj->setWiredFormat(true) : obj->setWiredFormat(false);
+
+		NodeXML drawCollisionNode = objectNode.getChild("draw-collision");
+		drawCollisionNode.isValid() ? obj->setDrawCollision(true) : obj->setDrawCollision(false);
+
+		NodeXML activeCollisionNode = objectNode.getChild("active-collision");
+		activeCollisionNode.isValid() ? obj->setActiveCollision(true) : obj->setActiveCollision(false);
 
 		Vector3 position;
 		position.x = objectNode.getChild("position").getChild("x").getFloat();
@@ -584,6 +585,51 @@ void SceneManager::Update(float deltaTime)
 		//											=> updateModelMatrix
 		// altfel calculez o singura data modelMatrix
 	}
+
+	// TODO : collision
+	// Check collision
+	static unsigned int collisionCount = 0;
+	for (unsigned int i = 0; i < objects.size(); i++)
+	{
+		for (unsigned int j = i + 1; j < objects.size(); j++)
+		{
+			if (objects[i]->getActiveCollision() && objects[j]->getActiveCollision() && checkCollision(objects[i], objects[j]))
+			{
+				// TODO : fix 
+				collisionCount++;
+				std::cout << "Collision #" << collisionCount << " between : " << objects[i]->getName() << "  VS  " << objects[j]->getName() << "\n\n";
+			}
+		}
+	}
+}
+
+void SceneManager::debugScene(bool activate)
+{
+	for (SceneObject* obj : objects)
+	{
+		obj->setWiredFormat(activate);
+		obj->setDrawCollision(activate);
+	}
+}
+
+bool SceneManager::checkCollision(SceneObject* obj1, SceneObject* obj2)
+{
+	CollisionComponent* col1 = obj1->getCollisionComponent();
+	CollisionComponent* col2 = obj2->getCollisionComponent();
+
+	if (!col1 || !col2)
+	{
+		return false;
+	}
+
+	return	col1->getMinX() <= col2->getMaxX() &&
+			col1->getMaxX() >= col2->getMinX() &&
+
+			col1->getMinY() <= col2->getMaxY() &&
+			col1->getMaxY() >= col2->getMinY() &&
+
+			col1->getMinZ() <= col2->getMaxZ() &&
+			col1->getMaxZ() >= col2->getMinZ();
 }
 
 ControlsConfig SceneManager::getControlsAction(std::string& action)
@@ -617,6 +663,9 @@ ControlsConfig SceneManager::getControlsAction(std::string& action)
 		return ControlsConfig::ROTATE_CAMERA_POSITIVE_Z;
 	else if (action == "ROTATE_CAMERA_NEGATIVE_Z")			// P
 		return ControlsConfig::ROTATE_CAMERA_NEGATIVE_Z;
+
+	if (action == "DEBUG_MODE")								// M
+		return ControlsConfig::DEBUG_MODE;
 
 	return ControlsConfig::DEFAULT_CONTROLSCONFIG;			// ERROR
 

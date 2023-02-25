@@ -6,7 +6,7 @@
 	<defaultScreenSize>
 		<width>960</width>
 		<height>720</height>
-		<!--
+		<!-- TODO
 			se mai poate pune si:
 			<fullscreen />
 		-->
@@ -83,8 +83,11 @@
 			<key>P</key>
 			<action>ROTATE_CAMERA_NEGATIVE_Z</action>
 		</control>
-		
-		<!-- TODO : adaugati restul -->
+
+		<control>
+			<key>M</key>
+			<action>DEBUG_MODE</action>
+		</control>
 	</controls>
 	
 	<cameras>
@@ -123,14 +126,14 @@
 			<model>1</model>
 			<shader>10</shader>
 			<type>normal</type>
-			<name>Crocodil_verde</name>
+			<name>Crocodil_verde_1</name>
 			<textures>
 				<texture id="4"/>
 			</textures>
 			<position>
-				<x>20.5</x>
-				<y>27.0</y>
-				<z>21.22</z>
+				<x>50.0</x>
+				<y>30.0</y>
+				<z>20.0</z>
 			</position>
 			<rotation>
 				<x>0.0</x>
@@ -146,9 +149,9 @@
 			<trajectory type="linear" iteration-count="3" direction="normal" speed="1.0">
 				<points>
 					<point>
-						<x>20.5</x>
-						<y>27.0</y>
-						<z>21.22</z>
+						<x>50.0</x>
+						<y>30.0</y>
+						<z>20.0</z>
 					</point>
 					<point>
 						<x>320.5</x>
@@ -157,6 +160,9 @@
 					</point>
 				</points>
 			</trajectory>
+
+			<draw-collision/>
+			<active-collision/>
 		</object>
 
 		<object id="2">
@@ -197,6 +203,11 @@
 					</point>
 				</points>
 			</trajectory>
+
+			<draw-collision/>
+			<!-- TODO : ACTIVATE COLLISION -->
+
+			
 		</object>
 
 		<object id="3">

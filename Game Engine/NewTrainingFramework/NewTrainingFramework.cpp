@@ -19,6 +19,8 @@ Camera* camera;
 // Input
 std::map<ControlsConfig, bool> input;
 
+bool debugScene = false;
+
 int Init ( ESContext *esContext )
 {
 	glEnable(GL_DEPTH_TEST);
@@ -63,6 +65,17 @@ void Update ( ESContext *esContext, float deltaTime )
 
 		// Update components
 		camera->setDeltaTime(deltaTime);
+
+		// Activate Debug Mode
+		if (input[ControlsConfig::DEBUG_MODE])
+		{
+			debugScene = !debugScene;
+			input[ControlsConfig::DEBUG_MODE] = false;
+
+			std::cout << "DEBUG MODE ACTIVATED\n";
+
+			SceneManager::getInstance()->debugScene(debugScene);
+		}
 
 		// Move camera
 		if (input[ControlsConfig::MOVE_CAMERA_POSITIVE_X])	// todo : -1.0f -> 1.0f
@@ -244,6 +257,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	  * 23. 
 
+
 	  -----------------------------------------------------------------------------------------------------------------------------
 	  -----------------------								INTREBARI LUMINI								-----------------------
 	  -----------------------------------------------------------------------------------------------------------------------------
@@ -253,14 +267,25 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	  25. In XML : 
 			<associatedObject>2</associatedObject>			<!-- TODO : ASTA PT CE E? -->
+
+
+	  -----------------------------------------------------------------------------------------------------------------------------
+	  -----------------------								INTREBARI COLIZIUNI								-----------------------
+	  -----------------------------------------------------------------------------------------------------------------------------
+
+	  26. Este gresit calculul minX, maxX, minY, maxY, minZ, maxZ ?
+
+	  27. Este corect checkCollision ?
+
+	  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	  !!!!!!!!!!!!!!!!!!!!!!!									REZOLVA CAMERA								!!!!!!!!!!!!!!!!!!!!!!!
+	  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 */
 
 /*
 
 	TODO LIST : 
-
-	PT CAMERA => ROTIRE GLOBALA (NU LOCALA CUM ESTE ACM)
-
 
 	* 1. ObjectType type -> conteaza doar la parsare => sterge din proprietatile unui SceneObject
 
