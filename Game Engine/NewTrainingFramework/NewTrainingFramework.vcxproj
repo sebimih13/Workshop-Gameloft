@@ -162,6 +162,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Axes.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
@@ -188,6 +189,7 @@
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Axes.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="DirectionalLight.h" />

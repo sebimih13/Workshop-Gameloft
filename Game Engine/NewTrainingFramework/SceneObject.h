@@ -54,11 +54,15 @@ public:
 
 	inline void setID(int id) { ID = id; }
 	inline void setName(std::string _name) { name = _name; }
+
 	inline void setWiredFormat(bool wired) { wiredFormat = wired; }
+
 	inline void setDrawCollision(bool enable) { drawCollision = enable; }
 
 	inline void setActiveCollision(bool enable) { activeCollision = enable; }
 	inline bool getActiveCollision() { return activeCollision; }
+
+	inline void setDrawAxes(bool enable) { drawAxes = enable; }
 
 	inline void setPosition(Vector3 _position) { position = _position; }
 	inline void setRotation(Vector3 _rotation) { rotation = _rotation; }
@@ -96,8 +100,13 @@ protected:
 	/** Attributes */
 	std::string name;
 	bool wiredFormat;
+
+	/** Collision */
 	bool drawCollision;
 	bool activeCollision;
+
+	/** Localspace Axes */
+	bool drawAxes;
 
 	int ID;		// TODO : make unsigned int
 

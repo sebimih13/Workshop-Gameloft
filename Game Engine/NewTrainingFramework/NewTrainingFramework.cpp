@@ -34,7 +34,7 @@ int Init ( ESContext *esContext )
 					1.0f);
 
 	// Load our objects
-	SceneManager::getInstance()->LoadObjects();
+	SceneManager::getInstance()->Load();
 
 	// Get active camera
 	camera = SceneManager::getInstance()->getActiveCamera();
@@ -276,6 +276,14 @@ int _tmain(int argc, _TCHAR* argv[])
 	  26. Este gresit calculul minX, maxX, minY, maxY, minZ, maxZ ?
 
 	  27. Este corect checkCollision ?
+
+
+	  -----------------------------------------------------------------------------------------------------------------------------
+	  -----------------------								INTREBARI TRAIECTORII							-----------------------
+	  -----------------------------------------------------------------------------------------------------------------------------
+
+	  28. Traiectoria pt circle = ?
+
 
 	  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	  !!!!!!!!!!!!!!!!!!!!!!!									REZOLVA CAMERA								!!!!!!!!!!!!!!!!!!!!!!!

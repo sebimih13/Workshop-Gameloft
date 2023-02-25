@@ -8,6 +8,8 @@
 #include "Light.h"
 #include "CollisionComponent.h"
 
+#include "Axes.h"
+
 SceneObject::SceneObject()
 {
 	type = ObjectType::Normal;
@@ -18,6 +20,8 @@ SceneObject::SceneObject()
 
 	drawCollision = false;
 	activeCollision = false;
+
+	drawAxes = false;
 
 	trajectory = nullptr;
 
@@ -175,6 +179,17 @@ void SceneObject::Draw()
 		glUseProgram(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
+
+	if (drawAxes)
+	{
+		scaleMatrix.SetScale(100.0f);
+		modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;
+
+		// TODO : check camera pointer
+		Matrix mvpAxes = modelMatrix * camera->getViewMatrix() * camera->getProjectionMatrix();
+
+		SceneManager::getInstance()->getAxes()->Draw(&mvpAxes);
 	}
 }
 

@@ -16,8 +16,16 @@
 #include "PointLight.h"
 #include "SpotLight.h"
 
+#include "Axes.h"
+
 // Instantiate static variables
 SceneManager* SceneManager::instance = nullptr;
+
+SceneManager::SceneManager()
+{
+	drawSceneAxes = false;
+	fogEffect = nullptr;
+}
 
 void SceneManager::Init(char* filePath)
 {
@@ -529,7 +537,27 @@ void SceneManager::Init(char* filePath)
 		objects.push_back(obj);
 	}
 
-	// TODO : debugSettings
+	// TODO : Debug Settings
+	NodeXML debugSettingsNode = rootNode.getChild("debugSettings");
+	if (debugSettingsNode.isValid())
+	{
+		Vector3 objectOXAxisColor;
+		objectOXAxisColor.x = debugSettingsNode.getChild("objectAxes").getChild("OXColor").getChild("r").getFloat();
+		objectOXAxisColor.y = debugSettingsNode.getChild("objectAxes").getChild("OXColor").getChild("g").getFloat();
+		objectOXAxisColor.z = debugSettingsNode.getChild("objectAxes").getChild("OXColor").getChild("b").getFloat();
+
+		Vector3 objectOYAxisColor;
+		objectOYAxisColor.x = debugSettingsNode.getChild("objectAxes").getChild("OYColor").getChild("r").getFloat();
+		objectOYAxisColor.y = debugSettingsNode.getChild("objectAxes").getChild("OYColor").getChild("g").getFloat();
+		objectOYAxisColor.z = debugSettingsNode.getChild("objectAxes").getChild("OYColor").getChild("b").getFloat();
+
+		Vector3 objectOZAxisColor;
+		objectOZAxisColor.x = debugSettingsNode.getChild("objectAxes").getChild("OZColor").getChild("r").getFloat();
+		objectOZAxisColor.y = debugSettingsNode.getChild("objectAxes").getChild("OZColor").getChild("g").getFloat();
+		objectOZAxisColor.z = debugSettingsNode.getChild("objectAxes").getChild("OZColor").getChild("b").getFloat();
+
+		axes = new Axes(objectOXAxisColor, objectOYAxisColor, objectOZAxisColor);
+	}
 
 	// TODO : debug class
 	debugClass();
@@ -550,13 +578,16 @@ SceneManager* SceneManager::getInstance()
 	return instance;
 }
 
-void SceneManager::LoadObjects()
+void SceneManager::Load()
 {
 	// Load objects
 	for (SceneObject* object : objects)
 	{
 		object->Load();
 	}
+
+	// Load Axes
+	axes->Load();
 }
 
 void SceneManager::Draw()
@@ -565,6 +596,31 @@ void SceneManager::Draw()
 	for (SceneObject* object : objects)
 	{
 		object->Draw();
+	}
+
+	// Draw Scene Axes
+	if (drawSceneAxes)
+	{
+		// TODO : precalculate MVP
+		Matrix translationMatrix;
+		translationMatrix.SetTranslation(Vector3(0.0f, 0.0f, 0.0f));
+
+		Matrix rotationMatrix;
+		Matrix rotMatrix;
+		rotationMatrix.SetIdentity();
+		rotationMatrix = rotationMatrix * rotMatrix.SetRotationX(0.0f);
+		rotationMatrix = rotationMatrix * rotMatrix.SetRotationY(0.0f);
+		rotationMatrix = rotationMatrix * rotMatrix.SetRotationZ(0.0f);
+
+		Matrix scaleMatrix;
+		scaleMatrix.SetScale(100000.0f);
+
+		// TODO : check camera pointer
+
+		Matrix modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;
+		Matrix mvp = modelMatrix * cameras[activeCameraID]->getViewMatrix() * cameras[activeCameraID]->getProjectionMatrix();
+
+		axes->Draw(&mvp);
 	}
 }
 
@@ -603,13 +659,16 @@ void SceneManager::Update(float deltaTime)
 	}
 }
 
-void SceneManager::debugScene(bool activate)
+void SceneManager::debugScene(bool activate)	// TODO : activate => enable
 {
 	for (SceneObject* obj : objects)
 	{
 		obj->setWiredFormat(activate);
 		obj->setDrawCollision(activate);
+		obj->setDrawAxes(activate);
 	}
+
+	drawSceneAxes = activate;
 }
 
 bool SceneManager::checkCollision(SceneObject* obj1, SceneObject* obj2)

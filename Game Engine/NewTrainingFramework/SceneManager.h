@@ -12,6 +12,7 @@
 
 /** Forward Declations */
 class FogEffect;
+class Axes;
 
 enum ControlsConfig
 {
@@ -55,7 +56,7 @@ public:
 	static SceneManager* getInstance();
 
 	/** Load objects */
-	void LoadObjects();
+	void Load();
 
 	/** Draw Objects */
 	void Draw();
@@ -77,9 +78,11 @@ public:
 
 	inline Camera* getActiveCamera() { return cameras[activeCameraID]; }
 
+	inline Axes* getAxes() { return axes; }
+
 private:
 	/** Constructor */
-	SceneManager() {  }
+	SceneManager();
 	 
 	/** Instance */
 	static SceneManager* instance;
@@ -104,6 +107,10 @@ private:
 
 	/** Lights */
 	std::map<int, Light*> lights;
+
+	/** Debug */
+	bool drawSceneAxes;
+	Axes* axes;
 
 	/** Utilities Functions */
 	ControlsConfig getControlsAction(std::string& action);
