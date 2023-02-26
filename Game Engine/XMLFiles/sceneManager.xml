@@ -1006,6 +1006,66 @@
 			</trajectory>
 		</object>
 
+		<object id="54">
+			<model>5</model>
+			<shader>13</shader>
+			<type>normal</type>
+			<name>PhongSphere_Anim_4</name>
+			<color>
+				<r>0.4</r>
+				<g>0.3</g>
+				<b>0.0</b>
+			</color>
+			<textures>
+				<texture id="40"/>
+			</textures>
+			<position>
+				<x>240.0</x>
+				<y>-20.0</y>
+				<z>-370</z>
+			</position>
+			<rotation>
+				<x>0.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</rotation>
+			<scale>
+				<x>0.3</x>
+				<y>0.3</y>
+				<z>0.3</z>
+			</scale>
+			<lights>
+				<light>1</light>
+				<light>10</light>
+				<light>100</light>
+			</lights>
+
+			<trajectory type="line-loop" iteration-count="infinite" speed="3.3">
+				<points>
+					<point>
+						<x>240.0</x>
+						<y>-20.0</y>
+						<z>-370.0</z>
+					</point>
+					<point>
+						<x>240.0</x>
+						<y>50.0</y>
+						<z>-370.0</z>
+					</point>
+					<point>
+						<x>350.0</x>
+						<y>50.0</y>
+						<z>-370.0</z>
+					</point>
+					<point>
+						<x>350.0</x>
+						<y>-20.0</y>
+						<z>-370.0</z>
+					</point>
+				</points>
+			</trajectory>
+		</object>
+
 		<object id="100">
 			<model>generated</model>
 			<shader>3</shader>

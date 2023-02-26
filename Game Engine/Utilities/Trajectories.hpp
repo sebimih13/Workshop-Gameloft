@@ -26,10 +26,15 @@ class Trajectory
 {
 public:
 	/** Constructor */
-	Trajectory() {  }
+	Trajectory(int count)
+		: iterationCount(count)
+	{  }
 
 	/** Tick function */
 	virtual void applyTrajectory(Vector3& currentPosition, Vector3& currentRotation, float deltaTime) = 0;
+
+protected:
+	int iterationCount;
 };
 
 class LinearTrajectory : public Trajectory
@@ -37,7 +42,7 @@ class LinearTrajectory : public Trajectory
 public:
 	/** Constructor */
 	LinearTrajectory(Vector3 start, Vector3 end, float desiredSpeed, int count, TrajectoryDirectionType dirType)
-		: startPoint(start), endPoint(end), speed(desiredSpeed), iterationCount(count), direction(dirType)
+		: Trajectory(count), startPoint(start), endPoint(end), speed(desiredSpeed), direction(dirType)
 	{  }
 
 
@@ -68,7 +73,11 @@ public:
 				case TrajectoryDirectionType::normal:
 				{
 					currentPosition = startPoint;
-					iterationCount--;
+
+					if (iterationCount > 0)
+					{
+						iterationCount--;
+					}
 				}
 				break;
 
@@ -78,7 +87,10 @@ public:
 					iteration = 1 - iteration;
 					if (iteration == 1)
 					{
-						iterationCount--;
+						if (iterationCount > 0)
+						{
+							iterationCount--;
+						}
 					}
 
 					// TODO : rotate object
@@ -99,7 +111,6 @@ private:
 	Vector3 endPoint;
 
 	float speed;
-	int iterationCount;
 	TrajectoryDirectionType direction;
 };
 
@@ -108,7 +119,7 @@ class LineStripTrajectory : public Trajectory
 public:
 	/** Constructor */
 	LineStripTrajectory(std::vector<Vector3> points, float desiredSpeed, int count, TrajectoryDirectionType dirType)
-		: points(points), speed(desiredSpeed), iterationCount(count), direction(dirType)
+		: Trajectory(count), points(points), speed(desiredSpeed), direction(dirType)
 	{	
 		nextPointIndex = 1;
 		nextIndex = 1;
@@ -138,7 +149,10 @@ public:
 				{
 					case TrajectoryDirectionType::normal:
 					{
-						iterationCount--;
+						if (iterationCount > 0)
+						{
+							iterationCount--;
+						}
 						nextPointIndex = 0;
 						currentPosition = points[nextPointIndex];
 					}
@@ -156,7 +170,10 @@ public:
 							nextIndex = 1;
 							nextPointIndex = 0;
 
-							iterationCount--;
+							if (iterationCount > 0)
+							{
+								iterationCount--;
+							}
 						}
 					}
 					break;
@@ -172,7 +189,6 @@ private:
 	std::vector<Vector3> points;
 
 	float speed;
-	int iterationCount;
 	TrajectoryDirectionType direction;
 
 	int nextPointIndex;
@@ -184,14 +200,14 @@ class LineLoopTrajectory : public Trajectory
 public:
 	/** Constructor */
 	LineLoopTrajectory(std::vector<Vector3> points, float desiredSpeed, int count)
-		: points(points), speed(desiredSpeed), iterationCount(count)
+		: Trajectory(count), points(points), speed(desiredSpeed)
 	{
 		nextPointIndex = 1;
 	}
 
 	void applyTrajectory(Vector3& currentPosition, Vector3& currentRotation, float deltaTime) override
 	{
-		if (speed <= 0.0f || iterationCount <= 0)
+		if (speed <= 0.0f || iterationCount == 0)
 		{
 			return;
 		}
@@ -214,7 +230,10 @@ public:
 			
 			if (nextPointIndex == 1)
 			{
-				iterationCount--;
+				if (iterationCount > 0)
+				{
+					iterationCount--;
+				}
 			}
 		}
 
@@ -226,8 +245,6 @@ private:
 	std::vector<Vector3> points;
 
 	float speed;
-	int iterationCount;
-
 	int nextPointIndex;
 };
 
@@ -236,7 +253,7 @@ class CircleTrajectory : public Trajectory
 public:
 	/** Constructor */
 	CircleTrajectory(Vector3 center, Vector3 rotationPlane, float radius, float desiredSpeed, int count)
-		: center(center), rotationPlane(rotationPlane), radius(radius), speed(desiredSpeed), iterationCount(count)
+		: Trajectory(count), center(center), rotationPlane(rotationPlane), radius(radius), speed(desiredSpeed)
 	{
 		
 	}
@@ -251,8 +268,6 @@ private:
 	Vector3 center;
 	Vector3 rotationPlane;
 	float radius;
-
 	float speed;
-	int iterationCount;
 };
 

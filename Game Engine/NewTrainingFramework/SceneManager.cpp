@@ -115,7 +115,7 @@ void SceneManager::Init(char* filePath)
 		camera->setNearPlane(cameraNode.getChild("near").getFloat());
 		camera->setFarPlane(cameraNode.getChild("far").getFloat());
 
-		// TODO : Init camera manually
+		// Init camera manually
 		camera->Init();
 
 		cameras.insert({ id, camera });
@@ -240,8 +240,7 @@ void SceneManager::Init(char* filePath)
 			lightObj->setRotation(rotation);
 
 			lightObj->setShader(11);
-
-			lightObj->setColor(diffuseColor);	// TODO : ambient / diffuse / specular 
+			lightObj->setColor(diffuseColor);
 
 			// Set Effects		TODO : rewrite this class
 			lightObj->setFog(fogEffect);
@@ -427,15 +426,19 @@ void SceneManager::Init(char* filePath)
 			}
 		}
 
-		// TODO : Trajectory
+		// Trajectory
 		NodeXML trajectoryNode = objectNode.getChild("trajectory");
 		if (trajectoryNode.isValid())
 		{
 			TrajectoryType trajectoryType = getTrajectoryType(trajectoryNode.getAttribute("type").getString());
 			float trajectorySpeed = trajectoryNode.getAttribute("speed").getFloat();
 
-			// TODO : iterationCount poate fi si INFINITE
-			int iterationCount = trajectoryNode.getAttribute("iteration-count").getInt();
+			int iterationCount = -1;
+			std::string iterationCountString = trajectoryNode.getAttribute("iteration-count").getString();
+			if (iterationCountString != "infinite")
+			{
+				iterationCount = trajectoryNode.getAttribute("iteration-count").getInt();
+			}
 
 			Trajectory* trajectory = nullptr;
 

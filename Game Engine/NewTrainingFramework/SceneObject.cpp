@@ -150,7 +150,7 @@ void SceneObject::Draw()
 	for (unsigned int i = 0; i < textures.size(); i++)
 	{
 		// TODO : pt unbind e bine?
-		glActiveTexture(GL_TEXTURE0 + i);	// TODO : asta mai trb pusa
+		glActiveTexture(GL_TEXTURE0 + i);	// TODO : asta mai trb pusa?
 		glBindTexture(textures[i]->getTextureType(), 0);
 	}
 
