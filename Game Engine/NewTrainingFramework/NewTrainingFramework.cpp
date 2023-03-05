@@ -187,10 +187,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 /**	INTREBARI : 
     
-
 	* 4. In SceneManager / ResourceManager - variabile / functii static ?
-
-	* 5. Daca stiu ca o variabila va fi populata ulterior, mai trb sa ii atribui o valoare default ? (pt siguranta)
 
 	* 7. structurile ModelResource / TextureResource / ShaderResource - ar trb sa mai memoreze id?
 		 * id-ul este folosit doar de ResourceManager cand adauga resursa in map[id] = resursa  
@@ -201,9 +198,6 @@ int _tmain(int argc, _TCHAR* argv[])
 		  * V2 - avem un constructor toti parametrii care contine la sfarsit functia Init()
 
 	* 12. Camera ar trb limitata pe rotatia OX sa nu poata sa faca 360
-		* De revizuit mai tarziu
-
-	* 13. ORICE implementare -> daca ma rotesc => rotatie pe axa OZ a obiectului
 		* De revizuit mai tarziu
 
 	* 15. in esUtil_win.cpp : 
@@ -222,40 +216,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	  -----------------------								INTREBARI TEREN									-----------------------
 	  -----------------------------------------------------------------------------------------------------------------------------
 
-	  * 16. LINEAR si REPEAT pt: ?
-			- rock.tga
-			- grass.tga
-			- dirt.tga
-			- Terrain_blend_map.tga
-
-	  * 17. in terrainShader pun in .vs + .fs ?
-				uniform sampler2D u_texture_3;	// terrain_blend_map.tga
-
 	  * 19. pot sa folosesc fs_uv_2 in terrainShader.vs ? 
-
-	  * 20. uniforms speciale pt un anumit tip de obiect:	* le pun in clasa obiectului ?
-															* sau le pun pe toate la gramada in shader.h 
-			ex. cele pt teren
-
-	  
-	  -----------------------------------------------------------------------------------------------------------------------------
-	  -----------------------								INTREBARI CEATA									-----------------------
-	  -----------------------------------------------------------------------------------------------------------------------------
-
-	  * 21. in modelShader.fs - vec4(fogAlpha * u_fogColor, 1.0) - e 1.0 aici?
-
-
-	  -----------------------------------------------------------------------------------------------------------------------------
-	  -----------------------								INTREBARI FOC									-----------------------
-	  -----------------------------------------------------------------------------------------------------------------------------
-
-	  * 22. Pt toate texturile avem?
-	  		<min_filter>LINEAR</min_filter>
-			<mag_filter>LINEAR</mag_filter>
-			<wrap_s>REPEAT</wrap_s>		
-			<wrap_t>REPEAT</wrap_t>	
-
-	  * 23. 
 
 
 	  -----------------------------------------------------------------------------------------------------------------------------
@@ -265,17 +226,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	  24. Exista posibilitatea sa transmit numarul de lumini si sa am acel for ?
 			-> problema : in fragment shader trb sa fie const pentru a putea itera
 
-	  25. In XML : 
-			<associatedObject>2</associatedObject>			<!-- TODO : ASTA PT CE E? -->
-
 
 	  -----------------------------------------------------------------------------------------------------------------------------
 	  -----------------------								INTREBARI COLIZIUNI								-----------------------
 	  -----------------------------------------------------------------------------------------------------------------------------
 
 	  26. Este gresit calculul minX, maxX, minY, maxY, minZ, maxZ ?
-
-	  27. Este corect checkCollision ?
 
 
 	  -----------------------------------------------------------------------------------------------------------------------------
@@ -294,10 +250,6 @@ int _tmain(int argc, _TCHAR* argv[])
 		  Trb calculate manual? si dupa trimise catre vertex+fragment shaders?
 
 
-	  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	  !!!!!!!!!!!!!!!!!!!!!!!									REZOLVA CAMERA								!!!!!!!!!!!!!!!!!!!!!!!
-	  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 */
 
 /*
@@ -306,10 +258,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	* 1. ObjectType type -> conteaza doar la parsare => sterge din proprietatile unui SceneObject
 
-	* 2. rezolva rotate camera
-
-	  -----------------------------------------------------------------------------------------------------------------------------
-
 	* 3. Forward Declarations in toate fisierele
 
 	* 4. rotate camera - mouse input
@@ -317,15 +265,17 @@ int _tmain(int argc, _TCHAR* argv[])
 	* 5. ObjectType type -> conteaza doar la parsare => sterge din proprietatile unui SceneObject
 
 	* 6. CONTROLS -> MERGI IN SUS/JOS GLOBAL (NU RELATIV CUM ESTE ACM)
-				  -> MERGI IN INAINTE/INAPO GLOBAL (NU RELATIV CUM ESTE ACM)
+				  -> MERGI IN INAINTE/INAPOI GLOBAL (NU RELATIV CUM ESTE ACM)
 
-	* 7. pt fiecare resource -> sa fie data in Init()
+	* 7. pt fiecare resource -> sa fie data ca parametru in Init()
 
 	* 8. pt ceata - fara if => clamp
 
 	* 9. verifica fiecare pointer inainte de a-l folosi
 
-	* 10. 
+	* 10. Circle trajectory
+
+	* 11. 
 
 */
 

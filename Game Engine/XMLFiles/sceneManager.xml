@@ -206,7 +206,7 @@
 
 			<draw-collision/>
 			<!-- TODO : ACTIVATE COLLISION -->
-
+			<active-collision/>
 			
 		</object>
 
@@ -1093,9 +1093,9 @@
 				<z>1.0</z>
 			</scale>
 			<height>
-				<r>15</r>
+				<r>40</r>
 				<g>5</g>
-				<b>-5</b>
+				<b>-10</b>
 			</height>
 		</object>
 

@@ -569,7 +569,7 @@ void SceneManager::Init(char* filePath)
 void SceneManager::Clear()
 {
 	// TODO : delete stuffs
-	delete fogEffect;
+	delete fogEffect;		// TODO : rewrite this class
 }
 
 SceneManager* SceneManager::getInstance()
@@ -645,7 +645,6 @@ void SceneManager::Update(float deltaTime)
 		// altfel calculez o singura data modelMatrix
 	}
 
-	// TODO : collision
 	// Check collision
 	static unsigned int collisionCount = 0;
 	for (unsigned int i = 0; i < objects.size(); i++)
@@ -683,6 +682,16 @@ bool SceneManager::checkCollision(SceneObject* obj1, SceneObject* obj2)
 	{
 		return false;
 	}
+
+	// TODO : DEBUG : delete this bool
+	bool valid = col1->getMinX() <= col2->getMaxX() &&
+			col1->getMaxX() >= col2->getMinX() &&
+
+			col1->getMinY() <= col2->getMaxY() &&
+			col1->getMaxY() >= col2->getMinY() &&
+
+			col1->getMinZ() <= col2->getMaxZ() &&
+			col1->getMaxZ() >= col2->getMinZ();
 
 	return	col1->getMinX() <= col2->getMaxX() &&
 			col1->getMaxX() >= col2->getMinX() &&

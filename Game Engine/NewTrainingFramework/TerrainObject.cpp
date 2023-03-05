@@ -6,11 +6,11 @@
 TerrainObject::TerrainObject()
 {
 	// TODO : find a good value
-	nrCelule = 4;				// TODO : nr par
-	dimensiuneCelula = 100;	
+	nrCelule = 10;				// TODO : nr par
+	dimensiuneCelula = 500;	
 
 	offsetX = 0;
-	offsetY = 50;			// TODO : find a good value
+	offsetY = 80;			// TODO : find a good value
 	offsetZ = 0;
 }
 
@@ -76,6 +76,9 @@ Model* TerrainObject::generateModel()
 
 void TerrainObject::Load()
 {
+	// load model manually
+	model = generateModel();
+
 	// call parent method to load : shader + textures
 	SceneObject::Load();
 
@@ -84,9 +87,6 @@ void TerrainObject::Load()
 	nrCeluleUniform = glGetUniformLocation(shader->getProgramID(), "u_nrCelule");
 	offsetXUniform = glGetUniformLocation(shader->getProgramID(), "u_offsetX");
 	offsetZUniform = glGetUniformLocation(shader->getProgramID(), "u_offsetZ");
-
-	// load model manually
-	model = generateModel();
 }
 
 void TerrainObject::Draw()

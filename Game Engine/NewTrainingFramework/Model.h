@@ -5,9 +5,6 @@
 
 #include "Vertex.h"
 
-/** Forward Declarations */
-class CollisionComponent;
-
 struct ModelResource
 {
 	int id;					// TODO : do i need this?
@@ -30,9 +27,6 @@ public:
 	/** Load buffers */
 	void LoadBuffers(std::vector<Vertex>& verticesData, std::vector<unsigned int>& indicesData);
 
-	/** Create Collision Box */
-	void LoadCollision(std::vector<Vertex>& verticesData);
-
 	/** Getters / Setters */
 	inline GLuint getVBO() { return VBO; }
 	inline GLuint getEBO() { return EBO; }
@@ -41,15 +35,16 @@ public:
 	inline GLuint getNrIndices() { return nrIndices; }
 	inline GLuint getNrIndicesWired() { return nrIndicesWired; }
 
-	inline CollisionComponent* getCollisionComponent() { return collision; }
+	inline std::vector<Vertex>& getVertices() { return verticesData; }
 
 private:
+	/** Render data */
+	std::vector<Vertex> verticesData;
+
 	GLuint VBO;
 	GLuint EBO;
 	GLuint wiredEBO;
 
 	GLuint nrIndices, nrIndicesWired;
-
-	CollisionComponent* collision;
 };
 

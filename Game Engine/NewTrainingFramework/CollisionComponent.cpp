@@ -4,25 +4,12 @@
 #include <limits>
 
 CollisionComponent::CollisionComponent(float minX, float maxX, float minY, float maxY, float minZ, float maxZ)
-	:	minX(FLT_MAX), maxX(FLT_MIN),
-		minY(FLT_MAX), maxY(FLT_MIN),
-		minZ(FLT_MAX), maxZ(FLT_MIN)
+	:	worldMinX(FLT_MAX), worldMaxX(FLT_MIN),
+		worldMinY(FLT_MAX), worldMaxY(FLT_MIN),
+		worldMinZ(FLT_MAX), worldMaxZ(FLT_MIN)
 {
 	glGenBuffers(1, &VBO);
 	glGenBuffers(1, &wiredEBO);
-
-	// TODO : delete
-	//std::vector<Vertex> verticesData = {
-	//	Vertex(Vector3(minX, minY, maxZ)),		// 0
-	//	Vertex(Vector3(maxX, minY, maxZ)),		// 1
-	//	Vertex(Vector3(minX, minY, minZ)),		// 2
-	//	Vertex(Vector3(maxX, minY, minZ)),		// 3
-
-	//	Vertex(Vector3(minX, maxY, maxZ)),		// 4
-	//	Vertex(Vector3(maxX, maxY, maxZ)),		// 5
-	//	Vertex(Vector3(minX, maxY, minZ)),		// 6
-	//	Vertex(Vector3(maxX, maxY, minZ)),		// 7
-	//};
 
 	verticesData.push_back(Vertex(Vector3(minX, minY, maxZ)));		// 0
 	verticesData.push_back(Vertex(Vector3(maxX, minY, maxZ)));		// 1
@@ -89,6 +76,37 @@ CollisionComponent::~CollisionComponent()
 {
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &wiredEBO);
+}
+
+void CollisionComponent::CalculateVertexPosition(Matrix& modelMatrix)
+{
+	// MIN/MAX values
+	float minX = FLT_MAX, maxX = FLT_MIN;
+	float minY = FLT_MAX, maxY = FLT_MIN;
+	float minZ = FLT_MAX, maxZ = FLT_MIN;
+
+	for (Vertex& v : verticesData)
+	{
+		Vector4 vertexPosition = Vector4(v.pos, 1.0f) * modelMatrix;
+
+		minX = min(minX, vertexPosition.x);
+		maxX = max(maxX, vertexPosition.x);
+
+		minY = min(minY, vertexPosition.y);
+		maxY = max(maxY, vertexPosition.y);
+
+		minZ = min(minZ, vertexPosition.z);
+		maxZ = max(maxZ, vertexPosition.z);
+	}
+
+	worldMinX = minX;
+	worldMaxX = maxX;
+
+	worldMinY = minY;
+	worldMaxY = maxY;
+
+	worldMinZ = minZ;
+	worldMaxZ = maxZ;
 }
 
 /*

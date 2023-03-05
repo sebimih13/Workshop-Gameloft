@@ -25,7 +25,14 @@ SceneObject::SceneObject()
 
 	trajectory = nullptr;
 
+	collision = nullptr;
+
 	// TODO : adaug restul?
+}
+
+SceneObject::~SceneObject()
+{
+	delete collision;
 }
 
 void SceneObject::Load()
@@ -48,10 +55,16 @@ void SceneObject::Load()
 		fogEffect->setCamera(camera);
 	}
 
-	// set camera offsets
+	// Set camera offsets
 	followingCameraOffset.x = position.x - camera->getPosition().x;
 	followingCameraOffset.y = position.y - camera->getPosition().y;
 	followingCameraOffset.z = position.z - camera->getPosition().z;
+
+	// Collision
+	if (model)
+	{
+		LoadCollision(model->getVertices());
+	}
 }
 
 void SceneObject::Draw()
@@ -195,8 +208,11 @@ void SceneObject::Draw()
 
 void SceneObject::Update(float deltaTime)
 {
+	// TODO : calculate modelMatrix for collision and draw
+	// here
+
 	// Update collision
-	if (activeCollision)	// TODO : mai trb adaugat si drawCollision
+	if (activeCollision)	// TODO
 	{
 		calculateCollision();
 	}
@@ -224,13 +240,35 @@ void SceneObject::Update(float deltaTime)
 	}
 }
 
+void SceneObject::LoadCollision(std::vector<Vertex>& verticesData)
+{
+	float minX = verticesData[0].pos.x;
+	float maxX = verticesData[0].pos.x;
+
+	float minY = verticesData[0].pos.y;
+	float maxY = verticesData[0].pos.y;
+
+	float minZ = verticesData[0].pos.z;
+	float maxZ = verticesData[0].pos.z;
+
+	for (Vertex& v : verticesData)
+	{
+		minX = min(minX, v.pos.x);
+		maxX = max(maxX, v.pos.x);
+
+		minY = min(minY, v.pos.y);
+		maxY = max(maxY, v.pos.y);
+
+		minZ = min(minZ, v.pos.z);
+		maxZ = max(maxZ, v.pos.z);
+	}
+
+	collision = new CollisionComponent(minX, maxX, minY, maxY, minZ, maxZ);
+}
+
 void SceneObject::calculateCollision()
 {
-	// TODO
-	// Get collision box's vertices
-	// multiply by mvp (p * v * m)
-	// get minVertex and maxVertex
-	// check collisions with other objects
+	// TODO : Calcualte collision box's vertices
 
 	// TODO : matrix model -> sa NU fie calculat la fiecare Draw() ddaca este obiect static
 	Matrix translationMatrix;
@@ -248,44 +286,7 @@ void SceneObject::calculateCollision()
 
 	Matrix modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;
 
-	// MIN/MAX values
-	float minX = FLT_MAX, maxX = FLT_MIN;
-	float minY = FLT_MAX, maxY = FLT_MIN;
-	float minZ = FLT_MAX, maxZ = FLT_MIN;
-
-	for (Vertex& v : getCollisionComponent()->getVerticesData())
-	{
-		// TODO : care este ordinea este corecta?
-		
-		// NO V1: Vector4 vertexPosition = camera->getProjectionMatrix() * camera->getViewMatrix() * modelMatrix * Vector4(v.pos, 1.0f);
-		// NO V2: Vector4 vertexPosition = Vector4(v.pos, 1.0f) * camera->getProjectionMatrix() * camera->getViewMatrix() * modelMatrix;
-
-		// NO V3: Vector4 vertexPosition = modelMatrix * camera->getViewMatrix() * camera->getProjectionMatrix() * Vector4(v.pos, 1.0f);
-		// V4: 
-		Vector4 vertexPosition = Vector4(v.pos, 1.0f) * modelMatrix * camera->getViewMatrix() * camera->getProjectionMatrix();
-
-		minX = min(minX, vertexPosition.x);
-		maxX = max(maxX, vertexPosition.x);
-
-		minY = min(minY, vertexPosition.y);
-		maxY = max(maxY, vertexPosition.y);
-
-		minZ = min(minZ, vertexPosition.z);
-		maxZ = max(maxZ, vertexPosition.z);
-	}
-
-	getCollisionComponent()->updateMinX(minX);
-	getCollisionComponent()->updateMaxX(maxX);
-
-	getCollisionComponent()->updateMinY(minY);
-	getCollisionComponent()->updateMaxY(maxY);
-
-	getCollisionComponent()->updateMinZ(minZ);
-	getCollisionComponent()->updateMaxZ(maxZ);
-
-	// TODO : delete DEBUG
-	//std::cout << "MIN X : " << minX << '\n';
-	//std::cout << "MAX X : " << maxX << "\n\n";
+	getCollisionComponent()->CalculateVertexPosition(modelMatrix);
 }
 
 void SceneObject::debug()

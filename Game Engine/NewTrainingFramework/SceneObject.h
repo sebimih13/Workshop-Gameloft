@@ -31,6 +31,9 @@ public:
 	/** Constructor */
 	SceneObject();
 
+	/** Deconstructor */
+	~SceneObject();
+
 	/** Load model + shader + textures */
 	virtual void Load();
 
@@ -40,7 +43,8 @@ public:
 	/** Update Object */
 	virtual void Update(float deltaTime);
 
-	/** Collision */
+	/** Collision Box */
+	void LoadCollision(std::vector<Vertex>& verticesData);
 	void calculateCollision();
 
 	/** Debug */
@@ -91,7 +95,7 @@ public:
 	/** Getters */
 	inline std::string& getName() { return name; }
 
-	CollisionComponent* getCollisionComponent() { return model->getCollisionComponent(); }
+	CollisionComponent* getCollisionComponent() { return collision; }
 
 protected:
 	ObjectType type;		// TODO : teoretic nu mai e nevoie de type aici (este nevoie de el doar cand parsam XML-ul)
@@ -146,7 +150,10 @@ private:
 
 	/** Trajectory */
 	Trajectory* trajectory;
-	
+
+	/** Collision */
+	CollisionComponent* collision;
+	 
 	/** Others */
 	// TODO : bool depthTest;
 };
