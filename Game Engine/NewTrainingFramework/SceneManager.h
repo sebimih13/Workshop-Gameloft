@@ -36,7 +36,11 @@ enum ControlsConfig
 	ROTATE_CAMERA_POSITIVE_Z,	// O 
 	ROTATE_CAMERA_NEGATIVE_Z,	// P
 
-	DEBUG_MODE					// M
+	DEBUG_MODE,					// M
+
+	GRAYSCALE_MODE,				// 1
+	BLUR_MODE,					// 2
+	SHARPEN_MODE				// 3
 
 	// TODO : ADD MORE
 };
@@ -64,8 +68,11 @@ public:
 	/** Upadate objects */
 	void Update(float deltaTime);
 
-	/** Debug */
+	/** Scene Effects */
 	void debugScene(bool activate);
+	void grayscaleScene(bool activate);
+	void blurScene(bool activate);
+	void sharpenScene(bool activate);
 
 	/** Check Collision */
 	bool checkCollision(SceneObject* obj1, SceneObject* obj2);
@@ -107,6 +114,9 @@ private:
 
 	/** Lights */
 	std::map<int, Light*> lights;
+
+	/** Post processing */
+	PostProcessor* postProcessor;
 
 	/** Debug */
 	bool drawSceneAxes;

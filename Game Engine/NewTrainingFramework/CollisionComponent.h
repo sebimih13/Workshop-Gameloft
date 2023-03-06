@@ -11,6 +11,7 @@ public:
 	/** Constructor */
 	CollisionComponent(float minX, float maxX, float minY, float maxY, float minZ, float maxZ);
 
+	/** Destructor */
 	~CollisionComponent();
 
 	/** Calculate min/max vertex position values */

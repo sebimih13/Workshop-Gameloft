@@ -20,6 +20,9 @@ Camera* camera;
 std::map<ControlsConfig, bool> input;
 
 bool debugScene = false;
+bool grayscaleScene = false;
+bool blurScene = false;
+bool sharpenScene = false;
 
 int Init ( ESContext *esContext )
 {
@@ -66,13 +69,74 @@ void Update ( ESContext *esContext, float deltaTime )
 		// Update components
 		camera->setDeltaTime(deltaTime);
 
+		// Activate Blur Mode
+		if (input[ControlsConfig::BLUR_MODE])
+		{
+			blurScene = !blurScene;
+			input[ControlsConfig::BLUR_MODE] = false;
+
+			if (blurScene)
+			{
+				std::cout << "BLUR MODE ACTIVATED\n";
+			}
+			else
+			{
+				std::cout << "BLUR MODE DEACTIVATED\n";
+			}
+
+			SceneManager::getInstance()->blurScene(blurScene);
+		}
+
+		// Activate Sharpen Mode
+		if (input[ControlsConfig::SHARPEN_MODE])
+		{
+			sharpenScene = !sharpenScene;
+			input[ControlsConfig::SHARPEN_MODE] = false;
+
+			if (sharpenScene)
+			{
+				std::cout << "SHARPEN MODE ACTIVATED\n";
+			}
+			else
+			{
+				std::cout << "SHARPEN MODE DEACTIVATED\n";
+			}
+
+			SceneManager::getInstance()->sharpenScene(sharpenScene);
+		}
+
+		// Activate Grayscale Mode
+		if (input[ControlsConfig::GRAYSCALE_MODE])
+		{
+			grayscaleScene = !grayscaleScene;
+			input[ControlsConfig::GRAYSCALE_MODE] = false;
+
+			if (grayscaleScene)
+			{
+				std::cout << "GRAYSCALE MODE ACTIVATED\n";
+			}
+			else
+			{
+				std::cout << "GRAYSCALE MODE DEACTIVATED\n";
+			}
+
+			SceneManager::getInstance()->grayscaleScene(grayscaleScene);
+		}
+
 		// Activate Debug Mode
 		if (input[ControlsConfig::DEBUG_MODE])
 		{
 			debugScene = !debugScene;
 			input[ControlsConfig::DEBUG_MODE] = false;
 
-			std::cout << "DEBUG MODE ACTIVATED\n";
+			if (debugScene)
+			{
+				std::cout << "DEBUG MODE ACTIVATED\n";
+			}
+			else
+			{
+				std::cout << "DEBUG MODE DEACTIVATED\n";
+			}
 
 			SceneManager::getInstance()->debugScene(debugScene);
 		}
@@ -114,7 +178,7 @@ void Update ( ESContext *esContext, float deltaTime )
 void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
 {
 	// TODO : ESC key => exit
-	// TODO : SceneManager::Controls
+	// TODO : SceneManager::Controls => static
 	
 	// Update input
 	std::map<char, ControlsConfig> inputMap = SceneManager::getInstance()->getControls();
@@ -246,10 +310,20 @@ int _tmain(int argc, _TCHAR* argv[])
 	  -----------------------------------------------------------------------------------------------------------------------------
 
 	  29. Normalele pt fiecare vertex
-	      Exista geometry shader in OpenGL ES?
-		  Trb calculate manual? si dupa trimise catre vertex+fragment shaders?
+		  Trb calculate manual si dupa trimise catre vertex+fragment shaders
 
 
+
+
+	 ! De citit cap 10  OpenGL 20ES/Addison.Wesley.OpenGL.ES.2.0.Programming.Guide.Aug.2008.pdf
+
+     1. render oglinda cu quad
+     2. efecte de post procesare  PAG 296
+
+     3. de ridicat skybox 
+     4. teren mai mare + fog + lumini
+
+	 *. outlining pt obiecte
 */
 
 /*

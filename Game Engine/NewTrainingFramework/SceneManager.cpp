@@ -25,6 +25,8 @@ SceneManager::SceneManager()
 {
 	drawSceneAxes = false;
 	fogEffect = nullptr;
+
+	postProcessor = new PostProcessor();
 }
 
 void SceneManager::Init(char* filePath)
@@ -570,6 +572,7 @@ void SceneManager::Clear()
 {
 	// TODO : delete stuffs
 	delete fogEffect;		// TODO : rewrite this class
+	delete postProcessor;
 }
 
 SceneManager* SceneManager::getInstance()
@@ -591,40 +594,48 @@ void SceneManager::Load()
 
 	// Load Axes
 	axes->Load();
+
+	postProcessor->Load();
 }
 
 void SceneManager::Draw()
 {
-	// Draw objects
-	for (SceneObject* object : objects)
-	{
-		object->Draw();
-	}
+	postProcessor->BeginRender();
 
-	// Draw Scene Axes
-	if (drawSceneAxes)
-	{
-		// TODO : precalculate MVP
-		Matrix translationMatrix;
-		translationMatrix.SetTranslation(Vector3(0.0f, 0.0f, 0.0f));
+		// Draw objects
+		for (SceneObject* object : objects)
+		{
+			object->Draw();
+		}
 
-		Matrix rotationMatrix;
-		Matrix rotMatrix;
-		rotationMatrix.SetIdentity();
-		rotationMatrix = rotationMatrix * rotMatrix.SetRotationX(0.0f);
-		rotationMatrix = rotationMatrix * rotMatrix.SetRotationY(0.0f);
-		rotationMatrix = rotationMatrix * rotMatrix.SetRotationZ(0.0f);
+		// Draw Scene Axes
+		if (drawSceneAxes)
+		{
+			// TODO : precalculate MVP
+			Matrix translationMatrix;
+			translationMatrix.SetTranslation(Vector3(0.0f, 0.0f, 0.0f));
 
-		Matrix scaleMatrix;
-		scaleMatrix.SetScale(100000.0f);
+			Matrix rotationMatrix;
+			Matrix rotMatrix;
+			rotationMatrix.SetIdentity();
+			rotationMatrix = rotationMatrix * rotMatrix.SetRotationX(0.0f);
+			rotationMatrix = rotationMatrix * rotMatrix.SetRotationY(0.0f);
+			rotationMatrix = rotationMatrix * rotMatrix.SetRotationZ(0.0f);
 
-		// TODO : check camera pointer
+			Matrix scaleMatrix;
+			scaleMatrix.SetScale(100000.0f);
 
-		Matrix modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;
-		Matrix mvp = modelMatrix * cameras[activeCameraID]->getViewMatrix() * cameras[activeCameraID]->getProjectionMatrix();
+			// TODO : check camera pointer
 
-		axes->Draw(&mvp);
-	}
+			Matrix modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;
+			Matrix mvp = modelMatrix * cameras[activeCameraID]->getViewMatrix() * cameras[activeCameraID]->getProjectionMatrix();
+
+			axes->Draw(&mvp);
+		}
+
+	postProcessor->EndRender();
+
+	postProcessor->Draw();
 }
 
 void SceneManager::Update(float deltaTime)
@@ -655,22 +666,10 @@ void SceneManager::Update(float deltaTime)
 			{
 				// TODO : fix 
 				collisionCount++;
-				std::cout << "Collision #" << collisionCount << " between : " << objects[i]->getName() << "  VS  " << objects[j]->getName() << "\n\n";
+				// std::cout << "Collision #" << collisionCount << " between : " << objects[i]->getName() << "  VS  " << objects[j]->getName() << "\n\n";
 			}
 		}
 	}
-}
-
-void SceneManager::debugScene(bool activate)	// TODO : activate => enable
-{
-	for (SceneObject* obj : objects)
-	{
-		obj->setWiredFormat(activate);
-		obj->setDrawCollision(activate);
-		obj->setDrawAxes(activate);
-	}
-
-	drawSceneAxes = activate;
 }
 
 bool SceneManager::checkCollision(SceneObject* obj1, SceneObject* obj2)
@@ -701,6 +700,33 @@ bool SceneManager::checkCollision(SceneObject* obj1, SceneObject* obj2)
 
 			col1->getMinZ() <= col2->getMaxZ() &&
 			col1->getMaxZ() >= col2->getMinZ();
+}
+
+void SceneManager::debugScene(bool activate)	// TODO : activate => enable
+{
+	for (SceneObject* obj : objects)
+	{
+		obj->setWiredFormat(activate);
+		obj->setDrawCollision(activate);
+		obj->setDrawAxes(activate);
+	}
+
+	drawSceneAxes = activate;
+}
+
+void SceneManager::grayscaleScene(bool activate) 
+{
+	postProcessor->setGrayscale(activate);
+}
+
+void SceneManager::blurScene(bool activate)
+{
+	postProcessor->setBlur(activate);
+}
+
+void SceneManager::sharpenScene(bool activate)
+{
+	postProcessor->setSharpen(activate);
 }
 
 ControlsConfig SceneManager::getControlsAction(std::string& action)
@@ -737,6 +763,13 @@ ControlsConfig SceneManager::getControlsAction(std::string& action)
 
 	if (action == "DEBUG_MODE")								// M
 		return ControlsConfig::DEBUG_MODE;
+
+	if (action == "GRAYSCALE_MODE")							// 1
+		return ControlsConfig::GRAYSCALE_MODE;
+	else if (action == "BLUR_MODE")							// 2
+		return ControlsConfig::BLUR_MODE;
+	else if (action == "SHARPEN_MODE")						// 3
+		return ControlsConfig::SHARPEN_MODE;
 
 	return ControlsConfig::DEFAULT_CONTROLSCONFIG;			// ERROR
 

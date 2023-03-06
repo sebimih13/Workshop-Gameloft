@@ -6,7 +6,7 @@ Texture::Texture(TextureResource* textureResource) : resource(textureResource)
 	glGenTextures(1, &textureID);
 
 	textureType = TextureType::TEXTURE_2D;
-	format = GL_RGBA;
+	format = GL_RGB;
 
 	switch (resource->type)
 	{

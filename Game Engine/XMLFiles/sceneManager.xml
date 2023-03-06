@@ -88,6 +88,20 @@
 			<key>M</key>
 			<action>DEBUG_MODE</action>
 		</control>
+
+		<control>
+			<key>1</key>
+			<action>GRAYSCALE_MODE</action>
+		</control>
+		<control>
+			<key>2</key>
+			<action>BLUR_MODE</action>
+		</control>
+		<control>
+			<key>3</key>
+			<action>SHARPEN_MODE</action>
+		</control>
+
 	</controls>
 	
 	<cameras>

@@ -9,6 +9,8 @@
 
 #include "FogEffect.h"
 
+#include "PostProcessor.h"
+
 /** Forward Declarations */
 class Camera;
 class Light;
@@ -31,7 +33,7 @@ public:
 	/** Constructor */
 	SceneObject();
 
-	/** Deconstructor */
+	/** Destructor */
 	~SceneObject();
 
 	/** Load model + shader + textures */

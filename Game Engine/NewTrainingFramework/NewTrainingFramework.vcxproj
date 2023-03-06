@@ -172,6 +172,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="NewTrainingFramework.cpp" />
     <ClCompile Include="PointLight.cpp" />
+    <ClCompile Include="PostProcessor.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SceneObject.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="PointLight.h" />
+    <ClInclude Include="PostProcessor.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SceneObject.h" />
     <ClInclude Include="Shader.h" />
@@ -224,6 +226,8 @@
     <None Include="..\Resources\Shaders\phongColorModelShader.vs" />
     <None Include="..\Resources\Shaders\phongNormalModelShader.fs" />
     <None Include="..\Resources\Shaders\phongNormalModelShader.vs" />
+    <None Include="..\Resources\Shaders\postProcessingShader.fs" />
+    <None Include="..\Resources\Shaders\postProcessingShader.vs" />
     <None Include="..\Resources\Shaders\skyboxReflectionShader.fs" />
     <None Include="..\Resources\Shaders\skyboxReflectionShader.vs" />
     <None Include="..\Resources\Shaders\skyboxShader.fs" />

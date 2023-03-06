@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "CollisionComponent.h"
 
-#include <limits>
-
 CollisionComponent::CollisionComponent(float minX, float maxX, float minY, float maxY, float minZ, float maxZ)
 	:	worldMinX(FLT_MAX), worldMaxX(FLT_MIN),
 		worldMinY(FLT_MAX), worldMaxY(FLT_MIN),

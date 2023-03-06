@@ -19,6 +19,13 @@ struct Vertex
 								uv(0.0f, 0.0f)
 	{  }
 
+	Vertex(Vector3 position, Vector2 uv) :	pos(position),
+											norm(0.0f, 0.0f, 0.0f),
+											binorm(0.0f, 0.0f, 0.0f),
+											tgt(0.0f, 0.0f, 0.0f),
+											uv(uv)
+	{  }
+
 	/** Copy Constructor */
 	Vertex(const Vertex& rhs) : pos(rhs.pos), 
 								norm(rhs.norm),
