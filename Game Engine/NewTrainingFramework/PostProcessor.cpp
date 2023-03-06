@@ -44,13 +44,13 @@ void PostProcessor::Load()
 	// initialize RBO
 	glGenRenderbuffers(1, &RBO);
 	glBindRenderbuffer(GL_RENDERBUFFER, RBO);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, screenWidth, screenHeight);	// TODO : DEPTH24 + STENCIL8
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, screenWidth, screenHeight);	// TODO ?: DEPTH24 + STENCIL8
 
 	// intialize texture
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, screenWidth, screenHeight, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, NULL);	// TODO : GL_UNSIGNED_BYTE
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, screenWidth, screenHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -122,7 +122,11 @@ void PostProcessor::BeginRender()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, FBO);
 	
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);		// TODO : change color form SceneManager
+	glClearColor(SceneManager::getInstance()->getBackgroundColor().x,
+				 SceneManager::getInstance()->getBackgroundColor().y,
+				 SceneManager::getInstance()->getBackgroundColor().z,
+				 1.0f);
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glEnable(GL_DEPTH_TEST);
@@ -146,7 +150,6 @@ void PostProcessor::Draw()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 
-	// TODO : check daca ramane sau nu
 	glDisable(GL_DEPTH_TEST);
 
 	// Set Textures

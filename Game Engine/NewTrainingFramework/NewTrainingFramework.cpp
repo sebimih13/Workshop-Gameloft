@@ -206,6 +206,7 @@ void Mouse(ESContext* esContext, MouseButtons button, MouseEvents eventType, int
 void CleanUp()
 {
 	// TODO : delete stuffs
+	SceneManager::getInstance()->Clear();
 }
 
 int _tmain(int argc, _TCHAR* argv[])
