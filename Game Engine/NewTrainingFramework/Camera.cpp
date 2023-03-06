@@ -115,6 +115,53 @@ void Camera::rotateOz(GLfloat value)
 	updateWorldView();
 }
 
+void Camera::rotateOxAngle(GLfloat value)
+{
+	Matrix mRotateOX;
+	mRotateOX.SetRotationX(getRadians(value));
+
+	Vector4 localUp = Vector4(0.0f, 1.0f, 0.0f, 0.0f);
+	Vector4 rotatedLocalUp = localUp * mRotateOX;
+	Vector4 up4 = rotatedLocalUp * worldMatrix;
+	up = Vector3(up4.x, up4.y, up4.z).Normalize();
+
+	Vector4 localTarget = Vector4(0.0f, 0.0f, -(target - position).Length(), 1.0f);
+	Vector4 rotatedTarget = localTarget * mRotateOX;
+	Vector4 target4 = rotatedTarget * worldMatrix;
+	target = Vector3(target4.x, target4.y, target4.z);
+
+	updateAxis();
+	updateWorldView();
+}
+
+void Camera::rotateOyAngle(GLfloat value)
+{
+	Matrix mRotateOY;
+	mRotateOY.SetRotationY(getRadians(value));
+
+	Vector4 localTarget = Vector4(0.0f, 0.0f, -(target - position).Length(), 1.0f);
+	Vector4 rotatedTarget = localTarget * mRotateOY;
+	Vector4 target4 = rotatedTarget * worldMatrix;
+	target = Vector3(target4.x, target4.y, target4.z);
+
+	updateAxis();
+	updateWorldView();
+}
+
+void Camera::rotateOzAngle(GLfloat value)
+{
+	Matrix mRotateOZ;
+	mRotateOZ.SetRotationZ(getRadians(value));
+
+	Vector4 localUp = Vector4(0.0f, 1.0f, 0.0f, 0.0f);
+	Vector4 rotatedLocalUp = localUp * mRotateOZ;
+	Vector4 up4 = rotatedLocalUp * worldMatrix;
+	up = Vector3(up4.x, up4.y, up4.z).Normalize();
+
+	updateAxis();
+	updateWorldView();
+}
+
 void Camera::updateAxis()
 {
 	/* TODO : cred ca aici e cv problema

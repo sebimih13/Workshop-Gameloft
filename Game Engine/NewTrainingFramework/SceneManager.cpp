@@ -18,6 +18,9 @@
 
 #include "Axes.h"
 
+#include "PostProcessor.h"
+#include "Mirror.h"
+
 // Instantiate static variables
 SceneManager* SceneManager::instance = nullptr;
 
@@ -27,6 +30,7 @@ SceneManager::SceneManager()
 	fogEffect = nullptr;
 
 	postProcessor = new PostProcessor();
+	mirror = new Mirror();
 }
 
 void SceneManager::Init(char* filePath)
@@ -573,6 +577,7 @@ void SceneManager::Clear()
 	// TODO : delete stuffs
 	delete fogEffect;		// TODO : rewrite this class
 	delete postProcessor;
+	delete mirror;
 }
 
 SceneManager* SceneManager::getInstance()
@@ -596,6 +601,7 @@ void SceneManager::Load()
 	axes->Load();
 
 	postProcessor->Load();
+	mirror->Load();
 }
 
 void SceneManager::Draw()
@@ -635,7 +641,46 @@ void SceneManager::Draw()
 
 	postProcessor->EndRender();
 
+	// TODO : rotate camera
+	mirror->BeginRender();
+	cameras[activeCameraID]->rotateOyAngle(180.0f);
+
+		// Draw objects
+		for (SceneObject* object : objects)
+		{
+			object->Draw();
+		}
+
+		// Draw Scene Axes
+		if (drawSceneAxes)
+		{
+			// TODO : precalculate MVP
+			Matrix translationMatrix;
+			translationMatrix.SetTranslation(Vector3(0.0f, 0.0f, 0.0f));
+
+			Matrix rotationMatrix;
+			Matrix rotMatrix;
+			rotationMatrix.SetIdentity();
+			rotationMatrix = rotationMatrix * rotMatrix.SetRotationX(0.0f);
+			rotationMatrix = rotationMatrix * rotMatrix.SetRotationY(0.0f);
+			rotationMatrix = rotationMatrix * rotMatrix.SetRotationZ(0.0f);
+
+			Matrix scaleMatrix;
+			scaleMatrix.SetScale(100000.0f);
+
+			// TODO : check camera pointer
+
+			Matrix modelMatrix = scaleMatrix * rotationMatrix * translationMatrix;
+			Matrix mvp = modelMatrix * cameras[activeCameraID]->getViewMatrix() * cameras[activeCameraID]->getProjectionMatrix();
+
+			axes->Draw(&mvp);
+		}
+
+	cameras[activeCameraID]->rotateOyAngle(180.0f);
+	mirror->EndRender();
+
 	postProcessor->Draw();
+	mirror->Draw();
 }
 
 void SceneManager::Update(float deltaTime)

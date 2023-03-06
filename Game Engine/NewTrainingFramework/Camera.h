@@ -33,6 +33,10 @@ public:
 	void rotateOy(GLfloat value);
 	void rotateOz(GLfloat value);
 
+	void rotateOxAngle(GLfloat value);
+	void rotateOyAngle(GLfloat value);
+	void rotateOzAngle(GLfloat value);
+
 	/** Update functions */
 	void updateWorldView();
 	void updateAxis();

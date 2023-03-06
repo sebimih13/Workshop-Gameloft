@@ -318,9 +318,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	 ! De citit cap 10  OpenGL 20ES/Addison.Wesley.OpenGL.ES.2.0.Programming.Guide.Aug.2008.pdf
 
-     1. render oglinda cu quad
-     2. efecte de post procesare  PAG 296
-
      3. de ridicat skybox 
      4. teren mai mare + fog + lumini
 

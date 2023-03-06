@@ -169,6 +169,7 @@
     <ClCompile Include="FireObject.cpp" />
     <ClCompile Include="FogEffect.cpp" />
     <ClCompile Include="Light.cpp" />
+    <ClCompile Include="Mirror.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="NewTrainingFramework.cpp" />
     <ClCompile Include="PointLight.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="FireObject.h" />
     <ClInclude Include="FogEffect.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="Mirror.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="PostProcessor.h" />

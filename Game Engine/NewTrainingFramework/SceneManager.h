@@ -13,6 +13,8 @@
 /** Forward Declations */
 class FogEffect;
 class Axes;
+class PostProcessor;
+class Mirror;
 
 enum ControlsConfig
 {
@@ -117,6 +119,9 @@ private:
 
 	/** Post processing */
 	PostProcessor* postProcessor;
+
+	/** Mirror */
+	Mirror* mirror;
 
 	/** Debug */
 	bool drawSceneAxes;

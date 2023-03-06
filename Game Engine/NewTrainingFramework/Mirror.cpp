@@ -1,31 +1,15 @@
 #include "stdafx.h"
-#include "PostProcessor.h"
+#include "Mirror.h"
 
 #include "SceneManager.h"
 #include "ResourceManager.h"
 
-PostProcessor::PostProcessor()
+Mirror::Mirror()
 {
-	grayscale = false;
-	grayscaleUniform = -1;
-
-	// Kernel Effects
-	offsetsUniform = -1;
-
-	// Blur
-	blur = false;
-	blurUniform = -1;
-	blurKernelUniform = -1;
-
-	// Sharpen
-	sharpen = false;
-	sharpenUniform = -1;
-	sharpenKernelUniform = -1;
-
 	shader = nullptr;
 }
 
-PostProcessor::~PostProcessor()
+Mirror::~Mirror()
 {
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
@@ -35,7 +19,7 @@ PostProcessor::~PostProcessor()
 	glDeleteTextures(1, &texture);
 }
 
-void PostProcessor::Load()
+void Mirror::Load()
 {
 	unsigned int& screenWidth = SceneManager::getInstance()->getDefaultScreenSize().width;
 	unsigned int& screenHeight = SceneManager::getInstance()->getDefaultScreenSize().height;
@@ -80,11 +64,19 @@ void PostProcessor::Load()
 	glGenBuffers(1, &VBO);
 	glGenBuffers(1, &EBO);
 
+	/**
+		TODO : calculeaza automat in functie de ScreenSize
+
+		width  = 960		=> 0.60 = -0.3 -> 0.3
+		height = 720		=> 0.45 = 0.55 -> 1.0
+
+	*/
+
 	std::vector<Vertex> verticesData = {
-		Vertex(Vector3(-1.0f, -1.0f, 0.0f), Vector2(0.0f, 0.0f)),	// 0 - stanga jos
-		Vertex(Vector3(-1.0f,  1.0f, 0.0f), Vector2(0.0f, 1.0f)),	// 1 - stanga sus
-		Vertex(Vector3( 1.0f, -1.0f, 0.0f), Vector2(1.0f, 0.0f)),	// 2 - dreapta jos
-		Vertex(Vector3( 1.0f,  1.0f, 0.0f), Vector2(1.0f, 1.0f))	// 3 - dreapta sus
+		Vertex(Vector3(-0.3f, 0.55f, 0.0f), Vector2(0.0f, 0.0f)),	// 0 - stanga jos
+		Vertex(Vector3(-0.3f, 1.0f, 0.0f), Vector2(0.0f, 1.0f)),	// 1 - stanga sus
+		Vertex(Vector3(0.3f,  0.55f, 0.0f), Vector2(1.0f, 0.0f)),	// 2 - dreapta jos
+		Vertex(Vector3(0.3f,  1.0f, 0.0f), Vector2(1.0f, 1.0f))		// 3 - dreapta sus
 	};
 
 	std::vector<unsigned int> indicesData = {
@@ -107,27 +99,16 @@ void PostProcessor::Load()
 
 	// Load post processing shader
 	shader = ResourceManager::getInstance()->LoadShader(17);
-
-	// Load Uniforms
-	grayscaleUniform = glGetUniformLocation(shader->getProgramID(), "u_grayscale");
-
-	offsetsUniform = glGetUniformLocation(shader->getProgramID(), "u_offsets");
-
-	blurUniform = glGetUniformLocation(shader->getProgramID(), "u_blur");
-	blurKernelUniform = glGetUniformLocation(shader->getProgramID(), "u_blurKernel");
-
-	sharpenUniform = glGetUniformLocation(shader->getProgramID(), "u_sharpen");
-	sharpenKernelUniform = glGetUniformLocation(shader->getProgramID(), "u_sharpenKernel");
 }
 
-void PostProcessor::BeginRender()
+void Mirror::BeginRender()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, FBO);
-	
+
 	glClearColor(SceneManager::getInstance()->getBackgroundColor().x,
-				 SceneManager::getInstance()->getBackgroundColor().y,
-				 SceneManager::getInstance()->getBackgroundColor().z,
-				 1.0f);
+		SceneManager::getInstance()->getBackgroundColor().y,
+		SceneManager::getInstance()->getBackgroundColor().z,
+		1.0f);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -137,7 +118,7 @@ void PostProcessor::BeginRender()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
-void PostProcessor::EndRender()
+void Mirror::EndRender()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
@@ -146,7 +127,7 @@ void PostProcessor::EndRender()
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void PostProcessor::Draw()
+void Mirror::Draw()
 {
 	glUseProgram(shader->getProgramID());
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -164,14 +145,7 @@ void PostProcessor::Draw()
 	shader->setUV();
 
 	// Set uniforms
-	setGrayscaleUniform();
-
-	setBlurUniform();
-	setOffsetsUniform();
-	setBlurKernelUniform();
-
-	setSharpenUniform();
-	setSharpenKernelUniform();
+	// TODO
 
 	// Draw
 	glDrawElements(GL_TRIANGLES, nrIndices, GL_UNSIGNED_INT, 0);
@@ -180,53 +154,5 @@ void PostProcessor::Draw()
 	glUseProgram(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-}
-
-void PostProcessor::setGrayscaleUniform()
-{
-	if (grayscaleUniform != -1)
-	{
-		glUniform1i(grayscaleUniform, grayscale);
-	}
-}
-
-void PostProcessor::setOffsetsUniform()
-{
-	if (offsetsUniform != -1)
-	{
-		glUniform2fv(offsetsUniform, 9, (float*)offsets);
-	}
-}
-
-void PostProcessor::setBlurUniform()
-{
-	if (blurUniform != -1)
-	{
-		glUniform1i(blurUniform, blur);
-	}
-}
-
-void PostProcessor::setBlurKernelUniform()
-{
-	if (blurKernelUniform != -1)
-	{
-		glUniform1fv(blurKernelUniform, 9, blurKernel);
-	}
-}
-
-void PostProcessor::setSharpenUniform()
-{
-	if (sharpenUniform != -1)
-	{
-		glUniform1i(sharpenUniform, sharpen);
-	}
-}
-
-void PostProcessor::setSharpenKernelUniform()
-{
-	if (sharpenKernelUniform != -1)
-	{
-		glUniform1fv(sharpenKernelUniform, 9, sharpenKernel);
-	}
 }
 
