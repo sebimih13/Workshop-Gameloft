@@ -313,6 +313,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	  29. Normalele pt fiecare vertex
 		  Trb calculate manual si dupa trimise catre vertex+fragment shaders
 
+		
+	 -----------------------------------------------------------------------------------------------------------------------------
+	 -----------------------								NEXT SECTION	   							   -----------------------
+	 -----------------------------------------------------------------------------------------------------------------------------
+	 
+	 30. next section
 
 
 
@@ -321,7 +327,32 @@ int _tmain(int argc, _TCHAR* argv[])
      3. de ridicat skybox 
      4. teren mai mare + fog + lumini
 
-	 *. outlining pt obiecte
+	 *. outlining pt obiecte cu stencil buffer
+	 
+	 TODO LIST:
+
+	 1. Depth of field
+		- smoothstep
+
+		- centru
+		- r - raza cerc mic
+		- R - raza cer mare
+
+	2. FreeType
+
+	3. Sunete
+
+	4. De recalculat pt fiecare vertex din crocodil noul Collision Box
+		- ce fac acm e collision box la collison box
+
+	5. Loading screen
+
+
+	Logica joc:
+	- limitare camera - stanga/dreapta
+	- de selectat obiecte
+	- mecanica de scor
+
 */
 
 /*

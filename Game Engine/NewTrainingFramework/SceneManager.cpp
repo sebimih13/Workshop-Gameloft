@@ -711,7 +711,7 @@ void SceneManager::Update(float deltaTime)
 			{
 				// TODO : fix 
 				collisionCount++;
-				// std::cout << "Collision #" << collisionCount << " between : " << objects[i]->getName() << "  VS  " << objects[j]->getName() << "\n\n";
+				std::cout << "Collision #" << collisionCount << " between : " << objects[i]->getName() << "  VS  " << objects[j]->getName() << "\n\n";
 			}
 		}
 	}
