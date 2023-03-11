@@ -4,6 +4,8 @@
 #include "../Utilities/NodeXML.hpp"
 #include "../Utilities/AttributeXML.hpp"
 
+#include "ResourceManager.h"
+
 #include "CollisionComponent.h"
 
 #include "TerrainObject.h"
@@ -606,6 +608,8 @@ void SceneManager::Load()
 
 void SceneManager::Draw()
 {
+	// TODO : FUNCTION TO DRAW SCENE
+
 	postProcessor->BeginRender();
 
 		// Draw objects
@@ -762,16 +766,22 @@ void SceneManager::debugScene(bool activate)	// TODO : activate => enable
 void SceneManager::grayscaleScene(bool activate) 
 {
 	postProcessor->setGrayscale(activate);
+	postProcessor->setBlur(false);
+	postProcessor->setSharpen(false);
 }
 
 void SceneManager::blurScene(bool activate)
 {
 	postProcessor->setBlur(activate);
+	postProcessor->setGrayscale(false);
+	postProcessor->setSharpen(false);
 }
 
 void SceneManager::sharpenScene(bool activate)
 {
 	postProcessor->setSharpen(activate);
+	postProcessor->setGrayscale(false);
+	postProcessor->setBlur(false);
 }
 
 ControlsConfig SceneManager::getControlsAction(std::string& action)

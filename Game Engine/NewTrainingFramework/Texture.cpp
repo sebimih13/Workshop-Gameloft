@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "Texture.h"
 
-Texture::Texture(TextureResource* textureResource) : resource(textureResource)
+Texture::Texture(TextureResource* textureResource) 
+	: resource(textureResource)
 {
 	glGenTextures(1, &textureID);
 

@@ -7,6 +7,9 @@
 #include "Model.h"
 #include "Texture.h"
 #include "Shader.h"
+#include "Sound.h"
+
+#include "fmod.hpp"
 
 class ResourceManager
 {
@@ -19,6 +22,7 @@ public:
 	Model* LoadModel(int id);
 	Texture* LoadTexture(int id);
 	Shader* LoadShader(int id);
+	Sound* LoadSound(int id);
 
 private:
 	/** Constructor */
@@ -35,9 +39,16 @@ private:
 	std::map<int, TextureResource*> textureResources;
 	std::map<int, Texture*> textures;
 
-	/** Shader */
+	/** Shaders */
 	std::map<int, ShaderResource*> shaderResources;
 	std::map<int, Shader*> shaders;
+
+	/** Sounds */
+	std::map<int, SoundResource*> soundResources;	// TODO : use
+	std::map<int, Sound*> sounds;					// TODO : use
+	 
+	/** FMOD System */
+	FMOD::System* fmodSystem;
 
 	/** Utilities Functions */
 	TextureType getTextureType(std::string type);

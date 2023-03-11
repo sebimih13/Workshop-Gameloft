@@ -1273,7 +1273,6 @@
 		
 	</lights>
 
-	
 	<debugSettings>
 		<objectAxes>
 			<OXColor>
@@ -1292,6 +1291,8 @@
 				<b>1.0</b>
 			</OZColor>
 		</objectAxes>
+
+		<!-- TODO : -->
 		<camAxes>
 			<OXColor>
 				<r>1.0</r>
@@ -1309,6 +1310,7 @@
 				<b>1.0</b>
 			</OZColor>
 		</camAxes>
+		
 	</debugSettings>
 	
 </sceneManager>

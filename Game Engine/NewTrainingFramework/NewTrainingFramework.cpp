@@ -340,7 +340,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	2. FreeType
 
-	3. Sunete
+	3. Sunete	-> resourceManager::getInstace()->LoadSound(1)->Play();
 
 	4. De recalculat pt fiecare vertex din crocodil noul Collision Box
 		- ce fac acm e collision box la collison box
@@ -352,6 +352,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	- limitare camera - stanga/dreapta
 	- de selectat obiecte
 	- mecanica de scor
+
+	- poate dual-screen pt 2 jucatori
+
+
+	- pt fiecare resource sa fie stearsa la sfarsit
+	- de pus ca parametru resouce-ul ori in Load() ori in Constructor()
 
 */
 

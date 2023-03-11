@@ -2,7 +2,8 @@
 #include "Shader.h"
 #include "Vertex.h"
 
-Shader::Shader(ShaderResource* shaderResource) : MAX_TEXTURES(5), resource(shaderResource)
+Shader::Shader(ShaderResource* shaderResource) 
+	: MAX_TEXTURES(5), resource(shaderResource)
 {
 	textureUniforms.resize(MAX_TEXTURES, -1);
 }

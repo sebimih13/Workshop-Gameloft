@@ -18,6 +18,8 @@ Model::~Model()
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
 	glDeleteBuffers(1, &wiredEBO);
+
+	// TODO : delete modelResource
 }
 
 void Model::Load(ModelResource* resource)

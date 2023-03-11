@@ -9,6 +9,18 @@ ResourceManager* ResourceManager::instance = nullptr;
 
 void ResourceManager::Init(char* filePath)
 {
+	// Initialize Sound System
+	if (FMOD::System_Create(&fmodSystem) != FMOD_OK)
+	{
+		std::cout << "ERROR : SOUND SYSTEM NOT CREATED !!! \n";
+	}
+	else
+	{
+		std::cout << "SOUND SYSTEM CREATED !!! \n";
+		fmodSystem->init(36, FMOD_INIT_NORMAL, NULL);
+	}
+
+	// Parse XML file
 	std::ifstream file(filePath);
 	std::stringstream buffer;
 	buffer << file.rdbuf();
@@ -78,6 +90,24 @@ void ResourceManager::Init(char* filePath)
 		}
 	}
 
+	// Sounds Node
+	NodeXML soundsNode = rootNode.getChild("sounds");
+	for (NodeXML folderNode = soundsNode.getChild("folder"); folderNode.isValid(); folderNode = folderNode.getNextSibling())
+	{
+		for (NodeXML soundNode = folderNode.getChild("sound"); soundNode.isValid(); soundNode = soundNode.getNextSibling())
+		{
+			SoundResource* resource = new SoundResource();
+
+			std::string folder = folderNode.getAttribute("path").getString();
+			std::string fileName = soundNode.getChild("file").getString();
+
+			resource->filePath = folder + fileName;
+			resource->id = soundNode.getAttribute("id").getInt();
+
+			soundResources.insert({ resource->id, resource });
+		}
+	}
+
 	debug();
 }
 
@@ -123,6 +153,16 @@ Shader* ResourceManager::LoadShader(int id)
 		shaders[id]->Load();
 	}
 	return shaders[id];
+}
+
+Sound* ResourceManager::LoadSound(int id)
+{
+	if (sounds[id] == nullptr)
+	{
+		sounds[id] = new Sound(soundResources[id]);
+		sounds[id]->Load(fmodSystem);
+	}
+	return sounds[id];
 }
 
 TextureType ResourceManager::getTextureType(std::string type)

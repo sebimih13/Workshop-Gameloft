@@ -296,6 +296,22 @@
 			</texture>
 			
 		</folder>
-	</textures>	
+	</textures>
+
+	<sounds>
+		<folder path="../ResourcesPacket/Sounds/">
+
+			<sound id="1">
+				<file>hapciu.wav</file>
+			</sound>
+
+			<sound id="2">
+				<file>toc.wav</file>
+			</sound>
+
+		</folder>
+	</sounds>
+
+
 </resourceManager>
 
