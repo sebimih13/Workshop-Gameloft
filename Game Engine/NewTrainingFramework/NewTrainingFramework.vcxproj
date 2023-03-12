@@ -80,7 +80,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Nvidia|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Include\FMOD;$(SolutionDir)\Include\Nvidia;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Include\FMOD;$(SolutionDir)\Include;$(SolutionDir)\Include\freetype;$(SolutionDir)\Include\Nvidia;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -90,8 +90,8 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;fmod_vc.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\Lib\Nvidia;$(SolutionDir)\Lib\FMOD;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libEGL.lib;libGLESv2.lib;fmod_vc.lib;fmodL_vc.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Lib\Nvidia;$(SolutionDir)\Lib\Freetype;$(SolutionDir)\Lib\FMOD;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
@@ -168,6 +168,7 @@
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="FireObject.cpp" />
     <ClCompile Include="FogEffect.cpp" />
+    <ClCompile Include="Font.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="Mirror.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -189,6 +190,7 @@
     </ClCompile>
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TerrainObject.cpp" />
+    <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +200,7 @@
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="FireObject.h" />
     <ClInclude Include="FogEffect.h" />
+    <ClInclude Include="Font.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Mirror.h" />
     <ClInclude Include="Model.h" />
@@ -213,6 +216,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TerrainObject.h" />
+    <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="SceneManager.h" />
@@ -238,6 +242,8 @@
     <None Include="..\Resources\Shaders\skyboxShader.vs" />
     <None Include="..\Resources\Shaders\terrainShader.fs" />
     <None Include="..\Resources\Shaders\terrainShader.vs" />
+    <None Include="..\Resources\Shaders\textShader.fs" />
+    <None Include="..\Resources\Shaders\textShader.vs" />
     <None Include="..\Resources\Shaders\totalSkyboxReflectionShader.fs" />
     <None Include="..\Resources\Shaders\totalSkyboxReflectionShader.vs" />
     <None Include="..\Resources\Shaders\TriangleShaderFS.fs" />

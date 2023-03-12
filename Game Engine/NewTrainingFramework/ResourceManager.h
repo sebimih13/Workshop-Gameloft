@@ -8,6 +8,7 @@
 #include "Texture.h"
 #include "Shader.h"
 #include "Sound.h"
+#include "Font.h"
 
 #include "fmod.hpp"
 
@@ -17,12 +18,14 @@ public:
 	void Init(char* filePath);
 	void Clear();
 
+	/** Get Instance */
 	static ResourceManager* getInstance();
 
 	Model* LoadModel(int id);
 	Texture* LoadTexture(int id);
 	Shader* LoadShader(int id);
 	Sound* LoadSound(int id);
+	Font* LoadFont(int id);
 
 private:
 	/** Constructor */
@@ -44,8 +47,12 @@ private:
 	std::map<int, Shader*> shaders;
 
 	/** Sounds */
-	std::map<int, SoundResource*> soundResources;	// TODO : use
-	std::map<int, Sound*> sounds;					// TODO : use
+	std::map<int, SoundResource*> soundResources;
+	std::map<int, Sound*> sounds;
+
+	/** Fonts */
+	std::map<int, FontResource*> fontResources;
+	std::map<int, Font*> fonts;
 	 
 	/** FMOD System */
 	FMOD::System* fmodSystem;

@@ -129,6 +129,11 @@
 				<fs>postProcessingShader.fs</fs>
 			</shader>
 
+			<shader id="18">
+				<vs>textShader.vs</vs>
+				<fs>textShader.fs</fs>
+			</shader>
+
 		</folder>
 	</shaders>
 	
@@ -312,6 +317,16 @@
 		</folder>
 	</sounds>
 
+	<fonts>
+		<folder path="../ResourcesPacket/Fonts/">
+
+			<font id="1">
+				<file>Antonio-Bold.ttf</file>
+				<size>24</size>
+			</font>
+			
+		</folder>
+	</fonts>
 
 </resourceManager>
 

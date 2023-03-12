@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "Sound.h"
 
-#include "ResourceManager.h"
-
 Sound::Sound(SoundResource* soundResource)
 	: resource(soundResource)
 {

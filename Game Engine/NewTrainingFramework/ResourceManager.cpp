@@ -108,6 +108,25 @@ void ResourceManager::Init(char* filePath)
 		}
 	}
 
+	// Fonts Node
+	NodeXML fontsNode = rootNode.getChild("fonts");
+	for (NodeXML folderNode = fontsNode.getChild("folder"); folderNode.isValid(); folderNode = folderNode.getNextSibling())
+	{
+		for (NodeXML fontNode = folderNode.getChild("font"); fontNode.isValid(); fontNode = fontNode.getNextSibling())
+		{
+			FontResource* resource = new FontResource();
+
+			std::string folder = folderNode.getAttribute("path").getString();
+			std::string fileName = fontNode.getChild("file").getString();
+
+			resource->id = fontNode.getAttribute("id").getInt();
+			resource->fontSize = fontNode.getChild("size").getInt();
+			resource->filePath = folder + fileName;
+
+			fontResources.insert({ resource->id, resource });
+		}
+	}
+
 	debug();
 }
 
@@ -163,6 +182,16 @@ Sound* ResourceManager::LoadSound(int id)
 		sounds[id]->Load(fmodSystem);
 	}
 	return sounds[id];
+}
+
+Font* ResourceManager::LoadFont(int id)
+{
+	if (fonts[id] == nullptr)
+	{
+		fonts[id] = new Font(fontResources[id]);
+		fonts[id]->Load();
+	}
+	return fonts[id];
 }
 
 TextureType ResourceManager::getTextureType(std::string type)

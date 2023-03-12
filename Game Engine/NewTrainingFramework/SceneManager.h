@@ -59,6 +59,7 @@ public:
 	void Init(char* filePath);
 	void Clear();
 
+	/** Get Instance */
 	static SceneManager* getInstance();
 
 	/** Load objects */

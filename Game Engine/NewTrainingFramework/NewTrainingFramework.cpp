@@ -36,7 +36,7 @@ int Init ( ESContext *esContext )
 					SceneManager::getInstance()->getBackgroundColor().z, 
 					1.0f);
 
-	// Load our objects
+	// Load our scene
 	SceneManager::getInstance()->Load();
 
 	// Get active camera
@@ -131,10 +131,12 @@ void Update ( ESContext *esContext, float deltaTime )
 
 			if (debugScene)
 			{
+				ResourceManager::getInstance()->LoadSound(1)->Play();	// TODO : change sound
 				std::cout << "DEBUG MODE ACTIVATED\n";
 			}
 			else
 			{
+				ResourceManager::getInstance()->LoadSound(1)->Play();	// TODO : change sound
 				std::cout << "DEBUG MODE DEACTIVATED\n";
 			}
 
