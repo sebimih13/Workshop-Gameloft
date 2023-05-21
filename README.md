@@ -3,6 +3,8 @@ Workshop Gameloft
 
 
 <p>
+  <img src="https://github.com/sebimih13/Workshop-Gameloft/blob/main/Resources/mirror.gif">
+  
   <img src="https://github.com/sebimih13/Workshop-Gameloft/blob/main/Resources/collision.gif">
   <img src="https://github.com/sebimih13/Workshop-Gameloft/blob/main/Resources/debug%20mode.gif">
   
