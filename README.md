@@ -1,6 +1,5 @@
 # Workshop-Gameloft
-Workshop Gameloft
-
+Workshop Gameloft - [Diploma](https://github.com/sebimih13/Workshop-Gameloft/blob/main/Resources/gameloft.pdf)
 
 <p>
   <img src="https://github.com/sebimih13/Workshop-Gameloft/blob/main/Resources/mirror.gif">
